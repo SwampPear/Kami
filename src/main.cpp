@@ -2,8 +2,8 @@
 #define MTL_PRIVATE_IMPLEMENTATION
 #define MTK_PRIVATE_IMPLEMENTATION
 #define CA_PRIVATE_IMPLEMENTATION
-#include "PCH.h"
-#include "core/application.h"
+#include "PCH.hpp"
+#include "core/application.hpp"
 
 
 int main() {

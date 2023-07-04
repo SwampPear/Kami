@@ -1,5 +1,5 @@
 
-#include "renderer.h"
+#include "renderer.hpp"
 
 gfx::Renderer::Renderer(MTL::Device* device) : device{device->retain()}{
     commandQueue = device->newCommandQueue();

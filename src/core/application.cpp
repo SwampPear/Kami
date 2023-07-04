@@ -1,5 +1,4 @@
-
-#include "application.h"
+#include "application.hpp"
 
 core::Application::~Application() {
     m_view->release();

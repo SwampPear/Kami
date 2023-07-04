@@ -1,6 +1,6 @@
 #pragma once
-#include "graphic/view.h"
-#include "PCH.h"
+#include "graphic/view.hpp"
+#include "PCH.hpp"
 
 namespace core{
 
