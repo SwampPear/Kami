@@ -1,18 +1,33 @@
-MIT License (Modified)
+MIT License
 
 Copyright (c) 2023 Michael Vaden
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
-of this game engine to deal
-in the engine without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+of this software to deal in the "Software" without restriction, including without 
+limitation the rights to use, copy, modify, merge, publish, distribute, 
+sublicense, and/or sell copies of the Software, and to permit persons to whom 
+the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
+1. The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
+2. Any asset which is not in itself pure "Software," as previously defined, is 
+restricted for use and does not harbor any of the rights defined above.
 
+3. "Software" which does not apply to any of the rights above granted by the 
+standard MIT license will be specifically designated with a comment such as:
+
+  - Copyright (c) [year] [name]. NOT licensed under the MIT license 
+  (see conditions 2 and 3 of LICENSE).
+
+as opposed to "Software" which is licensed under the standard MIT license which
+will be designated with a comment such as:
+
+  - Copyright (c) [year] [name]. Licensed under the MIT license 
+  (see LICENSE).
+
+if no licensing comment is stated, then the software will fall under the latter
+category.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
