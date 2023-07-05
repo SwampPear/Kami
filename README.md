@@ -1,5 +1,6 @@
 <img src="assets/Kami.svg" style="width: 30rem">   
-
+  
+  
 > This project is to serve as my personal exploration in game programming, design, and creativity.
 ### Goals
 - robust, beautiful graphics
