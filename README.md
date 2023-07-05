@@ -1,3 +1,4 @@
 # Kami
-- this project will allow for exploration of fundamentals to games and engines 
-as well as exploration in design and a creative outlet
+> This project is to serve as my personal exploration in game programming, design, and creativity.
+
+- all necessary libraries and header are included
