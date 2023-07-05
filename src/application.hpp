@@ -1,6 +1,7 @@
 #pragma once
 
 #include "window.hpp"
+#include "pipeline.hpp"
 
 namespace kami {
   class Application {
@@ -11,5 +12,6 @@ namespace kami {
       void run();
     private:
       Window window{WIDTH, HEIGHT, "window name"};
+      Pipeline pipeline{"shaders/shader.vert.spv", "shaders/shader.frag.spv"};
   };
 }
