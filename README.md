@@ -1,4 +1,4 @@
-<img src="assets/Kami.svg" style="width: 30rem">   
+<img src=".github/Kami.svg" style="width: 30rem">   
 
 <hr>
 
