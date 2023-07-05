@@ -1,10 +1,4 @@
 # General
 TODO.md
-reference/
 
-# Build]]
-CMakeFiles/
-cmake_install.cmake
-CMakeCache.txt
-Makefile
-app
+./app
