@@ -1,5 +1,4 @@
 # Kami
-[![Vulkan](https://img.shields.io/npm/v/truffle.svg)](https://www.npmjs.com/package/truffle)
 [![npm](https://img.shields.io/npm/dm/truffle.svg)](https://www.npmjs.com/package/truffle)
 [![GitHub Discussions](https://img.shields.io/static/v1?label=Join&message=Discussions&color=3fe0c5)](https://github.com/trufflesuite/truffle/discussions)
 [![Coverage Status](https://coveralls.io/repos/github/trufflesuite/truffle/badge.svg)](https://coveralls.io/github/trufflesuite/truffle)
