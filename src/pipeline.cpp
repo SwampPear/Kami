@@ -148,8 +148,9 @@ namespace kami {
     pipelineInfo.pStages = shaderStages;
     pipelineInfo.pVertexInputState = &vertexInputInfo;
     pipelineInfo.pInputAssemblyState = &configInfo.inputAssemblyInfo;
-    pipelineInfo.pViewportState - &configInfo.viewportInfo;
+    pipelineInfo.pViewportState = &configInfo.viewportInfo;
     pipelineInfo.pRasterizationState = &configInfo.rasterizationInfo;
+    pipelineInfo.pMultisampleState = &configInfo.multisampleInfo;
     pipelineInfo.pColorBlendState = &configInfo.colorBlendInfo;
     pipelineInfo.pDepthStencilState = &configInfo.depthStencilInfo;
     pipelineInfo.pDynamicState = nullptr;
