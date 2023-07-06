@@ -2,6 +2,7 @@
 
 #include "window.hpp"
 #include "pipeline.hpp"
+#include "device.hpp"
 
 namespace kami {
   class Application {
@@ -12,6 +13,7 @@ namespace kami {
       void run();
     private:
       Window window{WIDTH, HEIGHT, "window name"};
-      Pipeline pipeline{"shaders/shader.vert.spv", "shaders/shader.frag.spv"};
+      Device device{window};
+      Pipeline pipeline{device, "shaders/shader.vert.spv", "shaders/shader.frag.spv", Pipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};
   };
 }
