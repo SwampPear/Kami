@@ -1,6 +1,9 @@
-<img src=".github/Kami.svg" style="width: 30rem">   
+<p align="center">
+  <img alt="Kami Logo" src=".github/Kami.svg" style="width: 30rem">   
+</p>
 
 <hr>
+
 
 > This project is to serve as my personal exploration in game programming, design, and creativity.
 ### Goals
