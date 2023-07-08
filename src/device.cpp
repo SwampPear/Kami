@@ -106,7 +106,6 @@ void Device::createInstance() {
   }
 
   createInfo.flags = VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
-  std::cout << "dafasdfasdfasdf" << std::endl;
 
   if (vkCreateInstance(&createInfo, nullptr, &instance) != VK_SUCCESS) {
     throw std::runtime_error("failed to create instance!");
@@ -168,9 +167,6 @@ void Device::createLogicalDevice() {
   createInfo.pEnabledFeatures = &deviceFeatures;
   createInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
   createInfo.ppEnabledExtensionNames = deviceExtensions.data();
-
-  std::cout << deviceExtensions.data()[0] << std::endl;
-
 
   // might not really be necessary anymore because device specific validation layers
   // have been deprecated
@@ -281,7 +277,9 @@ std::vector<const char *> Device::getRequiredExtensions() {
     extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
   }
 
+  // required for mac
   extensions.push_back("VK_KHR_portability_enumeration");
+  extensions.push_back("VK_KHR_get_physical_device_properties2");
 
   return extensions;
 }
