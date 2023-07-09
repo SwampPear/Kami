@@ -7,6 +7,7 @@
 #include <memory>
 #include <vector>
 #include <stdexcept>
+#include <array>
 
 namespace kami {
   class Application {
