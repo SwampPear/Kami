@@ -1,7 +1,10 @@
-# Build
+# build
 app
 
-# Dependencies
+# dependencies
 env/
 include/
 lib/
+
+# development
+.vscode/
