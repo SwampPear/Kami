@@ -9,7 +9,10 @@ def compile_shaders(shaders: List[str]) -> None:
     """
 
     for shader in shaders:
-        os.system(f'env/glslc shaders/{shader} -o shaders/{shader}.spv')
+        try:
+            os.system(f'env/glslc shaders/{shader} -o shaders/{shader}.spv')
+        except:
+            print('asdf')
 
 
 if __name__ == '__main__':
