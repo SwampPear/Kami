@@ -1,20 +1,21 @@
 #pragma once
 
 #include "device.hpp"
+#include "not_copyable.hpp"
 #include <vulkan/vulkan.h>
 #include <string>
 #include <vector>
 
 namespace kami {
-  class SwapChain {
+  class SwapChain : public NotCopyable {
   public:
     static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
     SwapChain(Device &deviceRef, VkExtent2D windowExtent);
     ~SwapChain();
 
-    SwapChain(const SwapChain &) = delete;
-    void operator=(const SwapChain &) = delete;
+    //SwapChain(const SwapChain &) = delete;
+    //void operator=(const SwapChain &) = delete;
 
     VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; }
     VkRenderPass getRenderPass() { return renderPass; }

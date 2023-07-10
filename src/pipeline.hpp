@@ -1,6 +1,7 @@
 #pragma once
 
 #include "device.hpp"
+#include "not_copyable.hpp"
 #include <string>
 #include <vector>
 
@@ -20,7 +21,7 @@ namespace kami {
     uint32_t subpass = 0;
   };
 
-  class Pipeline {
+  class Pipeline : public NotCopyable {
     public:
       Pipeline(
         Device &device, 
@@ -30,8 +31,8 @@ namespace kami {
       );
       ~Pipeline();
 
-      Pipeline(const Pipeline &) = delete;
-      Pipeline &operator=(const Window &) = delete;
+      //Pipeline(const Pipeline &) = delete;
+      //Pipeline &operator=(const Window &) = delete;
 
       void bind(VkCommandBuffer commandBuffer);
       static PipelineConfigInfo defaultPipelineConfigInfo(uint32_t width, uint32_t height);

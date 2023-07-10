@@ -6,9 +6,7 @@ namespace kami {
     public:
       Model();
       ~Model();
-      Model(const Model &) = delete;
-      Model &operator=(const Model &) = delete;
-      
+
     private:
       Device& device;
       VkBuffer vertexBuffer;

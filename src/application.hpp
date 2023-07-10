@@ -4,21 +4,22 @@
 #include "pipeline.hpp"
 #include "device.hpp"
 #include "swap_chain.hpp"
+#include "not_copyable.hpp"
 #include <memory>
 #include <vector>
 #include <stdexcept>
 #include <array>
 
 namespace kami {
-  class Application {
+  class Application : public NotCopyable {
     public:
       static constexpr int WIDTH = 800;
       static constexpr int HEIGHT = 600;
 
       Application();
       ~Application();
-      Application(const Application &) = delete;
-      Application &operator=(const Application &) = delete;
+      //Application(const Application &) = delete;
+      //Application &operator=(const Application &) = delete;
 
       void run();
     private:

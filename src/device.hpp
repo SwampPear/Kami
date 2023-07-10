@@ -1,6 +1,8 @@
 #pragma once
 
 #include "window.hpp"
+#include "not_copyable.hpp"
+#include "not_movable.hpp"
 #include <string>
 #include <vector>
 
@@ -19,7 +21,7 @@ namespace kami {
     bool isComplete() { return graphicsFamilyHasValue && presentFamilyHasValue; }
   };
 
-  class Device {
+  class Device : public NotCopyable, public NotMovable {
     public:
       #ifdef NDEBUG
         const bool enableValidationLayers = false;
@@ -31,10 +33,10 @@ namespace kami {
       ~Device();
 
       // Not copyable or movable
-      Device(const Device &) = delete;
-      void operator=(const Device &) = delete;
-      Device(Device &&) = delete;
-      Device &operator=(Device &&) = delete;
+      //Device(const Device &) = delete;
+      //void operator=(const Device &) = delete;
+      //Device(Device &&) = delete;
+      //Device &operator=(Device &&) = delete;
 
       VkCommandPool getCommandPool() { return commandPool; }
       VkDevice device() { return device_; }
