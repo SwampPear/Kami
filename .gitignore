@@ -5,6 +5,7 @@ app
 env/
 include/
 lib/
+shaders/*.spv
 
 # development
 .vscode/
