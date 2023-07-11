@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Kami Logo" src=".github/Kami.svg" style="width: 30rem">   
+  <img alt="Kami Logo" src="assets/kami_logo_banner.svg" style="width: 30rem">   
 </p>
 
 <hr>
