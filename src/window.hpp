@@ -1,10 +1,10 @@
 #pragma once
 
+#include "util/trait.hpp"
+
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <string>
-
-#include "not_copyable.hpp"
 
 namespace kami {
   class Window : public NotCopyable{

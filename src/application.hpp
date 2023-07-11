@@ -4,7 +4,8 @@
 #include "pipeline.hpp"
 #include "device.hpp"
 #include "swap_chain.hpp"
-#include "not_copyable.hpp"
+#include "util/trait.hpp"
+#include "model.hpp"
 #include <memory>
 #include <vector>
 #include <stdexcept>
@@ -23,6 +24,7 @@ namespace kami {
 
       void run();
     private:
+      void loadModels();
       void createPipelineLayout();
       void createPipeline();
       void createCommandBuffers();
@@ -34,6 +36,7 @@ namespace kami {
       std::unique_ptr<Pipeline> pipeline;
       VkPipelineLayout pipelineLayout;
       std::vector<VkCommandBuffer> commandBuffers;
+      std::unique_ptr<Model> model;
       //Pipeline pipeline{device, "shaders/shader.vert.spv", "shaders/shader.frag.spv", Pipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};
   };
 }

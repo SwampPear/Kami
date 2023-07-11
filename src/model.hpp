@@ -1,6 +1,7 @@
 #pragma once
+
 #include "device.hpp"
-#include "not_copyable.hpp"
+#include "util/trait.hpp"
 #include <vector>
 
 #define GLM_FORCE_RADIANS

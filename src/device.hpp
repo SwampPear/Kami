@@ -1,8 +1,7 @@
 #pragma once
 
 #include "window.hpp"
-#include "not_copyable.hpp"
-#include "not_movable.hpp"
+#include "util/trait.hpp"
 #include <string>
 #include <vector>
 

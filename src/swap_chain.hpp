@@ -1,7 +1,7 @@
 #pragma once
 
 #include "device.hpp"
-#include "not_copyable.hpp"
+#include "util/trait.hpp"
 #include <vulkan/vulkan.h>
 #include <string>
 #include <vector>
