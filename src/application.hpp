@@ -12,6 +12,9 @@
 #include <array>
 
 namespace kami {
+  /**
+   * An application tethering all other systems in kami.
+  */
   class Application : public NotCopyable {
     public:
       static constexpr int WIDTH = 800;
@@ -19,6 +22,8 @@ namespace kami {
 
       Application();
       ~Application();
+
+      // will keep these here until I know traits struct work
       //Application(const Application &) = delete;
       //Application &operator=(const Application &) = delete;
 
@@ -37,6 +42,5 @@ namespace kami {
       VkPipelineLayout pipelineLayout;
       std::vector<VkCommandBuffer> commandBuffers;
       std::unique_ptr<Model> model;
-      //Pipeline pipeline{device, "shaders/shader.vert.spv", "shaders/shader.frag.spv", Pipeline::defaultPipelineConfigInfo(WIDTH, HEIGHT)};
   };
 }

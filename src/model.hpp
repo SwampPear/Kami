@@ -3,13 +3,15 @@
 #include "device.hpp"
 #include "util/trait.hpp"
 #include <vector>
-
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
 
 namespace kami {
   // should use dedicated memory allocator
+  /**
+   * A tangible (rendered) object.
+  */
   class Model : public NotCopyable {
     public:
       struct Vertex {
