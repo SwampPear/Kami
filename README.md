@@ -4,7 +4,7 @@
 
 <hr>
 
-> This project is to serve as my personal exploration in game programming, design, and creativity.
+> Kami, the venerated deities of myth, each embody their own unique concept. Together, they make up everything.
 
 Kami is my personal exploration and continuation of my own endeavors in game programming, design, and creativity.
 I have a few goals in mind at the core of its implementation:
