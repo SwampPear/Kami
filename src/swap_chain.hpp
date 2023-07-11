@@ -13,10 +13,7 @@ namespace kami {
 
     SwapChain(Device &deviceRef, VkExtent2D windowExtent);
     ~SwapChain();
-
-    //SwapChain(const SwapChain &) = delete;
-    //void operator=(const SwapChain &) = delete;
-
+    
     VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; }
     VkRenderPass getRenderPass() { return renderPass; }
     VkImageView getImageView(int index) { return swapChainImageViews[index]; }

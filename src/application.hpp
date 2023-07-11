@@ -23,10 +23,6 @@ namespace kami {
       Application();
       ~Application();
 
-      // will keep these here until I know traits struct work
-      //Application(const Application &) = delete;
-      //Application &operator=(const Application &) = delete;
-
       void run();
     private:
       void loadModels();
