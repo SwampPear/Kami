@@ -1,6 +1,6 @@
 #pragma once
 
-#include "util/trait.hpp"
+#include "utils/trait.hpp"
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <string>

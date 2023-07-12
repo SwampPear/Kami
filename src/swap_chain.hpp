@@ -1,7 +1,7 @@
 #pragma once
 
 #include "device.hpp"
-#include "util/trait.hpp"
+#include "utils/trait.hpp"
 #include <vulkan/vulkan.h>
 #include <string>
 #include <vector>
@@ -13,7 +13,7 @@ namespace kami {
 
     SwapChain(Device &deviceRef, VkExtent2D windowExtent);
     ~SwapChain();
-    
+
     VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; }
     VkRenderPass getRenderPass() { return renderPass; }
     VkImageView getImageView(int index) { return swapChainImageViews[index]; }

@@ -4,7 +4,7 @@
 #include "pipeline.hpp"
 #include "device.hpp"
 #include "swap_chain.hpp"
-#include "util/trait.hpp"
+#include "utils/trait.hpp"
 #include "model.hpp"
 #include <memory>
 #include <vector>

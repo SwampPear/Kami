@@ -1,7 +1,7 @@
 #pragma once
 
 #include "device.hpp"
-#include "util/trait.hpp"
+#include "utils/trait.hpp"
 #include <string>
 #include <vector>
 
