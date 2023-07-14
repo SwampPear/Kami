@@ -3,6 +3,7 @@
 #include "device.hpp"
 #include "utils/trait.hpp"
 #include <vulkan/vulkan.h>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -12,6 +13,7 @@ namespace kami {
     static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
     SwapChain(Device &deviceRef, VkExtent2D windowExtent);
+    SwapChain(Device &deviceRef, VkExtent2D windowExtent, std::shared_ptr<SwapChain> previous);
     ~SwapChain();
 
     VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; }
@@ -32,6 +34,7 @@ namespace kami {
     VkResult submitCommandBuffers(const VkCommandBuffer *buffers, uint32_t *imageIndex);
 
   private:
+    void init();
     void createSwapChain();
     void createImageViews();
     void createDepthResources();
@@ -62,6 +65,7 @@ namespace kami {
     VkExtent2D windowExtent;
 
     VkSwapchainKHR swapChain;
+    std::shared_ptr<SwapChain> oldSwapChain;
 
     std::vector<VkSemaphore> imageAvailableSemaphores;
     std::vector<VkSemaphore> renderFinishedSemaphores;
