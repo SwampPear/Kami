@@ -28,7 +28,7 @@ namespace kami {
 
   void Application::loadModels() {
     std::vector<Model::Vertex> vertices {
-      {{0.0f, -1.0f}, {1.0f, 0.0f, 0.0f}},
+      {{0.0f, -0.5f}, {1.0f, 0.0f, 0.0f}},
       {{0.5f, 0.5f}},
       {{-0.5f, 0.5f}}
     };
@@ -121,10 +121,10 @@ namespace kami {
     model->bind(commandBuffers[imageIndex]);
 
     // drawing loop
-    for (int j = 0; j < 1; j++) {
+    for (int i = 0; i < 4; i++) {
       SimplePushConstantData push{};
-      push.offset = {0.0f, -0.4 + j * 0.25f};
-      push.color = {0.0f, 0.0f, 0.2f * j};
+      push.offset = {0.0f, -0.4f + i * 0.25f};
+      push.color = {0.0f, 0.0f, 0.1f + i * 0.2f};
 
       vkCmdPushConstants(commandBuffers[imageIndex], pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
       model->draw(commandBuffers[imageIndex]);
