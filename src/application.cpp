@@ -120,7 +120,8 @@ namespace kami {
     pipeline->bind(commandBuffers[imageIndex]);
     model->bind(commandBuffers[imageIndex]);
 
-    for (int j = 0; j < 4; j++) {
+    // drawing loop
+    for (int j = 0; j < 1; j++) {
       SimplePushConstantData push{};
       push.offset = {0.0f, -0.4 + j * 0.25f};
       push.color = {0.0f, 0.0f, 0.2f * j};
@@ -128,8 +129,6 @@ namespace kami {
       vkCmdPushConstants(commandBuffers[imageIndex], pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
       model->draw(commandBuffers[imageIndex]);
     }
-
-    
 
     vkCmdEndRenderPass(commandBuffers[imageIndex]);
 
