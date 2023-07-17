@@ -1,4 +1,5 @@
-#include "window.hpp"
+#include "kami/renderer/window.hpp"
+
 
 namespace kami {
   Window::Window(int w, int h, std::string name) : width{w}, height{h}, windowName{name} {

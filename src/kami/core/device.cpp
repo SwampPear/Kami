@@ -1,8 +1,10 @@
-#include "device.hpp"
+#include "kami/core/device.hpp"
+
 #include <cstring>
 #include <iostream>
 #include <set>
 #include <unordered_set>
+
 
 namespace kami {
 

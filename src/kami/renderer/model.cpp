@@ -1,5 +1,7 @@
-#include "model.hpp"
+#include "kami/renderer/model.hpp"
+
 #include <cassert>
+
 
 namespace kami{
   std::vector<VkVertexInputBindingDescription> Model::Vertex::getBindingDescriptions() {

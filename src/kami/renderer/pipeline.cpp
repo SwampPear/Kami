@@ -1,9 +1,11 @@
-#include "pipeline.hpp"
-#include "model.hpp"
+#include "kami/renderer/pipeline.hpp"
+#include "kami/renderer/model.hpp"
+
 #include <fstream>
 #include <stdexcept>
 #include <iostream>
 #include <cassert>
+
 
 namespace kami {
   Pipeline::Pipeline(

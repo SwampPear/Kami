@@ -1,18 +1,21 @@
 #pragma once
 
-#include "window.hpp"
-#include "pipeline.hpp"
-#include "device.hpp"
-#include "swap_chain.hpp"
-#include "utils/trait.hpp"
-#include "model.hpp"
+#include "kami/renderer/window.hpp"
+#include "kami/renderer/pipeline.hpp"
+#include "kami/core/device.hpp"
+#include "kami/renderer/swap_chain.hpp"
+#include "kami/utils/trait.hpp"
+#include "kami/renderer/model.hpp"
+
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <glm/glm.hpp>
+
 #include <memory>
 #include <vector>
 #include <stdexcept>
 #include <array>
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#include <glm/glm.hpp>
+
 
 namespace kami {
   /**

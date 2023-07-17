@@ -1,9 +1,11 @@
 #pragma once
 
-#include "window.hpp"
-#include "utils/trait.hpp"
+#include "kami/renderer/window.hpp"
+#include "kami/utils/trait.hpp"
+
 #include <string>
 #include <vector>
+
 
 namespace kami {
   struct SwapChainSupportDetails {

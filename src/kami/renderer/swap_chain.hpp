@@ -1,11 +1,14 @@
 #pragma once
 
-#include "device.hpp"
-#include "utils/trait.hpp"
+#include "kami/core/device.hpp"
+#include "kami/utils/trait.hpp"
+
 #include <vulkan/vulkan.h>
+
 #include <memory>
 #include <string>
 #include <vector>
+
 
 namespace kami {
   class SwapChain : public NotCopyable {

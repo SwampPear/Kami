@@ -1,5 +1,6 @@
 #pragma once
 
+
 namespace kami {
   /**
    * Deletes the copy constructor and copy assignment operator of a parent.

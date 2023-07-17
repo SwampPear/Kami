@@ -1,11 +1,14 @@
 #pragma once
 
-#include "device.hpp"
-#include "utils/trait.hpp"
-#include <vector>
+#include "kami/core/device.hpp"
+#include "kami/utils/trait.hpp"
+
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
+
+#include <vector>
+
 
 namespace kami {
   // should use dedicated memory allocator
