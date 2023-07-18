@@ -9,7 +9,6 @@
 
 namespace kami {
   struct PipelineConfigInfo : public NoCopy {
-    
     VkPipelineViewportStateCreateInfo viewportInfo;
     VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
     VkPipelineRasterizationStateCreateInfo rasterizationInfo;
