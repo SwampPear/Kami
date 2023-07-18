@@ -4,7 +4,7 @@
 
 <hr>
 
-<p align="center" style="vertical-align: middle">
+<p style="display: flex; justify-contents: center: align-items: center">
   <img alt="license" src="https://img.shields.io/github/license/SwampPear/kami.svg">
   <img alt="built with love <3" src="http://ForTheBadge.com/images/badges/built-with-love.svg">
   <img alt="last commit" src="https://img.shields.io/github/last-commit/SwampPear/kami.svg">
