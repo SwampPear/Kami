@@ -1,8 +1,11 @@
 <p align="center">
   <img alt="Kami Logo" src="assets/kami_logo_banner_gradient.svg" style="width: 80%">   
 </p>
+<p align="center">
+  <img alt="license" src="https://img.shields.io/github/license/SwampPear/kami.svg">   
+</p>
 
-![license](https://img.shields.io/github/license/SwampPear/kami.svg)
+
 
 
 <hr>
