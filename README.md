@@ -1,16 +1,14 @@
 <p align="center">
   <img alt="Kami Logo" src="assets/kami_logo_banner_gradient.svg" style="width: 80%">   
 </p>
-<p align="center">
+
+<hr>
+
+<p align="center" style="vertical-align: middle">
   <img alt="license" src="https://img.shields.io/github/license/SwampPear/kami.svg">
   <img alt="built with love <3" src="http://ForTheBadge.com/images/badges/built-with-love.svg">
   <img alt="last commit" src="https://img.shields.io/github/last-commit/SwampPear/kami.svg">
 </p>
-
-
-
-
-<hr>
 
 > Kami, the venerated deities of myth, each are unique in their presidings. Together, they make up everything.
 
