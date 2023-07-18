@@ -2,15 +2,11 @@
   <img alt="Kami Logo" src="assets/kami_logo_banner_gradient.svg" style="width: 80%">   
 </p>
 
-<hr>
-
 <p align="center">
   <img align="middle" alt="license" src="https://img.shields.io/github/license/SwampPear/kami.svg">
   <img align="middle" alt="last commit" src="https://img.shields.io/github/last-commit/SwampPear/kami.svg">
   <img align="middle" alt="built with love <3" src="http://ForTheBadge.com/images/badges/built-with-love.svg">
 </p>
-
-> Kami, the venerated deities of myth, each are unique in their presidings. Together, they make up everything.
 
 Kami is my personal exploration and continuation of my own endeavors in game programming, design, and creativity.
 I have a few goals in mind at the core of its implementation:
