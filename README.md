@@ -9,8 +9,12 @@
   <img align="middle" alt="c++" src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge logo=c%2B%2B&logoColor=white">
 </p>
 
-Kami is my personal exploration and continuation of my own endeavors in game programming, design, and creativity.
-I have a few goals in mind at the core of its implementation:
+<p>
+  Kami is my personal exploration and continuation of my own endeavors in game programming, design, and creativity.
+  I have a few goals in mind at the core of its implementation:
+</p>
+
+
 
 - ease of use
 - robust, beautiful graphics system
