@@ -2,7 +2,8 @@
   <img alt="Kami Logo" src="assets/kami_logo_banner_gradient.svg" style="width: 80%">   
 </p>
 <p align="center">
-  <img alt="license" src="https://img.shields.io/github/license/SwampPear/kami.svg">   
+  <img alt="license" src="https://img.shields.io/github/license/SwampPear/kami.svg">
+  <img alt="last commit" src="https://img.shields.io/github/last-commit/SwampPear/kami.svg">
 </p>
 
 
