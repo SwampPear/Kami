@@ -2,6 +2,9 @@
   <img alt="Kami Logo" src="assets/kami_logo_banner_gradient.svg" style="width: 80%">   
 </p>
 
+![license](https://img.shields.io/github/license/SwampPear/kami.svg)
+
+
 <hr>
 
 > Kami, the venerated deities of myth, each are unique in their presidings. Together, they make up everything.
