@@ -6,7 +6,7 @@ namespace kami {
    * @struct NoCopy
    * @brief A struct that prevents copying and assignment through copy 
    * constructors and copy assignment operators. Should be inherited from.
-  */
+   */
   struct NoCopy {
     NoCopy() {};
     NoCopy(const NoCopy &) = delete; // prohibit copying
@@ -17,7 +17,7 @@ namespace kami {
    * @struct NoMove
    * @brief A struct that prevents moving and assignment through move
    * constructors and move assignment operators. Should be inherited from.
-  */
+   */
   struct NoMove {
     NoMove() {};
     NoMove(NoMove &&) = delete; // prohibit moving
