@@ -5,7 +5,7 @@
 <p align="center" style="height: 1.25rem">
   <img align="middle" style="height: 1.25rem" alt="license" src="https://img.shields.io/github/license/SwampPear/kami.svg">
   <img align="middle" style="height: 1.25rem" alt="last commit" src="https://img.shields.io/github/last-commit/SwampPear/kami.svg">
-  <img align="middle" style="height: 1.1rem" alt="built with love <3" src="http://ForTheBadge.com/images/badges/built-with-love.svg">
+  <img align="middle" style="height: 16px" alt="built with love <3" src="http://ForTheBadge.com/images/badges/built-with-love.svg">
   <img align="middle" style="height: 1.25rem" alt="c++" src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge logo=c%2B%2B&logoColor=white">
 </p>
 
