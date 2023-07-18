@@ -3,10 +3,10 @@
 </p>
 
 <p align="center">
-  <img align="middle" style="height: 1.75rem" alt="license" src="https://img.shields.io/github/license/SwampPear/kami.svg">
-  <img align="middle" style="height: 1.75rem"alt="last commit" src="https://img.shields.io/github/last-commit/SwampPear/kami.svg">
-  <img align="middle" style="height: 1.75rem"alt="built with love <3" src="http://ForTheBadge.com/images/badges/built-with-love.svg">
-  <img align="middle" style="height: 1.75rem"alt="c++" src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge logo=c%2B%2B&logoColor=white">
+  <img align="middle" style="height: 1.5rem" alt="license" src="https://img.shields.io/github/license/SwampPear/kami.svg">
+  <img align="middle" style="height: 1.5rem" alt="last commit" src="https://img.shields.io/github/last-commit/SwampPear/kami.svg">
+  <img align="middle" style="height: 1.5rem" alt="built with love <3" src="http://ForTheBadge.com/images/badges/built-with-love.svg">
+  <img align="middle" style="height: 1.5rem" alt="c++" src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge logo=c%2B%2B&logoColor=white">
 </p>
 
 Kami is my personal exploration and continuation of my own endeavors in game programming, design, and creativity.
