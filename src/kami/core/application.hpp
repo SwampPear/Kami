@@ -21,7 +21,7 @@ namespace kami {
   /**
    * An application tethering all other systems in kami.
   */
-  class Application : public NotCopyable {
+  class Application : public NoCopy {
     public:
       static constexpr int WIDTH = 800;
       static constexpr int HEIGHT = 600;

@@ -8,7 +8,7 @@
 
 
 namespace kami {
-  struct PipelineConfigInfo : public NotCopyable {
+  struct PipelineConfigInfo : public NoCopy {
     
     VkPipelineViewportStateCreateInfo viewportInfo;
     VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
@@ -24,7 +24,7 @@ namespace kami {
     uint32_t subpass = 0;
   };
 
-  class Pipeline : public NotCopyable {
+  class Pipeline : public NoCopy {
     public:
       Pipeline(
         Device &device, 

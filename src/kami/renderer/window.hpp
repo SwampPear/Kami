@@ -1,13 +1,14 @@
 #pragma once
 
 #include "kami/utils/trait.hpp"
+
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 #include <string>
 
 
 namespace kami {
-  class Window : public NotCopyable {
+  class Window : public NoCopy {
     public:
       Window(int w, int h, std::string name);
       ~Window();

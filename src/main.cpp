@@ -15,5 +15,3 @@ int main() {
 
     return EXIT_SUCCESS;
 }
-
-// 8-3:54

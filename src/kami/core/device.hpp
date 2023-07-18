@@ -22,7 +22,7 @@ namespace kami {
     bool isComplete() { return graphicsFamilyHasValue && presentFamilyHasValue; }
   };
 
-  class Device : public NotCopyable, public NotMovable {
+  class Device : public NoCopy, public NoMove {
     public:
       #ifdef NDEBUG
         const bool enableValidationLayers = false;

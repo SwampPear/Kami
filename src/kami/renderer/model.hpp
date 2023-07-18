@@ -15,7 +15,7 @@ namespace kami {
   /**
    * A tangible (rendered) object.
   */
-  class Model : public NotCopyable {
+  class Model : public NoCopy {
     public:
       struct Vertex {
         glm::vec2 position;

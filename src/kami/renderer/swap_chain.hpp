@@ -11,7 +11,7 @@
 
 
 namespace kami {
-  class SwapChain : public NotCopyable {
+  class SwapChain : public NoCopy {
   public:
     static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 

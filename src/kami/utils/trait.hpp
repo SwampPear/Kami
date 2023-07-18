@@ -3,20 +3,24 @@
 
 namespace kami {
   /**
-   * Deletes the copy constructor and copy assignment operator of a parent.
+   * @struct NoCopy
+   * @brief A struct that prevents copying and assignment through copy 
+   * constructors and copy assignment operators. Should be inherited from.
   */
-  struct NotCopyable {
-    NotCopyable() {};
-    NotCopyable(const NotCopyable &) = delete;
-    NotCopyable &operator=(const NotCopyable &) = delete;
+  struct NoCopy {
+    NoCopy() {};
+    NoCopy(const NoCopy &) = delete; // prohibit copying
+    NoCopy &operator=(const NoCopy &) = delete; // delete copy constructor
   };
 
   /**
-   * Deletes the move constructor and move constructor operato of a parent.
+   * @struct NoMove
+   * @brief A struct that prevents moving and assignment through move
+   * constructors and move assignment operators. Should be inherited from.
   */
-  struct NotMovable {
-    NotMovable() {};
-    NotMovable(NotMovable &&) = delete;
-    NotMovable &operator=(NotMovable &&) = delete;
+  struct NoMove {
+    NoMove() {};
+    NoMove(NoMove &&) = delete; // prohibit moving
+    NoMove &operator=(NoMove &&) = delete; // delete move operator
   };
 }
