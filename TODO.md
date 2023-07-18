@@ -1,1 +1,1 @@
-1. start with entt
+1. abstract rendering functionality into renderer class
