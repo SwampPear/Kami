@@ -15,7 +15,7 @@ namespace kami {
   }
 
   void Renderer::createCommandBuffers() {
-    commandBuffers.resize(swapChain->imageCount());
+    commandBuffers.resize(SwapChain::MAX_FRAMES_IN_FLIGHT);
     VkCommandBufferAllocateInfo allocInfo{};
     allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
     allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
@@ -45,15 +45,13 @@ namespace kami {
     if (swapChain == nullptr) {
       swapChain = std::make_unique<SwapChain>(device, extent);
     } else {
-      swapChain = std::make_unique<SwapChain>(device, extent, std::move(swapChain));
+      std::shared_ptr<SwapChain> oldSwapChain= std::move(swapChain);
+      swapChain = std::make_unique<SwapChain>(device, extent, oldSwapChain);
 
-      if (swapChain->imageCount() != commandBuffers.size()) {
-        freeCommandBuffers();
-        createCommandBuffers();
+      if (!oldSwapChain->compareSwapFormats(*swapChain.get())) {
+        throw std::runtime_error("Swapchain image format has changed!"); // should set up callback
       }
     }
-
-
   };
 
   VkCommandBuffer Renderer::beginFrame() {
@@ -97,13 +95,12 @@ namespace kami {
     if (result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || window.wasWindowResized()) {
       window.resetWindowResizedFlag();
       recreateSwapChain();
-    }
-
-    if (result != VK_SUCCESS) {
+    } else if (result != VK_SUCCESS) {
       throw std::runtime_error("failed to present swap chain image");
     }
 
     isFrameStarted = false;
+    currentFrameIndex = (currentFrameIndex + 1) % SwapChain::MAX_FRAMES_IN_FLIGHT;
   };
 
   void Renderer::beginSwapChainRenderPass(VkCommandBuffer commandBuffer) {

@@ -1,33 +1,32 @@
 #include "kami/core/application.hpp"
 #include "kami/utils/trait.hpp"
+#include "kami/renderer/render_system.hpp"
+#include "kami/renderer/camera.hpp"
 
 #include "glm/gtc/constants.hpp"
 
 
 namespace kami {
-  struct SimplePushConstantData {
-    glm::mat2 transform{1.f};
-    glm::vec2 offset;
-    alignas(16) glm::vec3 color;
-  };
-
   Application::Application() {
     loadGameObjects();
-    createPipelineLayout();
-    createPipeline();
   }
 
-  Application::~Application() {
-    vkDestroyPipelineLayout(device.device(), pipelineLayout, nullptr);
-  }
+  Application::~Application() { }
 
   void Application::run() {
+    RenderSystem renderSystem{device, renderer.getSwapChainRenderPass()};
+    Camera camera{};
+    
     while(!window.shouldClose()) {
       glfwPollEvents();
+
+      float aspect = renderer.getAspectRatio();
+      //camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
+      camera.setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
       
       if (auto commandBuffer = renderer.beginFrame()) {
         renderer.beginSwapChainRenderPass(commandBuffer);
-        renderGameObjects(commandBuffer);
+        renderSystem.renderGameObjects(commandBuffer, gameObjects, camera);
         renderer.endSwapChainRenderPass(commandBuffer);
         renderer.endFrame();
       }
@@ -36,65 +35,71 @@ namespace kami {
     vkDeviceWaitIdle(device.device());
   }
 
+  std::unique_ptr<Model> createCubeModel(Device& device, glm::vec3 offset) {
+  std::vector<Model::Vertex> vertices{
+ 
+      // left face (white)
+      {{-.5f, -.5f, -.5f}, {.9f, .9f, .9f}},
+      {{-.5f, .5f, .5f}, {.9f, .9f, .9f}},
+      {{-.5f, -.5f, .5f}, {.9f, .9f, .9f}},
+      {{-.5f, -.5f, -.5f}, {.9f, .9f, .9f}},
+      {{-.5f, .5f, -.5f}, {.9f, .9f, .9f}},
+      {{-.5f, .5f, .5f}, {.9f, .9f, .9f}},
+ 
+      // right face (yellow)
+      {{.5f, -.5f, -.5f}, {.8f, .8f, .1f}},
+      {{.5f, .5f, .5f}, {.8f, .8f, .1f}},
+      {{.5f, -.5f, .5f}, {.8f, .8f, .1f}},
+      {{.5f, -.5f, -.5f}, {.8f, .8f, .1f}},
+      {{.5f, .5f, -.5f}, {.8f, .8f, .1f}},
+      {{.5f, .5f, .5f}, {.8f, .8f, .1f}},
+ 
+      // top face (orange, remember y axis points down)
+      {{-.5f, -.5f, -.5f}, {.9f, .6f, .1f}},
+      {{.5f, -.5f, .5f}, {.9f, .6f, .1f}},
+      {{-.5f, -.5f, .5f}, {.9f, .6f, .1f}},
+      {{-.5f, -.5f, -.5f}, {.9f, .6f, .1f}},
+      {{.5f, -.5f, -.5f}, {.9f, .6f, .1f}},
+      {{.5f, -.5f, .5f}, {.9f, .6f, .1f}},
+ 
+      // bottom face (red)
+      {{-.5f, .5f, -.5f}, {.8f, .1f, .1f}},
+      {{.5f, .5f, .5f}, {.8f, .1f, .1f}},
+      {{-.5f, .5f, .5f}, {.8f, .1f, .1f}},
+      {{-.5f, .5f, -.5f}, {.8f, .1f, .1f}},
+      {{.5f, .5f, -.5f}, {.8f, .1f, .1f}},
+      {{.5f, .5f, .5f}, {.8f, .1f, .1f}},
+ 
+      // nose face (blue)
+      {{-.5f, -.5f, 0.5f}, {.1f, .1f, .8f}},
+      {{.5f, .5f, 0.5f}, {.1f, .1f, .8f}},
+      {{-.5f, .5f, 0.5f}, {.1f, .1f, .8f}},
+      {{-.5f, -.5f, 0.5f}, {.1f, .1f, .8f}},
+      {{.5f, -.5f, 0.5f}, {.1f, .1f, .8f}},
+      {{.5f, .5f, 0.5f}, {.1f, .1f, .8f}},
+ 
+      // tail face (green)
+      {{-.5f, -.5f, -0.5f}, {.1f, .8f, .1f}},
+      {{.5f, .5f, -0.5f}, {.1f, .8f, .1f}},
+      {{-.5f, .5f, -0.5f}, {.1f, .8f, .1f}},
+      {{-.5f, -.5f, -0.5f}, {.1f, .8f, .1f}},
+      {{.5f, -.5f, -0.5f}, {.1f, .8f, .1f}},
+      {{.5f, .5f, -0.5f}, {.1f, .8f, .1f}},
+ 
+  };
+  for (auto& v : vertices) {
+    v.position += offset;
+  }
+  return std::make_unique<Model>(device, vertices);
+}
+
   void Application::loadGameObjects() {
-    std::vector<Model::Vertex> vertices {
-      {{0.0f, -0.5f}, {1.0f, 0.0f, 0.0f}},
-      {{0.5f, 0.5f}},
-      {{-0.5f, 0.5f}}
-    };
+    std::shared_ptr<Model> model = createCubeModel(device, glm::vec3{0.0f});
 
-    auto model = std::make_shared<Model>(device, vertices);
-
-    auto triangle = GameObject::createGameObject();
-    triangle.model = model;
-    triangle.color = {.1f, .8f, .1f};
-    triangle.transform2D.translation.x = .2f;
-    triangle.transform2D.scale = {2.0f, 0.5f};
-    triangle.transform2D.rotation = 0.25f * glm::two_pi<float>();
-    gameObjects.push_back(std::move(triangle));
-  }
-
-  void Application::createPipelineLayout() {
-    VkPushConstantRange pushConstantRange{};
-    pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
-    pushConstantRange.offset = 0;
-    pushConstantRange.size = sizeof(SimplePushConstantData);
-
-    VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
-    pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-    pipelineLayoutInfo.setLayoutCount = 0;
-    pipelineLayoutInfo.pSetLayouts = nullptr;
-    pipelineLayoutInfo.pushConstantRangeCount = 1;
-    pipelineLayoutInfo.pPushConstantRanges = &pushConstantRange;
-
-    if (vkCreatePipelineLayout(device.device(), &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) {
-      throw std::runtime_error("failed to create pipeline layout");
-    }
-  }
-
-  void Application::createPipeline() {
-    assert(pipelineLayout != nullptr && "cannot create pipeline before pipeline layout");
-
-    PipelineConfigInfo pipelineConfig{};
-    Pipeline::defaultPipelineConfigInfo(pipelineConfig);
-    pipelineConfig.renderPass = renderer.getSwapChainRenderPass();
-    pipelineConfig.pipelineLayout = pipelineLayout;
-    pipeline = std::make_unique<Pipeline>(device, "shaders/shader.vert.spv", "shaders/shader.frag.spv", pipelineConfig);
-  }
-
-  void Application::renderGameObjects(VkCommandBuffer commandBuffer) {
-    pipeline->bind(commandBuffer);
-
-    for (auto& gameObject : gameObjects) {
-      gameObject.transform2D.rotation = glm::mod(gameObject.transform2D.rotation + 0.01f, glm::two_pi<float>());
-      SimplePushConstantData push{};
-      push.offset = gameObject.transform2D.translation;
-      push.color = gameObject.color;
-      push.transform = gameObject.transform2D.mat2();
-
-      vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
-      gameObject.model->bind(commandBuffer);
-      gameObject.model->draw(commandBuffer);
-    }
+    auto cube = GameObject::createGameObject();
+    cube.model = model;
+    cube.transform.translation = {0.0f, 0.0f, 2.5f};
+    cube.transform.scale = {0.5f, 0.5f, 0.5f};
+    gameObjects.push_back(std::move(cube));
   }
 }
