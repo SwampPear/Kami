@@ -23,4 +23,15 @@ namespace kami {
     NoMove(NoMove &&) = delete; // prohibit moving
     NoMove &operator=(NoMove &&) = delete; // delete move operator
   };
+
+  /**
+   * @struct DefaultMove
+   * @brief A struct that allows moving and assignment through default move
+   * constructors and move assignment operators. Should be inherited from.
+   */
+  struct DefaultMove {
+    DefaultMove() {};
+    DefaultMove(DefaultMove &&) = default; // default moving
+    DefaultMove &operator=(DefaultMove &&) = delete; // default move operator
+  };
 }

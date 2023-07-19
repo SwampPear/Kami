@@ -1,1 +1,0 @@
-1. abstract rendering functionality into renderer class
