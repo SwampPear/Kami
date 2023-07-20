@@ -4,6 +4,7 @@
 #include <tiny_object_loader/tinyObjectLoader.h>
 
 #include <cassert>
+#include <iostream>
 
 
 namespace kami{
@@ -44,6 +45,15 @@ namespace kami{
       vkDestroyBuffer(device.device(), indexBuffer, nullptr);
       vkFreeMemory(device.device(), indexBufferMemory, nullptr);
     }
+  }
+
+  std::unique_ptr<Model> Model::createModelFromFile(Device &device, const std::string &fileName) {
+    Builder builder{};
+    builder.loadModel(fileName);
+
+    std::cout << "Vertex count: " << builder.vertices.size() << std::endl;
+
+    return std::make_unique<Model>(device, builder);
   }
 
   void Model::createVertexBuffers(const std::vector<Vertex> &vertices) {
@@ -134,5 +144,64 @@ namespace kami{
     } else {
       vkCmdDraw(commandBuffer, vertexCount, 1, 0, 0);
     }
+  }
+
+  void Model::Builder::loadModel(const std::string &filePath) {
+    tinyobj::attrib_t attrib;
+    std::vector<tinyobj::shape_t> shapes;
+    std::vector<tinyobj::material_t> materials;
+    std::string warn, err;
+
+    std::cout << filePath << std::endl;
+
+    if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, filePath.c_str())) {
+      throw std::runtime_error(warn + err);
+    }
+
+    vertices.clear();
+    indices.clear();
+
+    for (const auto &shape : shapes) {
+      for (const auto &index : shape.mesh.indices) {
+        Vertex vertex{};
+
+        if (index.vertex_index >= 0) {
+          vertex.position = {
+            attrib.vertices[3 * index.vertex_index + 0],
+            attrib.vertices[3 * index.vertex_index + 1],
+            attrib.vertices[3 * index.vertex_index + 2]
+          };
+
+          auto colorIndex = 3 * index.vertex_index + 2;
+          if (colorIndex < attrib.colors.size()) {
+            vertex.color = {
+              attrib.colors[colorIndex - 2],
+              attrib.colors[colorIndex - 1],
+              attrib.colors[colorIndex - 0]
+            };
+          } else {
+            vertex.color = {1.0f, 1.0f, 1.0f};
+          }
+        }
+
+        if (index.normal_index >= 0) {
+          vertex.normal = {
+            attrib.normals[3 * index.normal_index + 0],
+            attrib.normals[3 * index.normal_index + 1],
+            attrib.normals[3 * index.normal_index + 2]
+          };
+        }
+
+        if (index.texcoord_index >= 0) {
+          vertex.uv = {
+            attrib.texcoords[2 * index.texcoord_index + 0],
+            attrib.texcoords[2 * index.texcoord_index + 1]
+          };
+        }
+
+        vertices.push_back(vertex);
+      }
+    }
+
   }
 }

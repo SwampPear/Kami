@@ -22,7 +22,7 @@ namespace kami {
     bool isComplete() { return graphicsFamilyHasValue && presentFamilyHasValue; }
   };
 
-  class Device : public NoCopy, public NoMove {
+  class Device {
     public:
       #ifdef NDEBUG
         const bool enableValidationLayers = false;
@@ -32,6 +32,10 @@ namespace kami {
 
       Device(Window &window);
       ~Device();
+      Device(const Device &) = delete; // prohibit copying
+      Device &operator=(const Device &) = delete; // delete copy constructor
+      Device(Device &&) = delete; // prohibit moving
+      Device &operator=(Device &&) = delete; // delete move operator
 
       VkCommandPool getCommandPool() { return commandPool; }
       VkDevice device() { return device_; }
