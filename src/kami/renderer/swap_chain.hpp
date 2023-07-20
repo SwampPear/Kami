@@ -11,74 +11,203 @@
 
 
 namespace kami {
+  /**
+   * @class SwapChain
+   * @brief Represents a swap chain for use in integrating the GPU with the
+   * rendering system. Not copyable.
+   */
   class SwapChain : public NoCopy {
-  public:
-    static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
+    public:
+      static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
-    SwapChain(Device &deviceRef, VkExtent2D windowExtent);
-    SwapChain(Device &deviceRef, VkExtent2D windowExtent, std::shared_ptr<SwapChain> previous);
-    ~SwapChain();
+      /**
+       * @brief Constructor. Initializes SwapChain object.
+       * @param deviceRef reference to the Device class instance
+       * @param windowExtent extent of the window surface
+       */
+      SwapChain(Device &deviceRef, VkExtent2D windowExtent);
 
-    VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; }
-    VkRenderPass getRenderPass() { return renderPass; }
-    VkImageView getImageView(int index) { return swapChainImageViews[index]; }
-    size_t imageCount() { return swapChainImages.size(); }
-    VkFormat getSwapChainImageFormat() { return swapChainImageFormat; }
-    VkExtent2D getSwapChainExtent() { return swapChainExtent; }
-    uint32_t width() { return swapChainExtent.width; }
-    uint32_t height() { return swapChainExtent.height; }
+      /**
+       * @brief Constructor. Initializes SwapChain object with previous SwapChain
+       * object for rebuilding this SwapChain.
+       * @param deviceRef reference to the Device class instance
+       * @param windowExtent extent of the window surface
+       * @param previous pointer to previous SwapChain
+       */
+      SwapChain(Device &deviceRef, VkExtent2D windowExtent, std::shared_ptr<SwapChain> previous);
 
-    float extentAspectRatio() {
-      return static_cast<float>(swapChainExtent.width) / static_cast<float>(swapChainExtent.height);
-    }
-    VkFormat findDepthFormat();
+      /**
+       * @brief Destructor. Deallocates all resources properly.
+       * @param
+       */
+      ~SwapChain();
 
-    VkResult acquireNextImage(uint32_t *imageIndex);
-    VkResult submitCommandBuffers(const VkCommandBuffer *buffers, uint32_t *imageIndex);
+      /**
+       * @brief Getter for frame buffer at index.
+       * @param index index of frame buffer to return
+       * @return frame buffer at index
+       */
+      VkFramebuffer getFrameBuffer(int index);
 
-    bool compareSwapFormats(const SwapChain &swapChain) const {
-      return swapChain.swapChainDepthFormat == swapChainDepthFormat && swapChain.swapChainImageFormat == swapChainImageFormat;
-    }
+      /**
+       * @brief Getter for render pass.
+       * @return render pass
+       */
+      VkRenderPass getRenderPass();
 
-  private:
-    void init();
-    void createSwapChain();
-    void createImageViews();
-    void createDepthResources();
-    void createRenderPass();
-    void createFramebuffers();
-    void createSyncObjects();
+      /**
+       * @brief Getter for image view at index.
+       * @param index index of image view to return.
+       * @return image view at index
+       */
+      VkImageView getImageView(int index);
 
-    // Helper functions
-    VkSurfaceFormatKHR chooseSwapSurfaceFormat(
-        const std::vector<VkSurfaceFormatKHR> &availableFormats);
-    VkPresentModeKHR chooseSwapPresentMode(
-        const std::vector<VkPresentModeKHR> &availablePresentModes);
-    VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
+      /**
+       * @brief Returns number of swap chain images.
+       * @return number of swap chain images
+       */
+      size_t imageCount();
 
-    VkFormat swapChainImageFormat;
-    VkFormat swapChainDepthFormat;
-    VkExtent2D swapChainExtent;
+      /**
+       * @brief Getter for swap chain image format.
+       * @return image format
+       */
+      VkFormat getSwapChainImageFormat();
 
-    std::vector<VkFramebuffer> swapChainFramebuffers;
-    VkRenderPass renderPass;
+      /**
+       * @brief Getter for swap chain extent.
+       * @return swap chain extent
+       */
+      VkExtent2D getSwapChainExtent();
 
-    std::vector<VkImage> depthImages;
-    std::vector<VkDeviceMemory> depthImageMemorys;
-    std::vector<VkImageView> depthImageViews;
-    std::vector<VkImage> swapChainImages;
-    std::vector<VkImageView> swapChainImageViews;
+      /**
+       * @brief Getter for swap chain extent width.
+       * @return swap chain extent width
+       */
+      uint32_t width();
 
-    Device &device;
-    VkExtent2D windowExtent;
+      /**
+       * @brief Getter for swap chain extent width.
+       * @return swap chain extent width
+       */
+      uint32_t height();
 
-    VkSwapchainKHR swapChain;
-    std::shared_ptr<SwapChain> oldSwapChain;
+      /**
+       * @brief Computes aspect ratio for extent.
+       * @return swap chain extent aspect ratio
+       */
+      float extentAspectRatio();
 
-    std::vector<VkSemaphore> imageAvailableSemaphores;
-    std::vector<VkSemaphore> renderFinishedSemaphores;
-    std::vector<VkFence> inFlightFences;
-    std::vector<VkFence> imagesInFlight;
-    size_t currentFrame = 0;
+      /**
+       * @brief Returns supported depth format for device.
+       * @return supported depth format for device
+       */
+      VkFormat findDepthFormat();
+
+      /**
+       * @brief Retrieves next image to be rendered.
+       * @param imageIndex index of current image
+       * @return next image
+       */
+      VkResult acquireNextImage(uint32_t *imageIndex);
+
+      /**
+       * @brief Submits command buffers at an index to swap chain.
+       * @param buffers command buffers to submit
+       * @param imageIndex index to submit buffers at
+       * @return result of computation
+       */
+      VkResult submitCommandBuffers(const VkCommandBuffer *buffers, uint32_t *imageIndex);
+
+      /**
+       * @brief Determines if format of next swap chain is identical to previous
+       * swap chain.
+       * @param swapChain next swap chain
+       * @return true if identical, false otherwise
+       */
+      bool compareSwapFormats(const SwapChain &swapChain) const;
+
+    private:
+      VkFormat swapChainImageFormat;
+      VkFormat swapChainDepthFormat;
+      VkExtent2D swapChainExtent;
+
+      std::vector<VkFramebuffer> swapChainFramebuffers;
+      VkRenderPass renderPass;
+
+      std::vector<VkImage> depthImages;
+      std::vector<VkDeviceMemory> depthImageMemorys;
+      std::vector<VkImageView> depthImageViews;
+      std::vector<VkImage> swapChainImages;
+      std::vector<VkImageView> swapChainImageViews;
+
+      Device &device;
+      VkExtent2D windowExtent;
+
+      VkSwapchainKHR swapChain;
+      std::shared_ptr<SwapChain> oldSwapChain;
+
+      std::vector<VkSemaphore> imageAvailableSemaphores;
+      std::vector<VkSemaphore> renderFinishedSemaphores;
+      std::vector<VkFence> inFlightFences;
+      std::vector<VkFence> imagesInFlight;
+      size_t currentFrame = 0;
+
+      /**
+       * @brief Initializes swap chain, image views, render pass, depth 
+       * resources, frame buffers, and sync objects.
+       */
+      void init();
+
+      /**
+       * @brief Initializes swap chain.
+       */
+      void createSwapChain();
+
+      /**
+       * @brief Initializes image views.
+       */
+      void createImageViews();
+
+      /**
+       * @brief Initializes depth resources.
+       */
+      void createDepthResources();
+
+      /**
+       * @brief Initializes render pass.
+       */
+      void createRenderPass();
+
+      /**
+       * @brief Initializes frame buffers.
+       */
+      void createFramebuffers();
+
+      /**
+       * @brief Initializes sync objects.
+       */
+      void createSyncObjects();
+
+      /**
+       * @brief Chooses swap chain surface format based on device capabilities.
+       * @param availableFormats available formats
+       * @return supported surface format
+       */
+      VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats);
+
+      /**
+       * @brief Chooses swap surface present mode based on device capabilities.
+       * @param availablePresentModes available present modes
+       * @return supported present modes
+       */
+      VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes);
+
+      /**
+       * @brief Chooses swap surface extent based on device capabilities.
+       * @param capabilites capabilities of device
+       * @return swap extent
+       */
+      VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities);
   };
 }

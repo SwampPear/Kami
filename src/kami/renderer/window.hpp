@@ -62,6 +62,7 @@ namespace kami {
        * @param surface the Vulkan window surface
        */
       void createWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
+      
     private:
       int width;
       int height;

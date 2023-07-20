@@ -22,15 +22,6 @@ namespace kami {
     oldSwapChain = nullptr;
   }
 
-  void SwapChain::init() {
-    createSwapChain();
-    createImageViews();
-    createRenderPass();
-    createDepthResources();
-    createFramebuffers();
-    createSyncObjects();
-  }
-
   SwapChain::~SwapChain() {
     for (auto imageView : swapChainImageViews) {
       vkDestroyImageView(device.device(), imageView, nullptr);
@@ -62,27 +53,72 @@ namespace kami {
     }
   }
 
+  VkFramebuffer SwapChain::getFrameBuffer(int index) { 
+    return swapChainFramebuffers[index]; 
+  }
+
+  VkRenderPass SwapChain::getRenderPass() { 
+    return renderPass; 
+  }
+
+  VkImageView SwapChain::getImageView(int index) { 
+    return swapChainImageViews[index]; 
+  }
+
+  size_t SwapChain::imageCount() { 
+    return swapChainImages.size(); 
+  }
+
+  VkFormat SwapChain::getSwapChainImageFormat() { 
+    return swapChainImageFormat; 
+  }
+
+  VkExtent2D SwapChain::getSwapChainExtent() { 
+    return swapChainExtent; 
+  }
+
+  uint32_t SwapChain::width() { 
+    return swapChainExtent.width; 
+  }
+
+  uint32_t SwapChain::height() { 
+    return swapChainExtent.height; 
+  }
+
+  float SwapChain::extentAspectRatio() {
+    return static_cast<float>(swapChainExtent.width) / static_cast<float>(swapChainExtent.height);
+  }
+
+  VkFormat SwapChain::findDepthFormat() {
+    return device.findSupportedFormat(
+      {VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT},
+      VK_IMAGE_TILING_OPTIMAL,
+      VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT
+    );
+  }
+
   VkResult SwapChain::acquireNextImage(uint32_t *imageIndex) {
     vkWaitForFences(
-        device.device(),
-        1,
-        &inFlightFences[currentFrame],
-        VK_TRUE,
-        std::numeric_limits<uint64_t>::max());
+      device.device(),
+      1,
+      &inFlightFences[currentFrame],
+      VK_TRUE,
+      std::numeric_limits<uint64_t>::max()
+    );
 
     VkResult result = vkAcquireNextImageKHR(
-        device.device(),
-        swapChain,
-        std::numeric_limits<uint64_t>::max(),
-        imageAvailableSemaphores[currentFrame],  // must be a not signaled semaphore
-        VK_NULL_HANDLE,
-        imageIndex);
+      device.device(),
+      swapChain,
+      std::numeric_limits<uint64_t>::max(),
+      imageAvailableSemaphores[currentFrame],  // must be a not signaled semaphore
+      VK_NULL_HANDLE,
+      imageIndex
+    );
 
     return result;
   }
 
-  VkResult SwapChain::submitCommandBuffers(
-      const VkCommandBuffer *buffers, uint32_t *imageIndex) {
+  VkResult SwapChain::submitCommandBuffers(const VkCommandBuffer *buffers, uint32_t *imageIndex) {
     if (imagesInFlight[*imageIndex] != VK_NULL_HANDLE) {
       vkWaitForFences(device.device(), 1, &imagesInFlight[*imageIndex], VK_TRUE, UINT64_MAX);
     }
@@ -127,6 +163,19 @@ namespace kami {
     currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
 
     return result;
+  }
+
+  bool SwapChain::compareSwapFormats(const SwapChain &swapChain) const {
+    return swapChain.swapChainDepthFormat == swapChainDepthFormat && swapChain.swapChainImageFormat == swapChainImageFormat;
+  }
+
+  void SwapChain::init() {
+    createSwapChain();
+    createImageViews();
+    createRenderPass();
+    createDepthResources();
+    createFramebuffers();
+    createSyncObjects();
   }
 
   void SwapChain::createSwapChain() {
@@ -370,8 +419,7 @@ namespace kami {
     }
   }
 
-  VkSurfaceFormatKHR SwapChain::chooseSwapSurfaceFormat(
-      const std::vector<VkSurfaceFormatKHR> &availableFormats) {
+  VkSurfaceFormatKHR SwapChain::chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats) {
     for (const auto &availableFormat : availableFormats) {
       if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB &&
           availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
@@ -382,8 +430,7 @@ namespace kami {
     return availableFormats[0];
   }
 
-  VkPresentModeKHR SwapChain::chooseSwapPresentMode(
-      const std::vector<VkPresentModeKHR> &availablePresentModes) {
+  VkPresentModeKHR SwapChain::chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes) {
     for (const auto &availablePresentMode : availablePresentModes) {
       if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
         std::cout << "Present mode: Mailbox" << std::endl;
@@ -416,12 +463,5 @@ namespace kami {
 
       return actualExtent;
     }
-  }
-
-  VkFormat SwapChain::findDepthFormat() {
-    return device.findSupportedFormat(
-        {VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT},
-        VK_IMAGE_TILING_OPTIMAL,
-        VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT);
   }
 }
