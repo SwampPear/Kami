@@ -52,6 +52,11 @@ namespace kami {
       void resetWindowResizedFlag();
 
       /**
+       * @brief returns the window member variable
+       */
+      GLFWwindow* getGLFWwindow();
+
+      /**
        * @brief Creates the surface which graphics are rendered on.
        * @param instance the Vulkan instance
        * @param surface the Vulkan window surface

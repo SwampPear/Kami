@@ -2,8 +2,11 @@
 #include "kami/utils/trait.hpp"
 #include "kami/renderer/render_system.hpp"
 #include "kami/renderer/camera.hpp"
+#include "kami/renderer/keyboard_movement_controller.hpp"
 
 #include "glm/gtc/constants.hpp"
+
+#include <chrono>
 
 
 namespace kami {
@@ -18,12 +21,23 @@ namespace kami {
     Camera camera{};
     //camera.setViewDirection(glm::vec3{0.0f}, glm::vec3{0.5f, 0.0f, 1.0f});
     camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
+
+    auto viewObject = GameObject::createGameObject();
+    KeyboardMovementController cameraController{};
+
+    auto currentTime = std::chrono::high_resolution_clock::now();
     
     while(!window.shouldClose()) {
       glfwPollEvents();
 
+      auto newTime = std::chrono::high_resolution_clock::now();
+      float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+      currentTime = newTime;
+
+      cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, viewObject);
+      camera.setViewYXZ(viewObject.transform.translation, viewObject.transform.rotation);
+
       float aspect = renderer.getAspectRatio();
-      //camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
       camera.setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
       
       if (auto commandBuffer = renderer.beginFrame()) {
