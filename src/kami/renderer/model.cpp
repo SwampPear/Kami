@@ -1,5 +1,8 @@
 #include "kami/renderer/model.hpp"
 
+#define TINYOBJLOADER_IMPLEMENTATION
+#include <tiny_object_loader/tinyObjectLoader.h>
+
 #include <cassert>
 
 
