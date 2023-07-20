@@ -49,12 +49,14 @@ namespace kami {
   void RenderSystem::renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject> &gameObjects, const Camera &camera) {
     pipeline->bind(commandBuffer);
 
+    auto projectionView = camera.getProjection() * camera.getView(); 
+
     for (auto& gameObject : gameObjects) {
       gameObject.transform.rotation.y = glm::mod(gameObject.transform.rotation.y + 0.01f, glm::two_pi<float>());
       gameObject.transform.rotation.x = glm::mod(gameObject.transform.rotation.y + 0.005f, glm::two_pi<float>());
       SimplePushConstantData push{};
       push.color = gameObject.color;
-      push.transform = camera.getProjection() * gameObject.transform.mat4();
+      push.transform = projectionView * gameObject.transform.mat4();
 
       vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
       gameObject.model->bind(commandBuffer);
