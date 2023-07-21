@@ -1,8 +1,8 @@
 #include "kami/core/application.hpp"
-#include "kami/utils/trait.hpp"
 #include "kami/renderer/render_system.hpp"
-#include "kami/renderer/camera.hpp"
+#include "kami/renderer/Camera/PerspectiveCamera.hpp"
 #include "kami/renderer/keyboard_movement_controller.hpp"
+#include "kami/utils/trait.hpp"
 
 #include "glm/gtc/constants.hpp"
 
@@ -18,7 +18,7 @@ namespace kami {
 
   void Application::run() {
     RenderSystem renderSystem{device, renderer.getSwapChainRenderPass()};
-    Camera camera{};
+    PerspectiveCamera camera{};
     //camera.setViewDirection(glm::vec3{0.0f}, glm::vec3{0.5f, 0.0f, 1.0f});
     camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
@@ -38,7 +38,7 @@ namespace kami {
       camera.setViewYXZ(viewObject.transform.translation, viewObject.transform.rotation);
 
       float aspect = renderer.getAspectRatio();
-      camera.setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
+      camera.setProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
       
       if (auto commandBuffer = renderer.beginFrame()) {
         renderer.beginSwapChainRenderPass(commandBuffer);
