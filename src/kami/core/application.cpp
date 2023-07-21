@@ -1,6 +1,7 @@
 #include "kami/core/application.hpp"
 #include "kami/renderer/render_system.hpp"
 #include "kami/renderer/Camera/PerspectiveCamera.hpp"
+#include "kami/renderer/Camera/Camera.hpp"
 #include "kami/renderer/keyboard_movement_controller.hpp"
 #include "kami/utils/trait.hpp"
 

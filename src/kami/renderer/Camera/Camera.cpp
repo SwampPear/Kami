@@ -2,6 +2,8 @@
 
 
 namespace kami {
+  Camera::~Camera() { }
+
   void Camera::setViewDirection(glm::vec3 position, glm::vec3 direction, glm::vec3 up) {
     const glm::vec3 w{glm::normalize(direction)};
     const glm::vec3 u{glm::normalize(glm::cross(w, up))};

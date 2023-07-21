@@ -9,13 +9,24 @@
 
 
 namespace kami {
+  /**
+   * @class Camera
+   * @brief Abstract class representing acamera object that determines rendering 
+   * of graphics and can be inherited from by other classes to determine the
+   * viewing frustrum and projection matrices.
+   */
   class Camera {
     public:
+      /**
+       * @brief Pure virtual destructor. Designates this class as abstract.
+       */
+      virtual ~Camera() = 0;
+
       void setViewDirection(glm::vec3 position, glm::vec3 direction, glm::vec3 up = {0.0f, -1.0f, 0.0f});
       void setViewTarget(glm::vec3 position, glm::vec3 target, glm::vec3 up = {0.0f, -1.0f, 0.0f});
       void setViewYXZ(glm::vec3 position, glm::vec3 rotation);
 
-      const glm::mat4 getProjection() const { return projectionMatrix; };
+      virtual const glm::mat4 getProjection() const { return projectionMatrix; };
       const glm::mat4 getView() const { return viewMatrix; };
 
     protected:
