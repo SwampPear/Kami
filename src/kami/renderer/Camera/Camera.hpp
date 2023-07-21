@@ -18,7 +18,7 @@ namespace kami {
       const glm::mat4 getProjection() const { return projectionMatrix; };
       const glm::mat4 getView() const { return viewMatrix; };
 
-    private:
+    protected:
       glm::mat4 projectionMatrix{1.0f};
       glm::mat4 viewMatrix{1.0f};
   };

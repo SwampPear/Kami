@@ -4,7 +4,7 @@
 #include "kami/core/device.hpp"
 #include "kami/utils/trait.hpp"
 #include "kami/core/game_object.hpp"
-#include "kami/renderer/camera.hpp"
+#include "kami/renderer/Camera/Camera.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE

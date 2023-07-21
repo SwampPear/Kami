@@ -7,5 +7,8 @@ namespace kami {
   class PerspectiveCamera : public Camera {
     public:
       void setProjection(float fovy, float aspect, float near, float far);
+      
+    private:
+      friend class Camera;
   };
 }
