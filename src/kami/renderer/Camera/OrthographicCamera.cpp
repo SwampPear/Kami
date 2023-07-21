@@ -1,8 +1,5 @@
 #include "kami/renderer/Camera/OrthographicCamera.hpp"
 
-#include <cassert>
-#include <limits>
-
 
 namespace kami {
   void OrthographicCamera::setProjection(float left, float right, float top, float bottom, float near, float far) {

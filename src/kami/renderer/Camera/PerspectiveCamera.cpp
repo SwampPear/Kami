@@ -1,8 +1,5 @@
 #include "kami/renderer/Camera/PerspectiveCamera.hpp"
 
-#include <cassert>
-#include <limits>
-
 
 namespace kami {
   void PerspectiveCamera::setProjection(float fovy, float aspect, float near, float far) {

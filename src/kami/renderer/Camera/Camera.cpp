@@ -1,8 +1,5 @@
 #include "kami/renderer/Camera/Camera.hpp"
 
-#include <cassert>
-#include <limits>
-
 
 namespace kami {
   void Camera::setViewDirection(glm::vec3 position, glm::vec3 direction, glm::vec3 up) {
