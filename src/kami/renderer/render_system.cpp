@@ -6,7 +6,7 @@
 namespace kami {
   struct SimplePushConstantData {
     glm::mat4 transform{1.f};
-    alignas(16) glm::vec3 color;
+    glm::mat4 modelMatrix{1.f};
   };
 
   RenderSystem::RenderSystem(Device &device, VkRenderPass renderPass) : device{device} {
@@ -53,8 +53,9 @@ namespace kami {
 
     for (auto& gameObject : gameObjects) {
       SimplePushConstantData push{};
-      push.color = gameObject.color;
-      push.transform = projectionView * gameObject.transform.mat4();
+      auto modelMatrix = gameObject.transform.mat4();
+      push.transform = projectionView * modelMatrix;
+      push.modelMatrix = modelMatrix;
 
       vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
       gameObject.model->bind(commandBuffer);

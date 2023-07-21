@@ -6,7 +6,7 @@ INCLUDE_PATH = src
 SUB_DIR = src src/kami/core src/kami/renderer src/kami/utils
 LIB = lib/*
 
-CFLAGS = -std=c++14 -Wall -L. $(LIB) -I $(INCLUDE) -I $(INCLUDE_PATH)
+CFLAGS = -std=c++17 -Wall -L. $(LIB) -I $(INCLUDE) -I $(INCLUDE_PATH)
 
 all: $(TARGET)
 

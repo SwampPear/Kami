@@ -54,7 +54,7 @@ namespace kami {
 
 
   void Application::loadGameObjects() {
-    std::shared_ptr<Model> model = Model::createModelFromFile(device, "models/crystal.obj");
+    std::shared_ptr<Model> model = Model::createModelFromFile(device, "models/pear.obj");
 
     auto cube = GameObject::createGameObject();
     cube.model = model;
