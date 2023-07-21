@@ -1,12 +1,13 @@
 #pragma once
 
-#include "kami/renderer/window.hpp"
 #include "kami/input/key_codes.hpp"
 #include "kami/input/mouse_codes.hpp"
+#include "kami/renderer/window.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
+
 #include <GLFW/glfw3.h>
 
 
@@ -15,9 +16,9 @@ namespace kami {
     public:
       /**
        * @brief Constructor. Initializes the Input object with GLFWwindow.
-       * @param window the GLFWwindow pointer to initialize with
+       * @param window the Window object to initialize with
        */
-      Input(GLFWwindow *window);
+      Input(Window &window);
 
       /**
        * @brief Destructor. Destroys the Input object.

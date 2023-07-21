@@ -5,6 +5,7 @@
 #include "kami/utils/trait.hpp"
 #include "kami/core/game_object.hpp"
 #include "kami/renderer/renderer.hpp"
+#include "kami/input/input.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -31,6 +32,7 @@ namespace kami {
 
       Window window{WIDTH, HEIGHT, "window name"};
       Device device{window};
+      Input input{window};
       Renderer renderer{window, device};
       std::vector<GameObject> gameObjects;
   };

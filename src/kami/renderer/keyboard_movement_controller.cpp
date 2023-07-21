@@ -7,12 +7,6 @@ namespace kami {
   void KeyboardMovementController::moveInPlaneXZ(GLFWwindow* window, float dt, GameObject& gameObject) {
     glm::vec3 rotate{0.0f};
 
-    // testing out mouse position
-    double xpos, ypos;
-    glfwGetCursorPos(window, &xpos, &ypos);
-
-    std::cout << "x: " << xpos << ", y: " << ypos << std::endl;
-
     if (glfwGetKey(window, keys.lookRight) == GLFW_PRESS) rotate.y += 1.0f;
     if (glfwGetKey(window, keys.lookLeft) == GLFW_PRESS) rotate.y -= 1.0f;
     if (glfwGetKey(window, keys.lookUp) == GLFW_PRESS) rotate.x += 1.0f;
