@@ -5,6 +5,7 @@
 #include "kami/utils/trait.hpp"
 #include "kami/core/game_object.hpp"
 #include "kami/renderer/Camera/Camera.hpp"
+#include "kami/renderer/frame_info.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -22,7 +23,7 @@ namespace kami {
       RenderSystem(Device &device, VkRenderPass renderPass);
       ~RenderSystem();
 
-      void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject> &gameObjects, const Camera &camera);
+      void renderGameObjects(FrameInfo &frameInfo, std::vector<GameObject> &gameObjects);
 
     private:
       void createPipelineLayout();

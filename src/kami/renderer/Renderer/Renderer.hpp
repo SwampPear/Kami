@@ -2,7 +2,7 @@
 
 #include "kami/renderer/window.hpp"
 #include "kami/core/device.hpp"
-#include "kami/renderer/swap_chain.hpp"
+#include "kami/renderer/Renderer/SwapChain.hpp"
 
 #include <memory>
 #include <vector>

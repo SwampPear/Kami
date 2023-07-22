@@ -1,4 +1,4 @@
-#include "kami/renderer/swap_chain.hpp"
+#include "kami/renderer/Renderer/SwapChain.hpp"
 
 #include <array>
 #include <cstdlib>
@@ -52,7 +52,7 @@ namespace kami {
       vkDestroyFence(device.device(), inFlightFences[i], nullptr);
     }
   }
-
+  
   VkFramebuffer SwapChain::getFrameBuffer(int index) { 
     return swapChainFramebuffers[index]; 
   }

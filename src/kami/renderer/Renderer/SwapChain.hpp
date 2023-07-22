@@ -16,10 +16,8 @@ namespace kami {
    * @brief Represents a swap chain for use in integrating the GPU with the
    * rendering system. Not copyable.
    */
-  class SwapChain : public NoCopy {
+  class SwapChain {
     public:
-      static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
-
       /**
        * @brief Constructor. Initializes SwapChain object.
        * @param deviceRef reference to the Device class instance
@@ -41,6 +39,11 @@ namespace kami {
        * @param
        */
       ~SwapChain();
+
+      SwapChain(const SwapChain &) = delete; // prohibit copying
+      SwapChain &operator=(const SwapChain &) = delete; // delete copy constructor
+
+      static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
       /**
        * @brief Getter for frame buffer at index.

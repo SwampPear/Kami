@@ -4,7 +4,7 @@
 #include "kami/core/device.hpp"
 #include "kami/utils/trait.hpp"
 #include "kami/core/game_object.hpp"
-#include "kami/renderer/renderer.hpp"
+#include "kami/renderer/Renderer/Renderer.hpp"
 #include "kami/input/input.hpp"
 
 #define GLM_FORCE_RADIANS
@@ -20,7 +20,7 @@
 namespace kami {
   class Application : public NoCopy {
     public:
-      static constexpr int WIDTH = 800;
+      static constexpr int WIDTH = 600;
       static constexpr int HEIGHT = 600;
 
       Application();

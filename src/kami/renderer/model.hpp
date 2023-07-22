@@ -1,7 +1,7 @@
 #pragma once
 
 #include "kami/core/device.hpp"
-#include "kami/utils/trait.hpp"
+#include "kami/renderer/buffer.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -54,12 +54,11 @@ namespace kami {
       void createIndexBuffers(const std::vector<uint32_t> &indices);
 
       Device& device;
-      VkBuffer vertexBuffer;
-      VkDeviceMemory vertexBufferMemory;
+      
+      std::unique_ptr<Buffer> vertexBuffer;
       uint32_t vertexCount;
 
-      VkBuffer indexBuffer;
-      VkDeviceMemory indexBufferMemory;
+      std::unique_ptr<Buffer> indexBuffer;
       uint32_t indexCount;
 
       bool hasIndexBuffer{false};

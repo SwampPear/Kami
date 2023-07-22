@@ -47,10 +47,10 @@ namespace kami {
     pipeline = std::make_unique<Pipeline>(device, "shaders/shader.vert.spv", "shaders/shader.frag.spv", pipelineConfig);
   }
 
-  void RenderSystem::renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject> &gameObjects, const Camera &camera) {
-    pipeline->bind(commandBuffer);
+  void RenderSystem::renderGameObjects(FrameInfo &frameInfo, std::vector<GameObject> &gameObjects) {
+    pipeline->bind(frameInfo.commandBuffer);
 
-    auto projectionView = camera.getProjection() * camera.getView(); 
+    auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView(); 
 
     for (auto& gameObject : gameObjects) {
       SimplePushConstantData push{};
@@ -58,9 +58,9 @@ namespace kami {
       push.transform = projectionView * modelMatrix;
       push.normalMatrix = gameObject.transform.normalMatrix();
 
-      vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
-      gameObject.model->bind(commandBuffer);
-      gameObject.model->draw(commandBuffer);
+      vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
+      gameObject.model->bind(frameInfo.commandBuffer);
+      gameObject.model->draw(frameInfo.commandBuffer);
     }
   }
 }

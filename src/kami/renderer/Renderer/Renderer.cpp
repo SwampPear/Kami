@@ -1,5 +1,4 @@
-#include "kami/renderer/renderer.hpp"
-#include "kami/utils/trait.hpp"
+#include "kami/renderer/Renderer/Renderer.hpp"
 
 #include "glm/gtc/constants.hpp"
 
