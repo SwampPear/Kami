@@ -9,13 +9,14 @@
   <img align="middle" alt="c++" src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge logo=c%2B%2B&logoColor=white">
 </p>
 
+Kami is a work-in-progress 3D and 2D game engine opting for simplicity in usage and implenentation wherever possible.
+While in its early stages, Kami is currently not in a usable state however it is quickly evolving. 
 Kami is my personal exploration and continuation of my own endeavors in game programming, design, and creativity.
+
 I have a few goals in mind at the core of its implementation:
 
-
-
-- ease of use
-- robust, beautiful graphics system
-- story-driven systemss
+- ease of use (primarily scripting, no UI)
+- robust, beauty focused graphics system
+- story-driven systems
 - efficient and proven essential systems (ECS: entt, graphics: vulkan)
 - procedural asset generation (terrain, story, and audio)
