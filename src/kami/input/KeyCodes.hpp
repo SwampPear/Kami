@@ -4,11 +4,10 @@
 
 
 namespace kami {
-  using KeyCode = int16_t;
+  using KeyCode = uint16_t;
 
   namespace Key {
     enum : KeyCode {
-      Unknown             = -1,
       Space               = 32,
       Apostrophe          = 39, /* ' */
       Comma               = 44, /* , */

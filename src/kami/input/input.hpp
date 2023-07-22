@@ -1,7 +1,7 @@
 #pragma once
 
-#include "kami/input/key_codes.hpp"
-#include "kami/input/mouse_codes.hpp"
+#include "kami/Input/KeyCodes.hpp"
+#include "kami/Input/MouseCodes.hpp"
 #include "kami/renderer/window.hpp"
 
 #define GLM_FORCE_RADIANS

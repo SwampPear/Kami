@@ -5,7 +5,7 @@
 #include "kami/utils/trait.hpp"
 #include "kami/core/game_object.hpp"
 #include "kami/renderer/Renderer/Renderer.hpp"
-#include "kami/input/input.hpp"
+#include "kami/Input/Input.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE

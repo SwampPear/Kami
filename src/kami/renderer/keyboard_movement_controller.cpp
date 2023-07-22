@@ -35,6 +35,5 @@ namespace kami {
     if (glm::dot(moveDir, moveDir) > std::numeric_limits<float>::epsilon()) {
       gameObject.transform.translation += moveSpeed * dt * glm::normalize(moveDir);
     }
-
   }
 }
