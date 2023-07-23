@@ -30,6 +30,7 @@ namespace kami {
   Application::~Application() { }
 
   void Application::run() {
+    // ubo buffers
     std::vector<std::unique_ptr<Buffer>> uboBuffers(SwapChain::MAX_FRAMES_IN_FLIGHT);
     for (int i = 0; i < uboBuffers.size(); i++) {
       uboBuffers[i] = std::make_unique<Buffer>(device,
@@ -42,6 +43,7 @@ namespace kami {
       uboBuffers[i]->map();
     }
 
+    // descriptor sets
     auto globalSetLayout = DescriptorSetLayout::Builder(device)
       .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)
       .build();
@@ -54,16 +56,18 @@ namespace kami {
         .build(globalDescriptorSets[i]);
     }
 
+    // rendering
     RenderSystem renderSystem{device, renderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
     PerspectiveCamera camera{};
 
     Scene scene{};
-    scene.createEntity();
+
     camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
     auto viewObject = GameObject::createGameObject();
     KeyboardMovementController cameraController{};
 
+    // main loop
     auto currentTime = std::chrono::high_resolution_clock::now();
     
     while(!window.shouldClose()) {

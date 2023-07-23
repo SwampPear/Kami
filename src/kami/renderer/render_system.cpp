@@ -63,7 +63,7 @@ namespace kami {
       nullptr
     );
 
-    auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView(); 
+    //auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView(); 
 
     for (auto& gameObject : gameObjects) {
       SimplePushConstantData push{};
