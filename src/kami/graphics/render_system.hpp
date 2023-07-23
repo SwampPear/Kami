@@ -24,7 +24,6 @@ namespace kami {
       RenderSystem(Device &device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout);
       ~RenderSystem();
 
-      //void renderGameObjects(FrameInfo &frameInfo, std::vector<GameObject> &gameObjects);
       void renderScene(FrameInfo &frameInfo, Scene &scene, std::shared_ptr<Model> model);
 
     private:

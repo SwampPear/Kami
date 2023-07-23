@@ -53,35 +53,6 @@ namespace kami {
     pipeline = std::make_unique<Pipeline>(device, "shaders/shader.vert.spv", "shaders/shader.frag.spv", pipelineConfig);
   }
 
-  /*
-  void RenderSystem::renderGameObjects(FrameInfo &frameInfo, std::vector<GameObject> &gameObjects) {
-    pipeline->bind(frameInfo.commandBuffer);
-
-    vkCmdBindDescriptorSets(
-      frameInfo.commandBuffer, 
-      VK_PIPELINE_BIND_POINT_GRAPHICS,
-      pipelineLayout,
-      0,
-      1,
-      &frameInfo.globalDescriptorSet,
-      0,
-      nullptr
-    );
-
-    //auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView(); 
-
-    for (auto& gameObject : gameObjects) {
-      SimplePushConstantData push{};
-      push.modelMatrix = gameObject.transform.mat4();
-      push.normalMatrix = gameObject.transform.normalMatrix();
-
-      vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
-      gameObject.model->bind(frameInfo.commandBuffer);
-      gameObject.model->draw(frameInfo.commandBuffer);
-    }
-  }
-  */
-
   void RenderSystem::renderScene(FrameInfo &frameInfo, Scene &scene, std::shared_ptr<Model> model) {
     pipeline->bind(frameInfo.commandBuffer);
 

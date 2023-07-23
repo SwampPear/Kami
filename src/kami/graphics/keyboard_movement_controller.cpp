@@ -17,7 +17,7 @@ namespace kami {
     }
 
     gameObject.transform.rotation.x = glm::clamp(gameObject.transform.rotation.x, -1.5f, 1.5f);
-    gameObject.transform.rotation.y = gameObject.transform.rotation.y; //glm::mod(gameObject.transform.rotation.y, glm::two_pi<float>());
+    gameObject.transform.rotation.y = gameObject.transform.rotation.y;
 
     float yaw = gameObject.transform.rotation.y;
     const glm::vec3 forwardDir{sin(yaw), 0.0f, cos(yaw)};
