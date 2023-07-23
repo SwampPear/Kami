@@ -116,7 +116,6 @@ namespace kami {
         uboBuffers[frameIndex]->flush();
 
         renderer.beginSwapChainRenderPass(commandBuffer);
-        //renderSystem.renderGameObjects(frameInfo, gameObjects);
         renderSystem.renderScene(frameInfo, scene, sphere);
         renderer.endSwapChainRenderPass(commandBuffer);
         renderer.endFrame();
