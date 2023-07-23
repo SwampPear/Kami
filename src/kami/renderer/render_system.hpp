@@ -20,13 +20,13 @@
 namespace kami {
   class RenderSystem : public NoCopy {
     public:
-      RenderSystem(Device &device, VkRenderPass renderPass);
+      RenderSystem(Device &device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout);
       ~RenderSystem();
 
       void renderGameObjects(FrameInfo &frameInfo, std::vector<GameObject> &gameObjects);
 
     private:
-      void createPipelineLayout();
+      void createPipelineLayout(VkDescriptorSetLayout globalSetLayout);
       void createPipeline(VkRenderPass renderPass);
 
       Device &device;

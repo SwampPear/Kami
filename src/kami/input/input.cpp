@@ -1,4 +1,4 @@
-#include "kami/input/input.hpp"
+#include "kami/Input/Input.hpp"
 
 
 namespace kami {

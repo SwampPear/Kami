@@ -6,6 +6,7 @@
 #include "kami/core/game_object.hpp"
 #include "kami/renderer/Renderer/Renderer.hpp"
 #include "kami/Input/Input.hpp"
+#include "kami/renderer/descriptors.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -34,6 +35,7 @@ namespace kami {
       Device device{window};
       Input input{window};
       Renderer renderer{window, device};
+      std::unique_ptr<DescriptorPool> globalPool{};
       std::vector<GameObject> gameObjects;
   };
 }

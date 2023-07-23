@@ -5,6 +5,7 @@
 #include "kami/renderer/keyboard_movement_controller.hpp"
 #include "kami/utils/trait.hpp"
 #include "kami/renderer/buffer.hpp"
+#include "kami/Scene/Scene.hpp"
 
 #include "glm/gtc/constants.hpp"
 
@@ -18,6 +19,11 @@ namespace kami {
   };
 
   Application::Application() {
+    globalPool = DescriptorPool::Builder(device)
+      .setMaxSets(SwapChain::MAX_FRAMES_IN_FLIGHT)
+      .addPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, SwapChain::MAX_FRAMES_IN_FLIGHT)
+      .addPoolSize(VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, SwapChain::MAX_FRAMES_IN_FLIGHT)
+      .build();
     loadGameObjects();
   }
 
@@ -36,9 +42,23 @@ namespace kami {
       uboBuffers[i]->map();
     }
 
-    RenderSystem renderSystem{device, renderer.getSwapChainRenderPass()};
+    auto globalSetLayout = DescriptorSetLayout::Builder(device)
+      .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)
+      .build();
+
+    std::vector<VkDescriptorSet> globalDescriptorSets(SwapChain::MAX_FRAMES_IN_FLIGHT);
+    for (int i = 0; i < globalDescriptorSets.size(); i++) {
+      auto bufferInfo = uboBuffers[i]->descriptorInfo();
+      DescriptorWriter(*globalSetLayout, *globalPool)
+        .writeBuffer(0, &bufferInfo)
+        .build(globalDescriptorSets[i]);
+    }
+
+    RenderSystem renderSystem{device, renderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
     PerspectiveCamera camera{};
-    //camera.setViewDirection(glm::vec3{0.0f}, glm::vec3{0.5f, 0.0f, 1.0f});
+
+    Scene scene{};
+    scene.createEntity();
     camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
     auto viewObject = GameObject::createGameObject();
@@ -65,7 +85,8 @@ namespace kami {
           frameIndex,
           frameTime,
           commandBuffer,
-          camera
+          camera,
+          globalDescriptorSets[frameIndex]
         };
 
         GlobalUBO ubo{};
@@ -86,7 +107,7 @@ namespace kami {
 
 
   void Application::loadGameObjects() {
-    std::shared_ptr<Model> model = Model::createModelFromFile(device, "models/pear.obj");
+    std::shared_ptr<Model> model = Model::createModelFromFile(device, "models/untitled.obj");
 
     auto cube = GameObject::createGameObject();
     cube.model = model;
