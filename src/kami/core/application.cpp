@@ -27,7 +27,6 @@ namespace kami {
       .addPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, SwapChain::MAX_FRAMES_IN_FLIGHT)
       .addPoolSize(VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, SwapChain::MAX_FRAMES_IN_FLIGHT)
       .build();
-    loadGameObjects();
   }
 
   Application::~Application() { }
@@ -125,23 +124,5 @@ namespace kami {
     }
 
     vkDeviceWaitIdle(device.device());
-  }
-
-
-
-  void Application::loadGameObjects() {
-    std::shared_ptr<Model> model = Model::createModelFromFile(device, "models/untitled.obj");
-
-    auto cube = GameObject::createGameObject();
-    cube.model = model;
-    cube.transform.translation = {0.0f, 0.0f, 2.5f};
-    cube.transform.scale = {0.5f, 0.5f, 0.5f};
-    gameObjects.push_back(std::move(cube));
-
-    auto cube2 = GameObject::createGameObject();
-    cube2.model = model;
-    cube2.transform.translation = {0.0f, -1.5f, 2.5f};
-    cube2.transform.scale = {0.5f, 0.5f, 0.5f};
-    gameObjects.push_back(std::move(cube2));
   }
 }

@@ -28,14 +28,12 @@ namespace kami {
       ~Application();
 
       void run();
+      
     private:
-      void loadGameObjects();
-
       Window window{WIDTH, HEIGHT, "window name"};
       Device device{window};
       Input input{window};
       Renderer renderer{window, device};
       std::unique_ptr<DescriptorPool> globalPool{};
-      std::vector<GameObject> gameObjects;
   };
 }
