@@ -13,9 +13,9 @@ namespace kami {
 
       //static Ref<Scene> Copy(Ref<Scene> other);
 
-      Entity CreateEntity(const std::string& name = std::string());
-      Entity CreateEntityWithUUID(UUID uuid, const std::string& name = std::string());
-      void DestroyEntity(Entity entity);
+      Entity createEntity();
+      Entity createEntityWithUUID(UUID uuid);
+      void destroyEntity(Entity entity);
 
       //void OnUpdateRuntime(Timestep ts);
       //void OnUpdateSimulation(Timestep ts, EditorCamera& camera);

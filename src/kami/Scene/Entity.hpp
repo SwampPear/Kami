@@ -54,7 +54,6 @@ namespace kami {
 		operator uint32_t() const { return (uint32_t)entityHandle; }
 
 		UUID GetUUID() { return GetComponent<IDComponent>().ID; }
-		const std::string& GetName() { return GetComponent<TagComponent>().Tag; }
 
 		bool operator==(const Entity& other) const {
 			return entityHandle == other.entityHandle && scene == other.scene;

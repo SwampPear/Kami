@@ -6,6 +6,7 @@
 #include "kami/utils/trait.hpp"
 #include "kami/renderer/buffer.hpp"
 #include "kami/Scene/Scene.hpp"
+#include "kami/Scene/Entity.hpp"
 
 #include "glm/gtc/constants.hpp"
 
@@ -61,6 +62,7 @@ namespace kami {
     PerspectiveCamera camera{};
 
     Scene scene{};
+    Entity ent = scene.createEntity();
 
     camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 

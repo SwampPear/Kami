@@ -10,23 +10,21 @@ namespace kami {
 	Scene::~Scene() { }
 
 
-	Entity Scene::CreateEntity(const std::string& name) {
-		return CreateEntityWithUUID(UUID(), name);
+	Entity Scene::createEntity() {
+		return createEntityWithUUID(UUID());
 	}
 
-	Entity Scene::CreateEntityWithUUID(UUID uuid, const std::string& name) {
+	Entity Scene::createEntityWithUUID(UUID uuid) {
 		Entity entity{registry.create(), this};
 		entity.AddComponent<IDComponent>(uuid);
 		entity.AddComponent<mTransformComponent>();
-		auto& tag = entity.AddComponent<TagComponent>();
-		tag.Tag = name.empty() ? "Entity" : name;
 
 		entityMap[uuid] = entity;
 
 		return entity;
 	}
 
-	void Scene::DestroyEntity(Entity entity) {
+	void Scene::destroyEntity(Entity entity) {
 		entityMap.erase(entity.GetUUID());
 		registry.destroy(entity);
 	}

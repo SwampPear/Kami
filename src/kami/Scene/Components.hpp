@@ -16,15 +16,6 @@ namespace kami {
 		IDComponent(const IDComponent&) = default;
 	};
 
-	struct TagComponent {
-		std::string Tag;
-
-		TagComponent() = default;
-		TagComponent(const TagComponent&) = default;
-		TagComponent(const std::string& tag)
-			: Tag(tag) {}
-	};
-
 	struct mTransformComponent {
 		glm::vec3 Translation = { 0.0f, 0.0f, 0.0f };
 		glm::vec3 Rotation = { 0.0f, 0.0f, 0.0f };
