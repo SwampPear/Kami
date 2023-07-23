@@ -25,7 +25,7 @@ namespace kami {
       ~RenderSystem();
 
       //void renderGameObjects(FrameInfo &frameInfo, std::vector<GameObject> &gameObjects);
-      void renderScene(FrameInfo &frameInfo, Scene &scene);
+      void renderScene(FrameInfo &frameInfo, Scene &scene, std::shared_ptr<Model> model);
 
     private:
       void createPipelineLayout(VkDescriptorSetLayout globalSetLayout);

@@ -76,17 +76,13 @@ namespace kami {
     Entity entity = scene.createEntity();
     entity.addComponent<TransformComponent>();
     entity.addComponent<ColorComponent>();
-    //entity.addComponent<ModelComponent>(model);
 
     auto entities = scene.GetAllEntitiesWith<TransformComponent>();
 
     for (auto e : entities) {
-      auto &model = entities.get<ModelComponent>(e);
-      model = sphere;
       auto &transform = entities.get<TransformComponent>(e);
-      std::cout << "test: " << transform.scale[0] << std::endl;
-      //transform.translation = {0.0f, 0.0f, 2.5f};
-      //transform.scale = {0.5f, 0.5f, 0.5f};
+      transform.translation = {0.0f, 0.0f, 2.5f};
+      transform.scale = {0.5f, 0.5f, 0.5f};
     }
 
     // main loop
@@ -122,6 +118,7 @@ namespace kami {
 
         renderer.beginSwapChainRenderPass(commandBuffer);
         //renderSystem.renderGameObjects(frameInfo, gameObjects);
+        renderSystem.renderScene(frameInfo, scene, sphere);
         renderer.endSwapChainRenderPass(commandBuffer);
         renderer.endFrame();
       }

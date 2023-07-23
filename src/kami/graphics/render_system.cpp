@@ -1,7 +1,11 @@
 #include "kami/graphics/render_system.hpp"
 #include "kami/graphics/camera/camera.hpp"
+#include "kami/graphics/model.hpp"
+#include "kami/core/components.hpp"
 
 #include "glm/gtc/constants.hpp"
+
+#include <memory>
 
 
 namespace kami {
@@ -78,8 +82,7 @@ namespace kami {
   }
   */
 
-  void RenderSystem::renderScene(FrameInfo &frameInfo, Scene &scene) {
-    /*
+  void RenderSystem::renderScene(FrameInfo &frameInfo, Scene &scene, std::shared_ptr<Model> model) {
     pipeline->bind(frameInfo.commandBuffer);
 
     vkCmdBindDescriptorSets(
@@ -94,15 +97,29 @@ namespace kami {
     );
 
     //auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView(); 
+    auto entities = scene.GetAllEntitiesWith<TransformComponent>();
 
+    for (auto e : entities) {
+      auto &transform = entities.get<TransformComponent>(e);
+
+      SimplePushConstantData push{};
+      push.modelMatrix = transform.mat4();
+      push.normalMatrix = transform.normalMatrix();
+
+      vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
+      model->bind(frameInfo.commandBuffer);
+      model->draw(frameInfo.commandBuffer);
+    }
+
+    /*
     for (auto& gameObject : gameObjects) {
       SimplePushConstantData push{};
       push.modelMatrix = gameObject.transform.mat4();
       push.normalMatrix = gameObject.transform.normalMatrix();
 
       vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
-      gameObject.model->bind(frameInfo.commandBuffer);
-      gameObject.model->draw(frameInfo.commandBuffer);
+      model->bind(frameInfo.commandBuffer);
+      model->draw(frameInfo.commandBuffer);
     }
     */
   }
