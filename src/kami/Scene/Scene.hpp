@@ -32,14 +32,11 @@ namespace kami {
 
       //void Step(int frames = 1);
 
-      /*
-      
       template<typename... Components>
       auto GetAllEntitiesWith()
       {
-        return m_Registry.view<Components...>();
+        return registry.view<Components...>();
       }
-      */
 
     private:
       //template<typename T> void OnComponentAdded(Entity entity, T& component);

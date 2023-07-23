@@ -1,7 +1,8 @@
-#include "kami/core/game_object.hpp"
- 
+#include "kami/core/components.hpp"
+
+
 namespace kami {
-  glm::mat4 TransformComponent1::mat4() {
+  glm::mat4 TransformComponent::mat4() {
     const float c3 = glm::cos(rotation.z);
     const float s3 = glm::sin(rotation.z);
     const float c2 = glm::cos(rotation.x);
@@ -31,7 +32,7 @@ namespace kami {
     };
   }
 
-  glm::mat3 TransformComponent1::normalMatrix() {
+  glm::mat3 TransformComponent::normalMatrix() {
     const float c3 = glm::cos(rotation.z);
     const float s3 = glm::sin(rotation.z);
     const float c2 = glm::cos(rotation.x);

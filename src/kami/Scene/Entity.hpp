@@ -16,7 +16,7 @@ namespace kami {
 		Entity(const Entity& other) = default;
 
 		template<typename T, typename... Args>
-		T& AddComponent(Args&&... args) {
+		T& addComponent(Args&&... args) {
 			//assert(!HasComponent<T>() && "Entity already has component!");
 			T& component = scene->registry.emplace<T>(entityHandle, std::forward<Args>(args)...);
 			//scene->OnComponentAdded<T>(*this, component);

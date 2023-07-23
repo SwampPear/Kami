@@ -9,7 +9,7 @@
 
 
 namespace kami {
-  struct TransformComponent {
+  struct TransformComponent1 {
     glm::vec3 translation{};
     glm::vec3 scale{1.0f, 1.0f, 1.0f};
     glm::vec3 rotation{};
@@ -37,7 +37,7 @@ namespace kami {
 
       std::shared_ptr<Model> model{};
       glm::vec3 color{};
-      TransformComponent transform{};
+      TransformComponent1 transform{};
 
     private:
       GameObject(id_t idObj): id{idObj} {};

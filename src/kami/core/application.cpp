@@ -7,10 +7,12 @@
 #include "kami/graphics/buffer.hpp"
 #include "kami/scene/scene.hpp"
 #include "kami/scene/entity.hpp"
+#include "kami/core/components.hpp"
 
 #include "glm/gtc/constants.hpp"
 
 #include <chrono>
+#include <iostream>
 
 
 namespace kami {
@@ -61,13 +63,31 @@ namespace kami {
     RenderSystem renderSystem{device, renderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
     PerspectiveCamera camera{};
 
-    Scene scene{};
-    Entity ent = scene.createEntity();
-
     camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
     auto viewObject = GameObject::createGameObject();
     KeyboardMovementController cameraController{};
+
+    // scene
+    std::shared_ptr<Model> sphere = Model::createModelFromFile(device, "models/untitled.obj");
+
+    Scene scene{};
+
+    Entity entity = scene.createEntity();
+    entity.addComponent<TransformComponent>();
+    entity.addComponent<ColorComponent>();
+    //entity.addComponent<ModelComponent>(model);
+
+    auto entities = scene.GetAllEntitiesWith<TransformComponent>();
+
+    for (auto e : entities) {
+      auto &model = entities.get<ModelComponent>(e);
+      model = sphere;
+      auto &transform = entities.get<TransformComponent>(e);
+      std::cout << "test: " << transform.scale[0] << std::endl;
+      //transform.translation = {0.0f, 0.0f, 2.5f};
+      //transform.scale = {0.5f, 0.5f, 0.5f};
+    }
 
     // main loop
     auto currentTime = std::chrono::high_resolution_clock::now();
@@ -101,7 +121,7 @@ namespace kami {
         uboBuffers[frameIndex]->flush();
 
         renderer.beginSwapChainRenderPass(commandBuffer);
-        renderSystem.renderGameObjects(frameInfo, gameObjects);
+        //renderSystem.renderGameObjects(frameInfo, gameObjects);
         renderer.endSwapChainRenderPass(commandBuffer);
         renderer.endFrame();
       }
@@ -120,5 +140,11 @@ namespace kami {
     cube.transform.translation = {0.0f, 0.0f, 2.5f};
     cube.transform.scale = {0.5f, 0.5f, 0.5f};
     gameObjects.push_back(std::move(cube));
+
+    auto cube2 = GameObject::createGameObject();
+    cube2.model = model;
+    cube2.transform.translation = {0.0f, -1.5f, 2.5f};
+    cube2.transform.scale = {0.5f, 0.5f, 0.5f};
+    gameObjects.push_back(std::move(cube2));
   }
 }
