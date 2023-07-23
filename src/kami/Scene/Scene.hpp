@@ -50,7 +50,7 @@ namespace kami {
 
       entt::registry registry;
 
-      std::unordered_map<UUID, entt::entity> entityMap;
+      std::unordered_map<UUID, entt::entity, HashUUID> entityMap;
 
       friend class Entity;
   };

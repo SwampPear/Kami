@@ -17,7 +17,7 @@ namespace kami {
 
 		template<typename T, typename... Args>
 		T& AddComponent(Args&&... args) {
-			assert(!HasComponent<T>() && "Entity already has component!");
+			//assert(!HasComponent<T>() && "Entity already has component!");
 			T& component = scene->registry.emplace<T>(entityHandle, std::forward<Args>(args)...);
 			//scene->OnComponentAdded<T>(*this, component);
 			return component;
@@ -32,18 +32,20 @@ namespace kami {
 
 		template<typename T>
 		T& GetComponent() {
-			assert(HasComponent<T>() && "Entity does not have component!");
+			//assert(HasComponent<T>() && "Entity does not have component!");
 			return scene->registry.get<T>(entityHandle);
 		}
 
+		/*
 		template<typename T>
 		bool HasComponent() {
 			return scene->registry.has<T>(entityHandle);
 		}
+		*/
 
 		template<typename T>
 		void RemoveComponent() {
-			assert(HasComponent<T>() && "Entity does not have component!");
+			//assert(HasComponent<T>() && "Entity does not have component!");
 			scene->registry.remove<T>(entityHandle);
 		}
 

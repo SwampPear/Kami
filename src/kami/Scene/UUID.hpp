@@ -1,5 +1,8 @@
 #pragma once
 
+#include <stdint.h>
+#include <cstddef>
+
 namespace kami {
 	class UUID {
     public:
@@ -12,15 +15,26 @@ namespace kami {
     private:
       uint64_t m_UUID;
 	};
-}
 
+	//template <typename T> struct HashUUID;
 
-namespace std {
-	template <typename T> struct hash;
-
-	template<> struct hash<kami::UUID> {
-		std::size_t operator()(const kami::UUID& uuid) const {
-			return (uint64_t)uuid;
+	//template<> 
+	struct HashUUID {
+		size_t operator()(const UUID& uuid) const {
+			return static_cast<size_t>((uint64_t)uuid);
 		}
 	};
 }
+
+/*
+namespace std {
+	template <typename T> struct hash;
+
+	template<> 
+	struct hash<kami::UUID> {
+		size_t operator()(const kami::UUID& uuid) const {
+			return static_cast<size_t>((uint64_t)uuid);
+		}
+	};
+}
+*/
