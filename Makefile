@@ -3,7 +3,7 @@ CC = g++
 TARGET = app
 INCLUDE = include
 INCLUDE_PATH = src
-SUB_DIR = src src/kami/core src/kami/renderer src/kami/utils src/kami/Input src/kami/Scene src/kami/renderer/Camera src/kami/renderer/Renderer 
+SUB_DIR = src src/kami/core src/kami/graphics src/kami/utils src/kami/input src/kami/scene src/kami/graphics/Camera src/kami/graphics/renderer 
 LIB = lib/*
 
 CFLAGS = -std=c++17 -Wall -L. $(LIB) -I $(INCLUDE) -I $(INCLUDE_PATH)

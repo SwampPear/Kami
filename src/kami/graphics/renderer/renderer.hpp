@@ -1,8 +1,8 @@
 #pragma once
 
-#include "kami/renderer/window.hpp"
+#include "kami/graphics/window.hpp"
 #include "kami/core/device.hpp"
-#include "kami/renderer/Renderer/SwapChain.hpp"
+#include "kami/graphics/renderer/swapChain.hpp"
 
 #include <memory>
 #include <vector>

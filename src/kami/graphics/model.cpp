@@ -1,4 +1,4 @@
-#include "kami/renderer/model.hpp"
+#include "kami/graphics/model.hpp"
 #include "kami/utils/utils.hpp"
 
 #define TINYOBJLOADER_IMPLEMENTATION

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "kami/renderer/pipeline.hpp"
+#include "kami/graphics/pipeline.hpp"
 #include "kami/core/device.hpp"
 #include "kami/utils/trait.hpp"
 #include "kami/core/game_object.hpp"
-#include "kami/renderer/Camera/Camera.hpp"
-#include "kami/renderer/frame_info.hpp"
+#include "kami/graphics/camera/camera.hpp"
+#include "kami/graphics/frame_info.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE

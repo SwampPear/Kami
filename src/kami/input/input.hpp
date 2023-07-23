@@ -1,8 +1,8 @@
 #pragma once
 
-#include "kami/Input/KeyCodes.hpp"
-#include "kami/Input/MouseCodes.hpp"
-#include "kami/renderer/window.hpp"
+#include "kami/input/keyCodes.hpp"
+#include "kami/input/mouseCodes.hpp"
+#include "kami/graphics/window.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE

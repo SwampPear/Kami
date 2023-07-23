@@ -1,4 +1,4 @@
-#include "kami/renderer/Camera/OrthographicCamera.hpp"
+#include "kami/graphics/camera/orthographicCamera.hpp"
 
 
 namespace kami {

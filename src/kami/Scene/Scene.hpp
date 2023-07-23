@@ -1,6 +1,6 @@
 #pragma once
 
-#include "kami/Scene/UUID.hpp"
+#include "kami/core/uuid.hpp"
 #include "entt/entt.hpp"
 
 namespace kami {

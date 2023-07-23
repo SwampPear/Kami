@@ -1,4 +1,4 @@
-#include "kami/renderer/Renderer/SwapChain.hpp"
+#include "kami/graphics/renderer/swapChain.hpp"
 
 #include <array>
 #include <cstdlib>

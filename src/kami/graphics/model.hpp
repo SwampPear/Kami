@@ -1,7 +1,7 @@
 #pragma once
 
 #include "kami/core/device.hpp"
-#include "kami/renderer/buffer.hpp"
+#include "kami/graphics/buffer.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE

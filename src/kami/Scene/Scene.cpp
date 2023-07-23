@@ -1,6 +1,6 @@
-#include "kami/Scene/Scene.hpp"
-#include "kami/Scene/Entity.hpp"
-#include "kami/Scene/Components.hpp"
+#include "kami/scene/scene.hpp"
+#include "kami/scene/entity.hpp"
+#include "kami/scene/components.hpp"
 
 #include <glm/glm.hpp>
 

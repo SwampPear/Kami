@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 #include "kami/core/game_object.hpp"
-#include "kami/renderer/window.hpp"
+#include "kami/graphics/window.hpp"
 
 
 namespace kami {

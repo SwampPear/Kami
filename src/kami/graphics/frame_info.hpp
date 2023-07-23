@@ -1,6 +1,6 @@
 #pragma once
 
-#include "kami/renderer/Camera/Camera.hpp"
+#include "kami/graphics/camera/camera.hpp"
 
 #include <vulkan/vulkan.h>
 

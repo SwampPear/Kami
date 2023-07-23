@@ -1,4 +1,4 @@
-#include "kami/renderer/Camera/PerspectiveCamera.hpp"
+#include "kami/graphics/camera/perspectiveCamera.hpp"
 
 
 namespace kami {

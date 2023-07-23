@@ -1,8 +1,8 @@
 #pragma once
 
-#include "kami/Scene/UUID.hpp"
-#include "kami/Scene/Scene.hpp"
-#include "kami/Scene/Components.hpp"
+#include "kami/core/uuid.hpp"
+#include "kami/scene/scene.hpp"
+#include "kami/scene/components.hpp"
 
 #include "entt/entt.hpp"
 

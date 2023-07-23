@@ -1,5 +1,5 @@
-#include "kami/renderer/render_system.hpp"
-#include "kami/renderer/Camera/Camera.hpp"
+#include "kami/graphics/render_system.hpp"
+#include "kami/graphics/camera/camera.hpp"
 
 #include "glm/gtc/constants.hpp"
 

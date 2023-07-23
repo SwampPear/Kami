@@ -1,7 +1,7 @@
 #pragma once
 
 #include "kami/utils/trait.hpp"
-#include "kami/renderer/model.hpp"
+#include "kami/graphics/model.hpp"
 
 #include "glm/gtc/matrix_transform.hpp"
 

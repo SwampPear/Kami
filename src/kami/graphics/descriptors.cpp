@@ -1,4 +1,4 @@
-#include "kami/renderer/descriptors.hpp"
+#include "kami/graphics/descriptors.hpp"
  
 // std
 #include <cassert>

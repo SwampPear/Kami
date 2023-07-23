@@ -1,6 +1,6 @@
 #pragma once
 
-#include "kami/Scene/UUID.hpp"
+#include "kami/core/uuid.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
