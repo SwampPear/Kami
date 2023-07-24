@@ -20,3 +20,10 @@ I have a few goals in mind at the core of its implementation:
 - story-driven systems
 - efficient and proven essential systems (ECS: entt, graphics: vulkan)
 - procedural asset generation (terrain, story, and audio)
+
+Current Features:
+- 3D rendering (2D is trivially implemented in the future)
+- smart resource manager (WIP)
+- ECS API (WIP, through EnTT)
+- uniform buffer and push constant support (Vulkan)
+- intuitive primarily singleton-based scripting API (major WIP, but trivial in that it only needs cleanup)
