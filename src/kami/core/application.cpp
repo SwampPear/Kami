@@ -7,7 +7,7 @@
 #include "kami/scene/entity.hpp"
 #include "kami/core/components.hpp"
 #include "kami/scene/components.hpp"
-#include "kami/assetManager/assetManager.hpp"
+#include "kami/resourceManager/resourceManager.hpp"
 
 #include "glm/gtc/constants.hpp"
 
@@ -60,8 +60,8 @@ namespace kami {
 
     // asset management
     //Model sphere = Model::createModelFromFile(device, "models/untitled.obj");
-    UUID sphereID = assetManager.addModel("models/untitled.obj");
-    UUID crystalID = assetManager.addModel("models/pear.obj");
+    UUID sphereID = resourceManager.addModel("models/untitled.obj");
+    UUID crystalID = resourceManager.addModel("models/pear.obj");
     Model *s = new Model(device, "models/untitled.obj");
 
     // rendering 
@@ -133,7 +133,7 @@ namespace kami {
         uboBuffers[frameIndex]->flush();
 
         renderer.beginSwapChainRenderPass(commandBuffer);
-        renderer.renderScene(frameInfo, scene, assetManager);
+        renderer.renderScene(frameInfo, scene, resourceManager);
         renderer.endSwapChainRenderPass(commandBuffer);
         renderer.endFrame();
       }

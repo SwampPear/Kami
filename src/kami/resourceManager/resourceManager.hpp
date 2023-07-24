@@ -8,9 +8,9 @@
 
 
 namespace kami {
-  class AssetManager {
+  class ResourceManager {
     public:
-      AssetManager(Device &device);
+      ResourceManager(Device &device);
 
       UUID addModel(const std::string &fileName);
       Model* getModel(UUID id);

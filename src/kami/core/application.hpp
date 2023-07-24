@@ -7,7 +7,7 @@
 #include "kami/graphics/renderer/renderer.hpp"
 #include "kami/input/input.hpp"
 #include "kami/graphics/descriptors.hpp"
-#include "kami/assetManager/assetManager.hpp"
+#include "kami/resourceManager/resourceManager.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -36,6 +36,6 @@ namespace kami {
       Input input{window};
       Renderer renderer{window, device};
       std::unique_ptr<DescriptorPool> globalPool{};
-      AssetManager assetManager{device};
+      ResourceManager resourceManager{device};
   };
 }

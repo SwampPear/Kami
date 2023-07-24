@@ -9,7 +9,7 @@
 #include "kami/graphics/camera.hpp"
 #include "kami/graphics/frame_info.hpp"
 #include "kami/scene/scene.hpp"
-#include "kami/assetManager/assetManager.hpp"
+#include "kami/resourceManager/resourceManager.hpp"
 
 #include <memory>
 #include <vector>
@@ -43,7 +43,7 @@ namespace kami {
     void endFrame();
     void beginSwapChainRenderPass(VkCommandBuffer commandBuffer);
     void endSwapChainRenderPass(VkCommandBuffer commandBuffer);
-    void renderScene(FrameInfo &frameInfo, Scene &scene, AssetManager assetManager);
+    void renderScene(FrameInfo &frameInfo, Scene &scene, ResourceManager resourceManager);
     void createPipeline(VkDescriptorSetLayout globalSetLayout);
 
   private:

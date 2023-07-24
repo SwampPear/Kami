@@ -20,7 +20,7 @@ namespace kami {
     vkDestroyPipelineLayout(device.device(), pipelineLayout, nullptr);
   }
 
-  void Renderer::renderScene(FrameInfo &frameInfo, Scene &scene, AssetManager assetManager) {
+  void Renderer::renderScene(FrameInfo &frameInfo, Scene &scene, ResourceManager resourceManager) {
     pipeline->bind(frameInfo.commandBuffer);
 
     vkCmdBindDescriptorSets(
@@ -52,8 +52,8 @@ namespace kami {
       //assetManager.getModel(modelID.ID)->getd();;
       //std::cout << m->vertices.size() << std::endl;
       //assetManager.getModel(modelID.ID)->getd();
-      assetManager.getModel(modelID.ID)->bind(frameInfo.commandBuffer);
-      assetManager.getModel(modelID.ID)->draw(frameInfo.commandBuffer);
+      resourceManager.getModel(modelID.ID)->bind(frameInfo.commandBuffer);
+      resourceManager.getModel(modelID.ID)->draw(frameInfo.commandBuffer);
     }
 
     std::cout << "a" << std::endl;
