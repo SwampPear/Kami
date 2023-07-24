@@ -2,6 +2,7 @@
 #include "kami/graphics/camera/camera.hpp"
 #include "kami/graphics/model.hpp"
 #include "kami/core/components.hpp"
+#include "kami/scene/components.hpp"
 
 #include "glm/gtc/constants.hpp"
 

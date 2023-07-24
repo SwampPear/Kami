@@ -24,14 +24,14 @@ namespace kami {
 		}
 
 		template<typename T, typename... Args>
-		T& AddOrReplaceComponent(Args&&... args) {
+		T& addOrReplaceComponent(Args&&... args) {
 			T& component = scene->registry.emplace_or_replace<T>(entityHandle, std::forward<Args>(args)...);
 			//scene->OnComponentAdded<T>(*this, component);
 			return component;
 		}
 
 		template<typename T>
-		T& GetComponent() {
+		T& getComponent() {
 			//assert(HasComponent<T>() && "Entity does not have component!");
 			return scene->registry.get<T>(entityHandle);
 		}
@@ -44,7 +44,7 @@ namespace kami {
 		*/
 
 		template<typename T>
-		void RemoveComponent() {
+		void removeComponent() {
 			//assert(HasComponent<T>() && "Entity does not have component!");
 			scene->registry.remove<T>(entityHandle);
 		}
@@ -53,7 +53,7 @@ namespace kami {
 		operator entt::entity() const { return entityHandle; }
 		operator uint32_t() const { return (uint32_t)entityHandle; }
 
-		UUID GetUUID() { return GetComponent<IDComponent>().ID; }
+		UUID GetUUID() { return getComponent<IDComponent>().ID; }
 
 		bool operator==(const Entity& other) const {
 			return entityHandle == other.entityHandle && scene == other.scene;

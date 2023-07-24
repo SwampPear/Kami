@@ -17,7 +17,7 @@ namespace kami {
 	Entity Scene::createEntityWithUUID(UUID uuid) {
 		Entity entity{registry.create(), this};
 		entity.addComponent<IDComponent>(uuid);
-		//entity.addComponent<mTransformComponent>();
+		entity.addComponent<TransformComponent>();
 
 		entityMap[uuid] = entity;
 
