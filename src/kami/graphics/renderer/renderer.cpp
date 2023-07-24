@@ -148,8 +148,6 @@ namespace kami {
     //auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView(); 
     auto entities = scene.getAllEntitiesWith<TransformComponent, ModelComponent>();
 
-    std::cout << "a" << std::endl;
-
     for (auto e : entities) {
       auto &transform = entities.get<TransformComponent>(e);
 
@@ -160,14 +158,10 @@ namespace kami {
       auto &modelID = entities.get<ModelComponent>(e);
 
       vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
-      //assetManager.getModel(modelID.ID)->getd();;
-      //std::cout << m->vertices.size() << std::endl;
-      //assetManager.getModel(modelID.ID)->getd();
+     
       resourceManager.getModel(modelID.ID)->bind(frameInfo.commandBuffer);
       resourceManager.getModel(modelID.ID)->draw(frameInfo.commandBuffer);
     }
-
-    std::cout << "a" << std::endl;
   }
 
   void Renderer::createPipeline(VkDescriptorSetLayout globalSetLayout) {
