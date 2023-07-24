@@ -1,5 +1,4 @@
 #include "kami/core/application.hpp"
-#include "kami/graphics/render_system.hpp"
 #include "kami/graphics/camera.hpp"
 #include "kami/graphics/keyboard_movement_controller.hpp"
 #include "kami/utils/trait.hpp"
@@ -83,7 +82,6 @@ namespace kami {
 
     // rendering
     renderer.cPipeline(renderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout());
-    //RenderSystem renderSystem{device, renderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
     Camera camera{};
 
     camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
