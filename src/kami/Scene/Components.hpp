@@ -36,4 +36,8 @@ namespace kami {
 		ModelComponent() = default;
 		ModelComponent(const ModelComponent&) = default;
 	};
+
+	struct ColorComponent{
+    glm::vec3 color{};
+  };
 }
