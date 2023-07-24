@@ -43,21 +43,15 @@ namespace kami{
     return attributeDescriptions;
   }
 
-  Model::Model(Device &device, const Model::Builder &builder) : device{device} {
-    createVertexBuffers(builder.vertices);
-    createIndexBuffers(builder.indices);
+  Model::Model(Device &device, const std::string &fileName) : device{device} {
+    loadModel(fileName);
+    std::cout << "Vertex count: " << vertices.size() << std::endl;
+
+    createVertexBuffers(vertices);
+    createIndexBuffers(indices);
   }
 
   Model::~Model() { }
-
-  std::unique_ptr<Model> Model::createModelFromFile(Device &device, const std::string &fileName) {
-    Builder builder{};
-    builder.loadModel(fileName);
-
-    std::cout << "Vertex count: " << builder.vertices.size() << std::endl;
-
-    return std::make_unique<Model>(device, builder);
-  }
 
   void Model::createVertexBuffers(const std::vector<Vertex> &vertices) {
     vertexCount = static_cast<uint32_t>(vertices.size());
@@ -137,7 +131,7 @@ namespace kami{
     }
   }
 
-  void Model::Builder::loadModel(const std::string &filePath) {
+  void Model::loadModel(const std::string &filePath) {
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
@@ -197,6 +191,9 @@ namespace kami{
         indices.push_back(uniqueVertices[vertex]);
       }
     }
+  }
 
+  bool Model::getd() {
+    return hasIndexBuffer;
   }
 }

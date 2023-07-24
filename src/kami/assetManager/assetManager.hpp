@@ -2,6 +2,7 @@
 
 #include "kami/core/uuid.hpp"
 #include "kami/graphics/model.hpp"
+#include "kami/core/device.hpp"
 
 #include <memory>
 
@@ -9,12 +10,13 @@
 namespace kami {
   class AssetManager {
     public:
-      AssetManager();
+      AssetManager(Device &device);
 
-      UUID addModel(std::shared_ptr<Model> model);
-      std::shared_ptr<Model> getModel(UUID id);
+      UUID addModel(const std::string &fileName);
+      Model* getModel(UUID id);
 
     private:
-      std::unordered_map<UUID, std::shared_ptr<Model>, HashUUID> modelMap;
+      Device& device;
+      std::unordered_map<UUID, Model*, HashUUID> modelMap;
   };
 }

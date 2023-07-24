@@ -2,6 +2,7 @@
 #include "kami/scene/components.hpp"
 
 #include "glm/gtc/constants.hpp"
+#include <iostream>
 
 
 namespace kami {
@@ -14,13 +15,12 @@ namespace kami {
     recreateSwapChain();
     createCommandBuffers();
   }
-  
   Renderer::~Renderer() {
     freeCommandBuffers();
     vkDestroyPipelineLayout(device.device(), pipelineLayout, nullptr);
   }
 
-  void Renderer::renderScene(FrameInfo &frameInfo, Scene &scene, std::shared_ptr<Model> model) {
+  void Renderer::renderScene(FrameInfo &frameInfo, Scene &scene, AssetManager assetManager) {
     pipeline->bind(frameInfo.commandBuffer);
 
     vkCmdBindDescriptorSets(
@@ -37,6 +37,8 @@ namespace kami {
     //auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView(); 
     auto entities = scene.getAllEntitiesWith<TransformComponent, ModelComponent>();
 
+    std::cout << "a" << std::endl;
+
     for (auto e : entities) {
       auto &transform = entities.get<TransformComponent>(e);
 
@@ -47,9 +49,14 @@ namespace kami {
       auto &modelID = entities.get<ModelComponent>(e);
 
       vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
-      model->bind(frameInfo.commandBuffer);
-      model->draw(frameInfo.commandBuffer);
+      //assetManager.getModel(modelID.ID)->getd();;
+      //std::cout << m->vertices.size() << std::endl;
+      //assetManager.getModel(modelID.ID)->getd();
+      assetManager.getModel(modelID.ID)->bind(frameInfo.commandBuffer);
+      assetManager.getModel(modelID.ID)->draw(frameInfo.commandBuffer);
     }
+
+    std::cout << "a" << std::endl;
   }
 
   void Renderer::createCommandBuffers() {

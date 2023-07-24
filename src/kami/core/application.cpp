@@ -59,8 +59,9 @@ namespace kami {
     }
 
     // asset management
-    std::shared_ptr<Model> sphere = Model::createModelFromFile(device, "models/untitled.obj");
-    UUID sphereID = assetManager.addModel(sphere);
+    //Model sphere = Model::createModelFromFile(device, "models/untitled.obj");
+    UUID sphereID = assetManager.addModel("models/untitled.obj");
+    Model *s = new Model(device, "models/untitled.obj");
 
     // rendering 
 
@@ -121,7 +122,7 @@ namespace kami {
         uboBuffers[frameIndex]->flush();
 
         renderer.beginSwapChainRenderPass(commandBuffer);
-        renderer.renderScene(frameInfo, scene, sphere);
+        renderer.renderScene(frameInfo, scene, assetManager);
         renderer.endSwapChainRenderPass(commandBuffer);
         renderer.endFrame();
       }

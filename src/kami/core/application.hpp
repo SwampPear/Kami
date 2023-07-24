@@ -36,6 +36,6 @@ namespace kami {
       Input input{window};
       Renderer renderer{window, device};
       std::unique_ptr<DescriptorPool> globalPool{};
-      AssetManager assetManager{};
+      AssetManager assetManager{device};
   };
 }

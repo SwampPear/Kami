@@ -43,7 +43,7 @@ namespace kami {
     void endFrame();
     void beginSwapChainRenderPass(VkCommandBuffer commandBuffer);
     void endSwapChainRenderPass(VkCommandBuffer commandBuffer);
-    void renderScene(FrameInfo &frameInfo, Scene &scene, std::shared_ptr<Model> model);
+    void renderScene(FrameInfo &frameInfo, Scene &scene, AssetManager assetManager);
     void createPipeline(VkDescriptorSetLayout globalSetLayout);
 
   private:

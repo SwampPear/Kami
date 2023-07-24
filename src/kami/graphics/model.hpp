@@ -32,14 +32,9 @@ namespace kami {
         }
       };
 
-      struct Builder {
-        std::vector<Vertex> vertices{};
-        std::vector<uint32_t> indices{};
+      void loadModel(const std::string &fileName);
 
-        void loadModel(const std::string &fileName);
-      };
-
-      Model(Device &device, const Model::Builder &builder);
+      Model(Device &device, const std::string &fileName);
       ~Model();
       Model(const Model &) = delete; // prohibit copying
       Model &operator=(const Model &) = delete; // delete copy constructor
@@ -48,12 +43,17 @@ namespace kami {
 
       void bind(VkCommandBuffer commandBuffer);
       void draw(VkCommandBuffer commandBuffer);
+      bool getd();
+      std::vector<Vertex> vertices{};
 
     private:
       void createVertexBuffers(const std::vector<Vertex> &vertices);
       void createIndexBuffers(const std::vector<uint32_t> &indices);
 
       Device& device;
+
+      
+      std::vector<uint32_t> indices{};
       
       std::unique_ptr<Buffer> vertexBuffer;
       uint32_t vertexCount;
