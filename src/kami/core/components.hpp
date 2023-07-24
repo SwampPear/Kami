@@ -11,8 +11,4 @@ namespace kami {
   struct ColorComponent{
     glm::vec3 color{};
   };
-
-  struct ModelComponent {
-    std::shared_ptr<Model> model{};
-  };
 }
