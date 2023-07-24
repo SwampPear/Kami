@@ -61,6 +61,7 @@ namespace kami {
     // asset management
     //Model sphere = Model::createModelFromFile(device, "models/untitled.obj");
     UUID sphereID = assetManager.addModel("models/untitled.obj");
+    UUID crystalID = assetManager.addModel("models/pear.obj");
     Model *s = new Model(device, "models/untitled.obj");
 
     // rendering 
@@ -68,9 +69,12 @@ namespace kami {
     Scene scene{};
 
     Entity entity = scene.createEntity();
+    Entity entity2 = scene.createEntity();
     
     entity.addComponent<ColorComponent>();
     entity.addComponent<ModelComponent>();
+    entity2.addComponent<ColorComponent>();
+    entity2.addComponent<ModelComponent>();
 
     auto entities = scene.getAllEntitiesWith<TransformComponent, ModelComponent>();
 
@@ -78,8 +82,15 @@ namespace kami {
     transform.translation = {0.0f, 0.0f, 2.5f};
     transform.scale = {0.5f, 0.5f, 0.5f};
 
+    auto &transform2 = entities.get<TransformComponent>(entity2);
+    transform2.translation = {0.0f, -1.5f, 2.5f};
+    transform2.scale = {0.5f, 0.5f, 0.5f};
+
     auto &model = entities.get<ModelComponent>(entity);
     model.ID = sphereID;
+
+    auto &model2 = entities.get<ModelComponent>(entity2);
+    model2.ID = crystalID;
 
     // rendering
     renderer.createPipeline(globalSetLayout->getDescriptorSetLayout());
