@@ -18,6 +18,12 @@ namespace kami {
    */
   class SwapChain {
     public:
+      SwapChain(const SwapChain &) = delete; // prohibit copying
+      SwapChain &operator=(const SwapChain &) = delete; // delete copy constructor
+
+      static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
+      
+    public:
       /**
        * @brief Constructor. Initializes SwapChain object.
        * @param deviceRef reference to the Device class instance
@@ -39,11 +45,6 @@ namespace kami {
        * @param
        */
       ~SwapChain();
-
-      SwapChain(const SwapChain &) = delete; // prohibit copying
-      SwapChain &operator=(const SwapChain &) = delete; // delete copy constructor
-
-      static constexpr int MAX_FRAMES_IN_FLIGHT = 2;
 
       /**
        * @brief Getter for frame buffer at index.
@@ -156,6 +157,7 @@ namespace kami {
       std::vector<VkFence> imagesInFlight;
       size_t currentFrame = 0;
 
+    private:
       /**
        * @brief Initializes swap chain, image views, render pass, depth 
        * resources, frame buffers, and sync objects.
