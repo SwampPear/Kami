@@ -29,4 +29,11 @@ namespace kami {
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
 	};
+
+	struct ModelComponent {
+		UUID ID;
+
+		ModelComponent() = default;
+		ModelComponent(const ModelComponent&) = default;
+	};
 }
