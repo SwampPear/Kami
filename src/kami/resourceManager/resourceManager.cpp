@@ -1,7 +1,5 @@
 #include "kami/resourceManager/resourceManager.hpp"
 
-#include <iostream>
-
 
 namespace kami {
   ResourceManager::ResourceManager(Device &device) : device{device} { }

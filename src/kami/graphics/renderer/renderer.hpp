@@ -17,6 +17,11 @@
 
 
 namespace kami {
+  /**
+   * @class Renderer
+   * @brief Represents a renderer object for rendering graphics and handling all
+   * subproccesses.
+   */
   class Renderer {
   public:
     Renderer(Window &window, Device &device, ResourceManager &resourceManager);
