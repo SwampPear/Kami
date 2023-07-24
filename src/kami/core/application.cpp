@@ -58,6 +58,23 @@ namespace kami {
         .build(globalDescriptorSets[i]);
     }
 
+    // scene
+    std::shared_ptr<Model> sphere = Model::createModelFromFile(device, "models/untitled.obj");
+
+    Scene scene{};
+
+    Entity entity = scene.createEntity();
+    
+    entity.addComponent<ColorComponent>();
+
+    auto entities = scene.GetAllEntitiesWith<TransformComponent>();
+
+    for (auto e : entities) {
+      auto &transform = entities.get<TransformComponent>(e);
+      transform.translation = {0.0f, 0.0f, 2.5f};
+      transform.scale = {0.5f, 0.5f, 0.5f};
+    }
+
     // rendering
     RenderSystem renderSystem{device, renderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
     Camera camera{};
@@ -66,25 +83,6 @@ namespace kami {
 
     auto viewObject = GameObject::createGameObject();
     KeyboardMovementController cameraController{};
-
-    // scene
-    std::shared_ptr<Model> sphere = Model::createModelFromFile(device, "models/untitled.obj");
-
-    Scene scene{};
-
-    Entity entity = scene.createEntity();
-    
-    entity.addComponent<TransformComponent>();
-    //entity.addComponent<ColorComponent>();
-
-    /*
-    auto entities = scene.GetAllEntitiesWith<TransformComponent>();
-
-    for (auto e : entities) {
-      auto &transform = entities.get<TransformComponent>(e);
-      transform.translation = {0.0f, 0.0f, 2.5f};
-      transform.scale = {0.5f, 0.5f, 0.5f};
-    }*/
 
     // main loop
     auto currentTime = std::chrono::high_resolution_clock::now();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "kami/core/uuid.hpp"
+#include "kami/graphics/camera.hpp"
 #include "entt/entt.hpp"
 
 namespace kami {
@@ -27,7 +28,7 @@ namespace kami {
       //Entity FindEntityByName(std::string_view name);
       //Entity GetEntityByUUID(UUID uuid);
 
-      //Entity GetPrimaryCameraEntity();
+      Entity getPrimaryCameraEntity();
 
 
       //void Step(int frames = 1);

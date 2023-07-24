@@ -3,11 +3,7 @@
 #include "kami/core/uuid.hpp"
 #include "kami/graphics/camera.hpp"
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-
-#define GLM_ENABLE_EXPERIMENTAL
-#include <glm/gtx/quaternion.hpp>
+#include "glm/gtc/matrix_transform.hpp"
 
 namespace kami {
 	struct IDComponent {
@@ -26,11 +22,11 @@ namespace kami {
 		glm::mat3 normalMatrix();
   };
 
-	/*
 	struct CameraComponent {
-		Camera camera;
+		Camera camera{};
+		bool primary{true};
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
-	};*/
+	};
 }
