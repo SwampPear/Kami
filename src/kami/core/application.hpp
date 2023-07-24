@@ -34,8 +34,8 @@ namespace kami {
       Window window{WIDTH, HEIGHT, "window name"};
       Device device{window};
       Input input{window};
-      Renderer renderer{window, device};
-      std::unique_ptr<DescriptorPool> globalPool{};
       ResourceManager resourceManager{device};
+      Renderer renderer{window, device, resourceManager};
+      std::unique_ptr<DescriptorPool> globalPool{};
   };
 }

@@ -133,7 +133,7 @@ namespace kami {
         uboBuffers[frameIndex]->flush();
 
         renderer.beginSwapChainRenderPass(commandBuffer);
-        renderer.renderScene(frameInfo, scene, resourceManager);
+        renderer.renderScene(frameInfo, scene);
         renderer.endSwapChainRenderPass(commandBuffer);
         renderer.endFrame();
       }

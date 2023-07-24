@@ -11,16 +11,18 @@ namespace kami {
     glm::mat4 normalMatrix{1.f};
   };
   
-  Renderer::Renderer(Window &window, Device &device) : window{window}, device{device} {
+  Renderer::Renderer(Window &window, Device &device, ResourceManager &resourceManager) 
+  : window{window}, device{device}, resourceManager{resourceManager} {
     recreateSwapChain();
     createCommandBuffers();
   }
+
   Renderer::~Renderer() {
     freeCommandBuffers();
     vkDestroyPipelineLayout(device.device(), pipelineLayout, nullptr);
   }
 
-  void Renderer::renderScene(FrameInfo &frameInfo, Scene &scene, ResourceManager resourceManager) {
+  void Renderer::renderScene(FrameInfo &frameInfo, Scene &scene) {
     pipeline->bind(frameInfo.commandBuffer);
 
     vkCmdBindDescriptorSets(

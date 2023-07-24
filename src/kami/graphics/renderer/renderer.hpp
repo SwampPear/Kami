@@ -19,7 +19,7 @@
 namespace kami {
   class Renderer {
   public:
-    Renderer(Window &window, Device &device);
+    Renderer(Window &window, Device &device, ResourceManager &resourceManager);
     ~Renderer();
 
     Renderer(const Renderer &) = delete;
@@ -43,7 +43,7 @@ namespace kami {
     void endFrame();
     void beginSwapChainRenderPass(VkCommandBuffer commandBuffer);
     void endSwapChainRenderPass(VkCommandBuffer commandBuffer);
-    void renderScene(FrameInfo &frameInfo, Scene &scene, ResourceManager resourceManager);
+    void renderScene(FrameInfo &frameInfo, Scene &scene);
     void createPipeline(VkDescriptorSetLayout globalSetLayout);
 
   private:
@@ -58,6 +58,7 @@ namespace kami {
     std::vector<VkCommandBuffer> commandBuffers;
     std::unique_ptr<Pipeline> pipeline;
     VkPipelineLayout pipelineLayout;
+    ResourceManager &resourceManager;
 
     uint32_t currentImageIndex;
     int currentFrameIndex{0};
