@@ -68,7 +68,7 @@ namespace kami {
     );
 
     //auto projectionView = frameInfo.camera.getProjection() * frameInfo.camera.getView(); 
-    auto entities = scene.getAllEntitiesWith<TransformComponent>();
+    auto entities = scene.getAllEntitiesWith<TransformComponent, ModelComponent>();
 
     for (auto e : entities) {
       auto &transform = entities.get<TransformComponent>(e);
@@ -76,6 +76,8 @@ namespace kami {
       SimplePushConstantData push{};
       push.modelMatrix = transform.mat4();
       push.normalMatrix = transform.normalMatrix();
+
+      auto &modelID = entities.get<ModelComponent>(e);
 
       vkCmdPushConstants(frameInfo.commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
       model->bind(frameInfo.commandBuffer);

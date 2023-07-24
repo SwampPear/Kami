@@ -7,6 +7,7 @@
 #include "kami/graphics/camera.hpp"
 #include "kami/graphics/frame_info.hpp"
 #include "kami/scene/scene.hpp"
+#include "kami/assetManager/assetManager.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE

@@ -3,6 +3,13 @@
 #include "kami/graphics/window.hpp"
 #include "kami/core/device.hpp"
 #include "kami/graphics/renderer/swapChain.hpp"
+#include "kami/graphics/pipeline.hpp"
+#include "kami/utils/trait.hpp"
+#include "kami/core/game_object.hpp"
+#include "kami/graphics/camera.hpp"
+#include "kami/graphics/frame_info.hpp"
+#include "kami/scene/scene.hpp"
+#include "kami/assetManager/assetManager.hpp"
 
 #include <memory>
 #include <vector>
@@ -14,6 +21,8 @@ namespace kami {
   public:
     Renderer(Window &window, Device &device);
     ~Renderer();
+
+    void cPipeline(VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout);
 
     Renderer(const Renderer &) = delete;
     Renderer &operator=(const Renderer &) = delete;
@@ -36,16 +45,21 @@ namespace kami {
     void endFrame();
     void beginSwapChainRenderPass(VkCommandBuffer commandBuffer);
     void endSwapChainRenderPass(VkCommandBuffer commandBuffer);
+    void renderScene(FrameInfo &frameInfo, Scene &scene, std::shared_ptr<Model> model);
 
   private:
     void createCommandBuffers();
     void freeCommandBuffers();
     void recreateSwapChain();
+    void createPipelineLayout(VkDescriptorSetLayout globalSetLayout);
+    void createPipeline(VkRenderPass renderPass);
 
     Window &window;
     Device &device;
     std::unique_ptr<SwapChain> swapChain;
     std::vector<VkCommandBuffer> commandBuffers;
+    std::unique_ptr<Pipeline> pipeline;
+    VkPipelineLayout pipelineLayout;
 
     uint32_t currentImageIndex;
     int currentFrameIndex{0};

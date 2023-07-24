@@ -59,25 +59,31 @@ namespace kami {
         .build(globalDescriptorSets[i]);
     }
 
-    // scene
+    // asset management
     std::shared_ptr<Model> sphere = Model::createModelFromFile(device, "models/untitled.obj");
+    UUID sphereID = assetManager.addModel(sphere);
+
+    // rendering 
 
     Scene scene{};
 
     Entity entity = scene.createEntity();
     
     entity.addComponent<ColorComponent>();
+    entity.addComponent<ModelComponent>();
 
-    auto entities = scene.getAllEntitiesWith<TransformComponent>();
+    auto entities = scene.getAllEntitiesWith<TransformComponent, ModelComponent>();
 
-    for (auto e : entities) {
-      auto &transform = entities.get<TransformComponent>(e);
-      transform.translation = {0.0f, 0.0f, 2.5f};
-      transform.scale = {0.5f, 0.5f, 0.5f};
-    }
+    auto &transform = entities.get<TransformComponent>(entity);
+    transform.translation = {0.0f, 0.0f, 2.5f};
+    transform.scale = {0.5f, 0.5f, 0.5f};
+
+    auto &model = entities.get<ModelComponent>(entity);
+    model.ID = sphereID;
 
     // rendering
-    RenderSystem renderSystem{device, renderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
+    renderer.cPipeline(renderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout());
+    //RenderSystem renderSystem{device, renderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
     Camera camera{};
 
     camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
@@ -117,7 +123,7 @@ namespace kami {
         uboBuffers[frameIndex]->flush();
 
         renderer.beginSwapChainRenderPass(commandBuffer);
-        renderSystem.renderScene(frameInfo, scene, sphere);
+        renderer.renderScene(frameInfo, scene, sphere);
         renderer.endSwapChainRenderPass(commandBuffer);
         renderer.endFrame();
       }

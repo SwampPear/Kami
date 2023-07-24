@@ -11,7 +11,9 @@ namespace kami {
     public:
       AssetManager();
 
-      void addModel(std::shared_ptr<Model> model);
+      UUID addModel(std::shared_ptr<Model> model);
+      std::shared_ptr<Model> getModel(UUID id);
+
     private:
       std::unordered_map<UUID, std::shared_ptr<Model>, HashUUID> modelMap;
   };
