@@ -28,18 +28,6 @@ namespace kami {
 		entityMap.erase(entity.GetUUID());
 		registry.destroy(entity);
 	}
-	
-	Entity Scene::getPrimaryCameraEntity() {
-		auto view = registry.view<CameraComponent>();
-
-		for (auto entity : view) {
-			const auto& camera = view.get<CameraComponent>(entity);
-			if (camera.primary)
-				return Entity{entity, this};
-		}
-
-		return {};
-	}
 
 	template<typename... Components>
 	auto Scene::getAllEntitiesWith() {

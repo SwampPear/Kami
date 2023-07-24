@@ -16,8 +16,6 @@ namespace kami {
       Entity createEntityWithUUID(UUID uuid);
       void destroyEntity(Entity entity);
 
-      Entity getPrimaryCameraEntity();
-
       template<typename... Components>
       auto GetAllEntitiesWith();
 
