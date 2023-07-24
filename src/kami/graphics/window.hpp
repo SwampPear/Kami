@@ -13,7 +13,11 @@ namespace kami {
    * @brief Represents a manipulatable window object on which graphics can be 
    * rendered. Not copyable.
    */
-  class Window : public NoCopy {
+  class Window {
+    public:
+      Window(const Window &) = delete; // prohibit copying
+      Window &operator=(const Window &) = delete; // delete copy constructor
+
     public:
       /**
        * @brief Constructor. Initializes the glfw window.
@@ -62,7 +66,7 @@ namespace kami {
        * @param surface the Vulkan window surface
        */
       void createWindowSurface(VkInstance instance, VkSurfaceKHR *surface);
-      
+    
     private:
       int width;
       int height;
@@ -72,7 +76,8 @@ namespace kami {
       bool framebufferResized = false;
 
       GLFWwindow *window;
-
+      
+    private:
       /**
        * @brief Callback for resizing window based on GLFWwindow.
        * @param window pointer to GLFWwindow
