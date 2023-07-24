@@ -1,7 +1,6 @@
 #include "kami/core/application.hpp"
 #include "kami/graphics/render_system.hpp"
-#include "kami/graphics/camera/perspectiveCamera.hpp"
-#include "kami/graphics/camera/camera.hpp"
+#include "kami/graphics/camera.hpp"
 #include "kami/graphics/keyboard_movement_controller.hpp"
 #include "kami/utils/trait.hpp"
 #include "kami/graphics/buffer.hpp"
@@ -61,7 +60,7 @@ namespace kami {
 
     // rendering
     RenderSystem renderSystem{device, renderer.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout()};
-    PerspectiveCamera camera{};
+    Camera camera{};
 
     camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
@@ -74,16 +73,18 @@ namespace kami {
     Scene scene{};
 
     Entity entity = scene.createEntity();
+    
     entity.addComponent<TransformComponent>();
-    entity.addComponent<ColorComponent>();
+    //entity.addComponent<ColorComponent>();
 
+    /*
     auto entities = scene.GetAllEntitiesWith<TransformComponent>();
 
     for (auto e : entities) {
       auto &transform = entities.get<TransformComponent>(e);
       transform.translation = {0.0f, 0.0f, 2.5f};
       transform.scale = {0.5f, 0.5f, 0.5f};
-    }
+    }*/
 
     // main loop
     auto currentTime = std::chrono::high_resolution_clock::now();
@@ -99,7 +100,7 @@ namespace kami {
       camera.setViewYXZ(viewObject.transform.translation, viewObject.transform.rotation);
 
       float aspect = renderer.getAspectRatio();
-      camera.setProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
+      camera.setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
       
       if (auto commandBuffer = renderer.beginFrame()) {
         int frameIndex = renderer.getFrameIndex();

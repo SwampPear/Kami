@@ -1,5 +1,4 @@
 #include "kami/graphics/render_system.hpp"
-#include "kami/graphics/camera/camera.hpp"
 #include "kami/graphics/model.hpp"
 #include "kami/core/components.hpp"
 #include "kami/scene/components.hpp"
