@@ -60,8 +60,8 @@ namespace kami {
 
     // asset management
     //Model sphere = Model::createModelFromFile(device, "models/untitled.obj");
-    UUID sphereID = resourceManager.addModel("models/untitled.obj");
-    UUID crystalID = resourceManager.addModel("models/pear.obj");
+    UUID sphereID = resourceManager.loadModel("models/untitled.obj");
+    UUID crystalID = resourceManager.loadModel("models/pear.obj");
     Model *s = new Model(device, "models/untitled.obj");
 
     // rendering 
@@ -140,5 +140,7 @@ namespace kami {
     }
 
     vkDeviceWaitIdle(device.device());
+    resourceManager.unloadModel(sphereID);
+    resourceManager.unloadModel(crystalID);
   }
 }

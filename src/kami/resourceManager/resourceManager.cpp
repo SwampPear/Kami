@@ -6,12 +6,16 @@
 namespace kami {
   ResourceManager::ResourceManager(Device &device) : device{device} { }
 
-  UUID ResourceManager::addModel(const std::string &fileName) {
+  UUID ResourceManager::loadModel(const std::string &fileName) {
     UUID id = UUID();
 
     modelMap[id] = new Model(device, fileName);;
 
     return id;
+  }
+
+  void ResourceManager::unloadModel(UUID id) {
+    delete modelMap[id];
   }
 
   Model* ResourceManager::getModel(UUID id) {

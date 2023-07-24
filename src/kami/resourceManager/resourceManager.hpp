@@ -12,7 +12,8 @@ namespace kami {
     public:
       ResourceManager(Device &device);
 
-      UUID addModel(const std::string &fileName);
+      UUID loadModel(const std::string &fileName);
+      void unloadModel(UUID id);
       Model* getModel(UUID id);
 
     private:
