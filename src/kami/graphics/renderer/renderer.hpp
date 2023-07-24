@@ -23,50 +23,115 @@ namespace kami {
    * subproccesses.
    */
   class Renderer {
-  public:
-    Renderer(Window &window, Device &device, ResourceManager &resourceManager);
-    ~Renderer();
+    public:
+      Renderer(const Renderer &) = delete; // prohibit copy
+      Renderer &operator=(const Renderer &) = delete; // delete copy operator
+      
+    public:
+      /**
+       * @brief Constructor. Initializes this Renderer, creates initial swapchain,
+       * and creates command buffers.
+       */
+      Renderer(Window &window, Device &device, ResourceManager &resourceManager);
 
-    Renderer(const Renderer &) = delete;
-    Renderer &operator=(const Renderer &) = delete;
+      /**
+       * @brief Destructor. Frees command buffers and destroys pipeline.
+       */
+      ~Renderer();
 
-    VkRenderPass getSwapChainRenderPass() const { return swapChain->getRenderPass(); }
-    float getAspectRatio() const { return swapChain->extentAspectRatio(); }
-    bool isFrameInProgress() const { return isFrameStarted; }
+      /**
+       * @brief Retrieves render pass from swap chain.
+       * @return render pass of swap chain
+       */
+      VkRenderPass getSwapChainRenderPass() const;
 
-    VkCommandBuffer getCurrentCommandBuffer() const {
-      assert(isFrameStarted && "Cannot get command buffer when frame not in progress");
-      return commandBuffers[currentFrameIndex];
-    }
+      /**
+       * @brief Retrieves aspect ratio of the swap chain extent.
+       * @return swap chain extent
+       */
+      float getAspectRatio() const;
 
-    int getFrameIndex() const {
-      assert(isFrameStarted && "Cannot get frame index when frame not in progress");
-      return currentFrameIndex;
-    }
+      /**
+       * @brief Determines if frame is started.
+       * @return true if frame is started, false otherwise
+       */
+      bool isFrameInProgress() const;
 
-    VkCommandBuffer beginFrame();
-    void endFrame();
-    void beginSwapChainRenderPass(VkCommandBuffer commandBuffer);
-    void endSwapChainRenderPass(VkCommandBuffer commandBuffer);
-    void renderScene(FrameInfo &frameInfo, Scene &scene);
-    void createPipeline(VkDescriptorSetLayout globalSetLayout);
+      /**
+       * @brief Retrieves the current command buffer.
+       * @return the command buffer at the current index
+       */
+      VkCommandBuffer getCurrentCommandBuffer() const;
 
-  private:
-    void createCommandBuffers();
-    void freeCommandBuffers();
-    void recreateSwapChain();
-    
+      /**
+       * @brief Retrieves the current frame index.
+       * @return the current frame index
+       */
+      int getFrameIndex() const;
 
-    Window &window;
-    Device &device;
-    std::unique_ptr<SwapChain> swapChain;
-    std::vector<VkCommandBuffer> commandBuffers;
-    std::unique_ptr<Pipeline> pipeline;
-    VkPipelineLayout pipelineLayout;
-    ResourceManager &resourceManager;
+      /**
+       * @brief Begins a frame.
+       * @return the beginning command buffer
+       */
+      VkCommandBuffer beginFrame();
 
-    uint32_t currentImageIndex;
-    int currentFrameIndex{0};
-    bool isFrameStarted{false};
+      /**
+       * @brief Ends a frame.
+       */
+      void endFrame();
+
+      /**
+       * @brief Begins a swapc hain render pass.
+       * @param commandBuffer the current command buffer to use
+       */
+      void beginSwapChainRenderPass(VkCommandBuffer commandBuffer);
+
+      /**
+       * @brief Ends a swap chain render pass.
+       * @param commandBuffer the current command buffer to use
+       */
+      void endSwapChainRenderPass(VkCommandBuffer commandBuffer);
+
+      /**
+       * @brief Renders a scene.
+       * @param frameInfo frame info to use for rendering
+       * @param scene scene to render
+       */
+      void renderScene(FrameInfo &frameInfo, Scene &scene);
+
+      /**
+       * @brief Creates a pipeline with a descriptor set layout.
+       * @param globalSetLayout
+       */
+      void createPipeline(VkDescriptorSetLayout globalSetLayout);
+
+    private:
+      Window &window;
+      Device &device;
+      std::unique_ptr<SwapChain> swapChain;
+      std::vector<VkCommandBuffer> commandBuffers;
+      std::unique_ptr<Pipeline> pipeline;
+      VkPipelineLayout pipelineLayout;
+      ResourceManager &resourceManager;
+
+      uint32_t currentImageIndex;
+      int currentFrameIndex{0};
+      bool isFrameStarted{false};
+
+    private:
+      /**
+       * @brief Creates command buffers.
+       */
+      void createCommandBuffers();
+
+      /**
+       * @brief Frees command buffer memory.
+       */
+      void freeCommandBuffers();
+
+      /**
+       * @brief Recreates the swap chain.
+       */
+      void recreateSwapChain();
   };
 }
