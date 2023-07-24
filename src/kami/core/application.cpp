@@ -8,6 +8,7 @@
 #include "kami/scene/entity.hpp"
 #include "kami/core/components.hpp"
 #include "kami/scene/components.hpp"
+#include "kami/assetManager/assetManager.hpp"
 
 #include "glm/gtc/constants.hpp"
 
