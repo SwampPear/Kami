@@ -5,7 +5,6 @@
 #include "kami/graphics/buffer.hpp"
 #include "kami/scene/scene.hpp"
 #include "kami/scene/entity.hpp"
-#include "kami/core/components.hpp"
 #include "kami/scene/components.hpp"
 #include "kami/resourceManager/resourceManager.hpp"
 
@@ -22,6 +21,7 @@ namespace kami {
   };
 
   Application::Application() {
+    // create descriptor pool
     globalPool = DescriptorPool::Builder(device)
       .setMaxSets(SwapChain::MAX_FRAMES_IN_FLIGHT)
       .addPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, SwapChain::MAX_FRAMES_IN_FLIGHT)
@@ -32,7 +32,7 @@ namespace kami {
   Application::~Application() { }
 
   void Application::run() {
-    // ubo buffers
+    // create uniform buffer objects
     std::vector<std::unique_ptr<Buffer>> uboBuffers(SwapChain::MAX_FRAMES_IN_FLIGHT);
     for (int i = 0; i < uboBuffers.size(); i++) {
       uboBuffers[i] = std::make_unique<Buffer>(device,
@@ -45,7 +45,7 @@ namespace kami {
       uboBuffers[i]->map();
     }
 
-    // descriptor sets
+    // create decsriptor set layouts
     auto globalSetLayout = DescriptorSetLayout::Builder(device)
       .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)
       .build();
@@ -58,14 +58,11 @@ namespace kami {
         .build(globalDescriptorSets[i]);
     }
 
-    // asset management
-    //Model sphere = Model::createModelFromFile(device, "models/untitled.obj");
+    // resource management
     UUID sphereID = resourceManager.loadModel("models/untitled.obj");
     UUID crystalID = resourceManager.loadModel("models/pear.obj");
-    Model *s = new Model(device, "models/untitled.obj");
 
-    // rendering 
-
+    // scene setup
     Scene scene{};
 
     Entity entity = scene.createEntity();
@@ -98,26 +95,29 @@ namespace kami {
 
     camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
-    auto viewObject = GameObject::createGameObject();
+    auto viewObject = GameObject::createGameObject(); // game objects should be removed entirely in favor of using ECS
     KeyboardMovementController cameraController{};
 
     // main loop
     auto currentTime = std::chrono::high_resolution_clock::now();
     
     while(!window.shouldClose()) {
-      glfwPollEvents();
+      glfwPollEvents(); // checks for GLFW events
 
+      // update time
       auto newTime = std::chrono::high_resolution_clock::now();
       float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
       currentTime = newTime;
 
+      // update camera
       cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, viewObject);
       camera.setViewYXZ(viewObject.transform.translation, viewObject.transform.rotation);
-
       float aspect = renderer.getAspectRatio();
       camera.setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
       
+      // update on frame begin
       if (auto commandBuffer = renderer.beginFrame()) {
+        // update uniform buffer objects
         int frameIndex = renderer.getFrameIndex();
         FrameInfo frameInfo{
           frameIndex,
@@ -132,14 +132,17 @@ namespace kami {
         uboBuffers[frameIndex]->writeToBuffer(&ubo);
         uboBuffers[frameIndex]->flush();
 
-        renderer.beginSwapChainRenderPass(commandBuffer);
-        renderer.renderScene(frameInfo, scene);
-        renderer.endSwapChainRenderPass(commandBuffer);
-        renderer.endFrame();
+        renderer.beginSwapChainRenderPass(commandBuffer);   // step 1
+        renderer.renderScene(frameInfo, scene);             // step 2
+        renderer.endSwapChainRenderPass(commandBuffer);     // step 3
+        renderer.endFrame();                                // step 4
       }
     }
 
+    // wait if device commands it
     vkDeviceWaitIdle(device.device());
+
+    // deallocate resource memory, possibly a better solution for this
     resourceManager.unloadModel(sphereID);
     resourceManager.unloadModel(crystalID);
   }
