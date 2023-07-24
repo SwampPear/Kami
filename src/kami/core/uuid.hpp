@@ -4,37 +4,38 @@
 #include <cstddef>
 
 namespace kami {
+	/**
+   * @class UUID
+   * @brief Represents a universally unique id used to provide a uniform id for 
+	 * any object or component across the engine.
+   */
 	class UUID {
+		public:
+			UUID(const UUID &) = default; // default copy
+			operator uint64_t() const { return uuid; } // uint64_t casting
+			
     public:
+			/**
+			 * @brief Constructor. Randomly generates a unique id.
+			 */
       UUID();
-      UUID(uint64_t uuid);
-      UUID(const UUID&) = default;
 
-      operator uint64_t() const { return m_UUID; }
+			/**
+			 * @brief Constructor. Randomly generates a unique id from a seed id.
+			 */
+      UUID(uint64_t uuid);
 
     private:
-      uint64_t m_UUID;
+      uint64_t uuid;
 	};
 
-	//template <typename T> struct HashUUID;
-
-	//template<> 
+	/**
+	 * @struct HashUUID
+   * @brief Hashing operator for usage in unordered map.
+   */
 	struct HashUUID {
 		size_t operator()(const UUID& uuid) const {
 			return static_cast<size_t>((uint64_t)uuid);
 		}
 	};
 }
-
-/*
-namespace std {
-	template <typename T> struct hash;
-
-	template<> 
-	struct hash<kami::UUID> {
-		size_t operator()(const kami::UUID& uuid) const {
-			return static_cast<size_t>((uint64_t)uuid);
-		}
-	};
-}
-*/
