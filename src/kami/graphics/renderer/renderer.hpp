@@ -22,8 +22,6 @@ namespace kami {
     Renderer(Window &window, Device &device);
     ~Renderer();
 
-    void cPipeline(VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout);
-
     Renderer(const Renderer &) = delete;
     Renderer &operator=(const Renderer &) = delete;
 
@@ -46,13 +44,13 @@ namespace kami {
     void beginSwapChainRenderPass(VkCommandBuffer commandBuffer);
     void endSwapChainRenderPass(VkCommandBuffer commandBuffer);
     void renderScene(FrameInfo &frameInfo, Scene &scene, std::shared_ptr<Model> model);
+    void createPipeline(VkDescriptorSetLayout globalSetLayout);
 
   private:
     void createCommandBuffers();
     void freeCommandBuffers();
     void recreateSwapChain();
-    void createPipelineLayout(VkDescriptorSetLayout globalSetLayout);
-    void createPipeline(VkRenderPass renderPass);
+    
 
     Window &window;
     Device &device;

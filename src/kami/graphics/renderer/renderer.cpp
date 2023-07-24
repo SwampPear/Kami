@@ -14,12 +14,7 @@ namespace kami {
     recreateSwapChain();
     createCommandBuffers();
   }
-
-  void Renderer::cPipeline(VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout) {
-    createPipelineLayout(globalSetLayout);
-    createPipeline(renderPass);
-  }
-
+  
   Renderer::~Renderer() {
     freeCommandBuffers();
     vkDestroyPipelineLayout(device.device(), pipelineLayout, nullptr);
@@ -183,7 +178,7 @@ namespace kami {
     vkCmdEndRenderPass(commandBuffer);
   };
 
-  void Renderer::createPipelineLayout(VkDescriptorSetLayout globalSetLayout) {
+  void Renderer::createPipeline(VkDescriptorSetLayout globalSetLayout) {
     VkPushConstantRange pushConstantRange{};
     pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
     pushConstantRange.offset = 0;
@@ -201,14 +196,13 @@ namespace kami {
     if (vkCreatePipelineLayout(device.device(), &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) {
       throw std::runtime_error("failed to create pipeline layout");
     }
-  }
 
-  void Renderer::createPipeline(VkRenderPass renderPass) {
+    // create pipeline
     assert(pipelineLayout != nullptr && "cannot create pipeline before pipeline layout");
 
     PipelineConfigInfo pipelineConfig{};
     Pipeline::defaultPipelineConfigInfo(pipelineConfig);
-    pipelineConfig.renderPass = renderPass;
+    pipelineConfig.renderPass = getSwapChainRenderPass();
     pipelineConfig.pipelineLayout = pipelineLayout;
     pipeline = std::make_unique<Pipeline>(device, "shaders/shader.vert.spv", "shaders/shader.frag.spv", pipelineConfig);
   }
