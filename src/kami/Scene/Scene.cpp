@@ -28,9 +28,4 @@ namespace kami {
 		entityMap.erase(entity.GetUUID());
 		registry.destroy(entity);
 	}
-
-	template<typename... Components>
-	auto Scene::getAllEntitiesWith() {
-		return registry.view<Components...>();
-	}
 }

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "kami/core/uuid.hpp"
-#include "kami/renderer/model.hpp"
+#include "kami/graphics/model.hpp"
 
 #include <memory>
 
@@ -11,8 +11,8 @@ namespace kami {
     public:
       AssetManager();
 
-      void addModel(std:shared_ptr<Model> model);
+      void addModel(std::shared_ptr<Model> model);
     private:
-      std::unordered_map<UUID, std::shared_ptr, HashUUID> modelMap;
+      std::unordered_map<UUID, std::shared_ptr<Model>, HashUUID> modelMap;
   };
 }

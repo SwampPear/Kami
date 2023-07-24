@@ -17,7 +17,9 @@ namespace kami {
       void destroyEntity(Entity entity);
 
       template<typename... Components>
-      auto GetAllEntitiesWith();
+      auto getAllEntitiesWith() {
+        return registry.view<Components...>();
+      }
 
     private:
       entt::registry registry;
