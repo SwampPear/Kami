@@ -40,4 +40,9 @@ namespace kami {
 
 		return {};
 	}
+
+	template<typename... Components>
+	auto Scene::getAllEntitiesWith() {
+		return registry.view<Components...>();
+	}
 }

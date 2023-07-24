@@ -68,7 +68,7 @@ namespace kami {
     
     entity.addComponent<ColorComponent>();
 
-    auto entities = scene.GetAllEntitiesWith<TransformComponent>();
+    auto entities = scene.getAllEntitiesWith<TransformComponent>();
 
     for (auto e : entities) {
       auto &transform = entities.get<TransformComponent>(e);
