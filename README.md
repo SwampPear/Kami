@@ -13,7 +13,7 @@ Kami is a work-in-progress 3D and 2D game engine opting for simplicity in usage 
 While in its early stages, Kami is currently not in a usable state however it is quickly evolving. 
 Kami is my personal exploration and continuation of my own endeavors in game programming, design, and creativity.
 
-I have a few goals in mind at the core of its implementation:
+Goals:
 
 - ease of use (primarily scripting, no UI)
 - robust, beauty focused graphics system
@@ -21,7 +21,7 @@ I have a few goals in mind at the core of its implementation:
 - efficient and proven essential systems (ECS: entt, graphics: vulkan)
 - procedural asset generation (terrain, story, and audio)
 
-Current Features:
+Features:
 - 3D rendering (2D is trivially implemented in the future)
 - smart resource manager (WIP)
 - ECS API (WIP, through EnTT)
