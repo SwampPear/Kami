@@ -13,8 +13,8 @@ namespace kami {
    */
   class Window {
     public:
-      Window(const Window &) = delete; // prohibit copying
-      Window &operator=(const Window &) = delete; // delete copy constructor
+      Window(const Window &) = delete;
+      Window &operator=(const Window &) = delete;
 
     public:
       /**

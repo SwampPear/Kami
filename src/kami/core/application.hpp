@@ -30,11 +30,13 @@ namespace kami {
       ~Application();
 
       void run();
+      static Application& get() { return *instance; }
+      Window& getWindow() { return window; }
       
     private:
+      static Application *instance;
       Window window{WIDTH, HEIGHT, "window name"};
       Device device{window};
-      Input input{window};
       ResourceManager resourceManager{device};
       Renderer renderer{window, device, resourceManager};
       std::unique_ptr<DescriptorPool> globalPool{};

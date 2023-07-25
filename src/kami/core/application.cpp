@@ -22,7 +22,11 @@ namespace kami {
     glm::vec3 lightDirection = glm::normalize(glm::vec3{1.0f, -3.0f, -1.0f});
   };
 
+  Application* Application::instance = nullptr;
+
   Application::Application() {
+    instance = this;
+
     // create descriptor pool
     globalPool = DescriptorPool::Builder(device)
       .setMaxSets(SwapChain::MAX_FRAMES_IN_FLIGHT)
@@ -98,6 +102,10 @@ namespace kami {
     
     while(!window.shouldClose()) {
       glfwPollEvents(); // checks for GLFW events
+
+      if (Input::isKeyPressed(Key::A)) {
+        std::cout << "A" << std::endl;
+      }
 
       DeltaTime dt = timer.deltaTime();
 

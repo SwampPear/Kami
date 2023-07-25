@@ -1,19 +1,26 @@
 #include "kami/input/input.hpp"
+#include "kami/core/application.hpp"
 
 
 namespace kami {
-  Input::Input(Window &window) : window{window.getGLFWwindow()} { };
-  Input::~Input() { }
+  //auto* window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+		//auto state = glfwGetKey(window, static_cast<int32_t>(key));
+		//return state == GLFW_PRESS;
+
 
   bool Input::isKeyPressed(KeyCode key) { 
-    return glfwGetKey(window, key) == GLFW_PRESS; 
+    auto* window = static_cast<GLFWwindow*>(Application::get().getWindow().getGLFWwindow());
+    return glfwGetKey(window, static_cast<int32_t>(key)) == GLFW_PRESS; 
   }
 
   bool Input::isMouseButtonPressed(MouseCode button) {
-    return glfwGetMouseButton(window, button) == GLFW_PRESS;
+    auto* window = static_cast<GLFWwindow*>(Application::get().getWindow().getGLFWwindow());
+    return glfwGetMouseButton(window, static_cast<int32_t>(button)) == GLFW_PRESS;
   }
 
   glm::vec2 Input::getMousePosition() {
+    auto* window = static_cast<GLFWwindow*>(Application::get().getWindow().getGLFWwindow());
+    
     double xPos, yPos;
 
     glfwGetCursorPos(window, &xPos, &yPos);
