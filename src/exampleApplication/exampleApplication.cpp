@@ -3,6 +3,6 @@
 
 class ExampleApplication : public kami::Application {
 public:
-	ExampleApplication();
-  ~ExampleApplication();
+	ExampleApplication() { };
+  ~ExampleApplication() { };
 };

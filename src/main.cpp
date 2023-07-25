@@ -1,14 +1,15 @@
-#include "kami/core/application.hpp"
+#include "exampleApplication/exampleApplication.cpp"
 
 #include <cstdlib>
 #include <iostream>
 #include <stdexcept>
 
 int main() {
-    kami::Application app{};
+    ExampleApplication app{};
 
     try {
-        app.run();
+        //app.run();
+        std::cout << "test" << std::endl;
     } catch (const std::exception &e) {
         return EXIT_FAILURE;
     }
