@@ -1,7 +1,5 @@
 #pragma once
 
-#include "kami/graphics/camera.hpp"
-
 #include <vulkan/vulkan.h>
 
 
@@ -10,7 +8,6 @@ namespace kami {
     int frameIndex;
     float frameTime;
     VkCommandBuffer commandBuffer;
-    Camera &camera;
     VkDescriptorSet globalDescriptorSet;
   };
 }

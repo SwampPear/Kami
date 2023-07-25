@@ -23,7 +23,7 @@ namespace kami {
   };
 
 	struct CameraComponent {
-		Camera camera{};
+		Camera *camera;
 		bool primary{true};
 
 		CameraComponent() = default;

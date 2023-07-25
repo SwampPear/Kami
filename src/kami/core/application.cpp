@@ -61,18 +61,28 @@ namespace kami {
     UUID sphereID = resourceManager.loadModel("models/sphere.obj");
     UUID crystalID = resourceManager.loadModel("models/pear.obj");
 
+    // scene setup
+    Scene scene{};
+
     // rendering
     renderer.createPipeline(globalSetLayout->getDescriptorSetLayout());
-    Camera camera{};
 
-    camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
+    // camera setup
+    Entity cameraEntity = scene.createEntity();
+    cameraEntity.addComponent<CameraComponent>();
+
+    auto &cameraObject = scene.getAllEntitiesWith<CameraComponent>().get<CameraComponent>(cameraEntity);
+
+    cameraObject.camera = new Camera();
+    cameraObject.camera->setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
+
+    //Camera camera{};
+    //camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
     auto viewObject = GameObject::createGameObject(); // game objects should be removed entirely in favor of using ECS
     KeyboardMovementController cameraController{};
 
-    // scene setup
-    Scene scene{};
-
+    // entity setup
     Entity entity = scene.createEntity();
     Entity entity2 = scene.createEntity();
     
@@ -109,10 +119,14 @@ namespace kami {
       currentTime = newTime;
 
       // update camera
-      cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, viewObject);
-      camera.setViewYXZ(viewObject.transform.translation, viewObject.transform.rotation);
+      cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, scene, cameraEntity);
+      //camera.setViewYXZ(viewObject.transform.translation, viewObject.transform.rotation);
+      auto cameraA = scene.getAllEntitiesWith<CameraComponent, TransformComponent>();
+      auto &cameraO = cameraA.get<CameraComponent>(cameraEntity);
+      //cameraO.camera->setViewYXZ(cameraB.translation, cameraB.rotation);
       float aspect = renderer.getAspectRatio();
-      camera.setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
+
+      cameraO.camera->setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
       
       // update on frame begin
       if (auto commandBuffer = renderer.beginFrame()) {
@@ -122,12 +136,11 @@ namespace kami {
           frameIndex,
           frameTime,
           commandBuffer,
-          camera,
           globalDescriptorSets[frameIndex]
         };
 
         GlobalUBO ubo{};
-        ubo.projectionView = camera.getProjection() * camera.getView();
+        ubo.projectionView = cameraO.camera->getProjection() * cameraO.camera->getView();
         uboBuffers[frameIndex]->writeToBuffer(&ubo);
         uboBuffers[frameIndex]->flush();
 

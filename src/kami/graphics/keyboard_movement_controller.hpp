@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include "kami/core/game_object.hpp"
 #include "kami/graphics/window.hpp"
+#include "kami/scene/entity.hpp"
 
 
 namespace kami {
@@ -21,7 +22,7 @@ namespace kami {
         int lookDown = GLFW_KEY_DOWN;
       };
 
-      void moveInPlaneXZ(GLFWwindow* window, float dt, GameObject& gameObject);
+      void moveInPlaneXZ(GLFWwindow* window, float dt, Scene &scene, Entity entity);
 
       KeyMappings keys{};
       float moveSpeed{3.0f};
