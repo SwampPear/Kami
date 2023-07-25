@@ -1,11 +1,13 @@
 #include "kami/core/application.hpp"
-#include "kami/renderer/camera.hpp"
-#include "kami/renderer/keyboard_movement_controller.hpp"
 #include "kami/renderer/buffer.hpp"
-#include "kami/scene/scene.hpp"
-#include "kami/scene/entity.hpp"
+#include "kami/renderer/camera.hpp"
+#include "kami/renderer/cameraController.hpp"
 #include "kami/scene/components.hpp"
+#include "kami/scene/entity.hpp"
+#include "kami/scene/scene.hpp"
 #include "kami/resourceManager/resourceManager.hpp"
+
+#include <koios/koios.hpp>
 
 #include "glm/gtc/constants.hpp"
 
@@ -57,27 +59,25 @@ namespace kami {
         .build(globalDescriptorSets[i]);
     }
 
-    // resource management
-    UUID pearID = resourceManager.loadModel("models/pear.obj");
+    // create pipeline
+    renderer.createPipeline(globalSetLayout->getDescriptorSetLayout());
 
     // scene setup
     Scene scene{};
-
-    // rendering
-    renderer.createPipeline(globalSetLayout->getDescriptorSetLayout());
 
     // camera setup
     Entity cameraEntity = scene.createEntity();
     cameraEntity.addComponent<CameraComponent>();
 
-    auto &cameraObject = scene.getAllEntitiesWith<CameraComponent>().get<CameraComponent>(cameraEntity);
+    auto &camera = scene.getAllEntitiesWith<CameraComponent>().get<CameraComponent>(cameraEntity);
 
-    cameraObject.camera = new Camera();
-    cameraObject.camera->setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
+    camera.camera = new Camera();
+    camera.camera->setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
-    KeyboardMovementController cameraController{};
+    CameraController cameraController{};
 
     // entity setup
+    UUID pearID = resourceManager.loadModel("models/pear.obj");
     Entity entity = scene.createEntity();
     
     entity.addComponent<ColorComponent>();
@@ -105,13 +105,7 @@ namespace kami {
 
       // update camera
       cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, scene, cameraEntity);
-      //camera.setViewYXZ(viewObject.transform.translation, viewObject.transform.rotation);
-      auto cameraA = scene.getAllEntitiesWith<CameraComponent, TransformComponent>();
-      auto &cameraO = cameraA.get<CameraComponent>(cameraEntity);
-      //cameraO.camera->setViewYXZ(cameraB.translation, cameraB.rotation);
-      float aspect = renderer.getAspectRatio();
-
-      cameraO.camera->setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
+      camera.camera->setPerspectiveProjection(glm::radians(50.0f), renderer.getAspectRatio(), 0.1f, 10.0f);
       
       // update on frame begin
       if (auto commandBuffer = renderer.beginFrame()) {
@@ -125,7 +119,7 @@ namespace kami {
         };
 
         GlobalUBO ubo{};
-        ubo.projectionView = cameraO.camera->getProjection() * cameraO.camera->getView();
+        ubo.projectionView = camera.camera->getProjection() * camera.camera->getView();
         uboBuffers[frameIndex]->writeToBuffer(&ubo);
         uboBuffers[frameIndex]->flush();
 

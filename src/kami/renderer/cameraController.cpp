@@ -1,11 +1,11 @@
-#include "kami/renderer/keyboard_movement_controller.hpp"
+#include "kami/renderer/cameraController.hpp"
 #include "kami/renderer/camera.hpp"
 
 #include <iostream>
 
 
 namespace kami {
-  void KeyboardMovementController::moveInPlaneXZ(GLFWwindow* window, float dt, Scene &scene, Entity entity) {
+  void CameraController::moveInPlaneXZ(GLFWwindow* window, float dt, Scene &scene, Entity entity) {
     auto view = scene.getAllEntitiesWith<TransformComponent, CameraComponent>();
 
     auto &transform = view.get<TransformComponent>(entity);

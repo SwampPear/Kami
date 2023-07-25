@@ -4,7 +4,7 @@
 
 
 namespace kami {
-	using MouseCode = int16_t;
+	using MouseCode = uint16_t;
 
 	namespace Mouse {
 		enum : MouseCode {

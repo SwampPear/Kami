@@ -6,7 +6,7 @@
 
 
 namespace kami {
-  class KeyboardMovementController {
+  class CameraController {
     public:
       struct KeyMappings {
         int moveLeft = GLFW_KEY_A;

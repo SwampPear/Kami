@@ -6,6 +6,10 @@
 namespace kami {
   class Buffer {
     public:
+      Buffer(const Buffer&) = delete;
+      Buffer& operator=(const Buffer&) = delete;
+
+    public:
       Buffer(
           Device& device,
           VkDeviceSize instanceSize,
@@ -14,9 +18,6 @@ namespace kami {
           VkMemoryPropertyFlags memoryPropertyFlags,
           VkDeviceSize minOffsetAlignment = 1);
       ~Buffer();
-
-      Buffer(const Buffer&) = delete;
-      Buffer& operator=(const Buffer&) = delete;
 
       VkResult map(VkDeviceSize size = VK_WHOLE_SIZE, VkDeviceSize offset = 0);
       void unmap();
