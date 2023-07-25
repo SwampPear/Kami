@@ -94,16 +94,12 @@ namespace kami {
     model.ID = pearID;
 
     // main loop
-    //auto currentTime = std::chrono::high_resolution_clock::now();
     Timer timer{};
     
     while(!window.shouldClose()) {
       glfwPollEvents(); // checks for GLFW events
 
-      // update time
-      //auto newTime = std::chrono::high_resolution_clock::now();
       DeltaTime frameTime = timer.deltaTime(); //std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
-      //currentTime = newTime;
 
       // update camera
       cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, scene, cameraEntity);
