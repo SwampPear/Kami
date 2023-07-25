@@ -3,6 +3,11 @@
 #include <functional>
 
 
+/*
+The following code is useful as a reference but will probably need to be implemented
+using some event bus system.
+
+
 namespace kami {
 	enum class EventType
 	{
@@ -61,3 +66,4 @@ namespace kami {
 			Event& m_Event;
 	};
 }
+*/

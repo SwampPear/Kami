@@ -7,12 +7,12 @@
 #include "kami/scene/scene.hpp"
 #include "kami/resourceManager/resourceManager.hpp"
 #include "kami/core/deltaTime.hpp"
+#include "kami/core/timer.hpp"
 
 #include <koios/koios.hpp>
 
 #include "glm/gtc/constants.hpp"
 
-#include <chrono>
 #include <iostream>
 
 
@@ -94,15 +94,16 @@ namespace kami {
     model.ID = pearID;
 
     // main loop
-    auto currentTime = std::chrono::high_resolution_clock::now();
+    //auto currentTime = std::chrono::high_resolution_clock::now();
+    Timer timer{};
     
     while(!window.shouldClose()) {
       glfwPollEvents(); // checks for GLFW events
 
       // update time
-      auto newTime = std::chrono::high_resolution_clock::now();
-      DeltaTime frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
-      currentTime = newTime;
+      //auto newTime = std::chrono::high_resolution_clock::now();
+      DeltaTime frameTime = timer.deltaTime(); //std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+      //currentTime = newTime;
 
       // update camera
       cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, scene, cameraEntity);
