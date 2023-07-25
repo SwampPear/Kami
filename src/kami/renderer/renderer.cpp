@@ -1,4 +1,4 @@
-#include "kami/graphics/renderer/renderer.hpp"
+#include "kami/renderer/renderer.hpp"
 #include "kami/scene/components.hpp"
 
 #include "glm/gtc/constants.hpp"

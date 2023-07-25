@@ -1,4 +1,4 @@
-#include "kami/graphics/window.hpp"
+#include "kami/renderer/window.hpp"
 
 
 namespace kami {

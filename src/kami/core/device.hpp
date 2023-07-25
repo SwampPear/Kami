@@ -1,6 +1,6 @@
 #pragma once
 
-#include "kami/graphics/window.hpp"
+#include "kami/renderer/window.hpp"
 
 #include <string>
 #include <vector>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "kami/graphics/window.hpp"
+#include "kami/renderer/window.hpp"
 #include "kami/scene/entity.hpp"
 
 

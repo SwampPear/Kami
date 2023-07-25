@@ -1,7 +1,7 @@
 #pragma once
 
 #include "kami/core/uuid.hpp"
-#include "kami/graphics/model.hpp"
+#include "kami/renderer/model.hpp"
 #include "kami/core/device.hpp"
 
 #include <memory>

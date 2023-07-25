@@ -1,4 +1,4 @@
-#include "kami/graphics/buffer.hpp"
+#include "kami/renderer/buffer.hpp"
  
 #include <cassert>
 #include <cstring>

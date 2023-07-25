@@ -1,5 +1,5 @@
-#include "kami/graphics/keyboard_movement_controller.hpp"
-#include "kami/graphics/camera.hpp"
+#include "kami/renderer/keyboard_movement_controller.hpp"
+#include "kami/renderer/camera.hpp"
 
 #include <iostream>
 

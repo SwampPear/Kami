@@ -1,4 +1,4 @@
-#include "kami/graphics/model.hpp"
+#include "kami/renderer/model.hpp"
 #include "kami/utils/utils.hpp"
 
 #include <koios/koios.hpp>

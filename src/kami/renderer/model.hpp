@@ -1,7 +1,7 @@
 #pragma once
 
 #include "kami/core/device.hpp"
-#include "kami/graphics/buffer.hpp"
+#include "kami/renderer/buffer.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
@@ -13,9 +13,6 @@
 
 namespace kami {
   // should use dedicated memory allocator
-  /**
-   * A tangible (rendered) object.
-  */
   class Model {
     public:
       struct Vertex {

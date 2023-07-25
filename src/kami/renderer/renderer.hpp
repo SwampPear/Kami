@@ -1,11 +1,11 @@
 #pragma once
 
-#include "kami/graphics/window.hpp"
+#include "kami/renderer/window.hpp"
 #include "kami/core/device.hpp"
-#include "kami/graphics/renderer/swapChain.hpp"
-#include "kami/graphics/pipeline.hpp"
-#include "kami/graphics/camera.hpp"
-#include "kami/graphics/frame_info.hpp"
+#include "kami/renderer/swapChain.hpp"
+#include "kami/renderer/pipeline.hpp"
+#include "kami/renderer/camera.hpp"
+#include "kami/renderer/frame_info.hpp"
 #include "kami/scene/scene.hpp"
 #include "kami/resourceManager/resourceManager.hpp"
 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "kami/graphics/window.hpp"
+#include "kami/renderer/window.hpp"
 #include "kami/core/device.hpp"
-#include "kami/graphics/renderer/renderer.hpp"
+#include "kami/renderer/renderer.hpp"
 #include "kami/input/input.hpp"
-#include "kami/graphics/descriptors.hpp"
+#include "kami/renderer/descriptors.hpp"
 #include "kami/resourceManager/resourceManager.hpp"
 
 #define GLM_FORCE_RADIANS

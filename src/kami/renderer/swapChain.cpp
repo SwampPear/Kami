@@ -1,4 +1,4 @@
-#include "kami/graphics/renderer/swapChain.hpp"
+#include "kami/renderer/swapChain.hpp"
 
 #include <koios/koios.hpp>
 

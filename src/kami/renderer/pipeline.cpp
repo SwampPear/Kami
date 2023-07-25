@@ -1,5 +1,5 @@
-#include "kami/graphics/pipeline.hpp"
-#include "kami/graphics/model.hpp"
+#include "kami/renderer/pipeline.hpp"
+#include "kami/renderer/model.hpp"
 
 #include <fstream>
 #include <stdexcept>

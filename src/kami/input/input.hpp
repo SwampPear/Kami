@@ -2,7 +2,7 @@
 
 #include "kami/input/keyCodes.hpp"
 #include "kami/input/mouseCodes.hpp"
-#include "kami/graphics/window.hpp"
+#include "kami/renderer/window.hpp"
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
