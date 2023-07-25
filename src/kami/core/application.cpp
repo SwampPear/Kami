@@ -110,7 +110,7 @@ namespace kami {
       DeltaTime dt = timer.deltaTime();
 
       // update camera
-      cameraController.moveInPlaneXZ(window.getGLFWwindow(), dt, scene, cameraEntity);
+      cameraController.moveInPlaneXZ(dt, scene, cameraEntity);
       camera.camera->setPerspectiveProjection(glm::radians(50.0f), renderer.getAspectRatio(), 0.1f, 10.0f);
       
       // update on frame begin
