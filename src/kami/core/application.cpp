@@ -58,8 +58,7 @@ namespace kami {
     }
 
     // resource management
-    UUID sphereID = resourceManager.loadModel("models/sphere.obj");
-    UUID crystalID = resourceManager.loadModel("models/pear.obj");
+    UUID pearID = resourceManager.loadModel("models/pear.obj");
 
     // scene setup
     Scene scene{};
@@ -76,19 +75,13 @@ namespace kami {
     cameraObject.camera = new Camera();
     cameraObject.camera->setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
-    //Camera camera{};
-    //camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
-
     KeyboardMovementController cameraController{};
 
     // entity setup
     Entity entity = scene.createEntity();
-    Entity entity2 = scene.createEntity();
     
     entity.addComponent<ColorComponent>();
     entity.addComponent<ModelComponent>();
-    entity2.addComponent<ColorComponent>();
-    entity2.addComponent<ModelComponent>();
 
     auto entitiesView = scene.getAllEntitiesWith<TransformComponent, ModelComponent>();
 
@@ -96,15 +89,8 @@ namespace kami {
     transform.translation = {0.0f, 0.0f, 2.5f};
     transform.scale = {0.5f, 0.5f, 0.5f};
 
-    auto &transform2 = entitiesView.get<TransformComponent>(entity2);
-    transform2.translation = {0.0f, -1.5f, 2.5f};
-    transform2.scale = {0.5f, 0.5f, 0.5f};
-
     auto &model = entitiesView.get<ModelComponent>(entity);
-    model.ID = sphereID;
-
-    auto &model2 = entitiesView.get<ModelComponent>(entity2);
-    model2.ID = crystalID;
+    model.ID = pearID;
 
     // main loop
     auto currentTime = std::chrono::high_resolution_clock::now();
@@ -154,7 +140,6 @@ namespace kami {
     vkDeviceWaitIdle(device.device());
 
     // deallocate resource memory, possibly a better solution for this
-    resourceManager.unloadModel(sphereID);
-    resourceManager.unloadModel(crystalID);
+    resourceManager.unloadModel(pearID);
   }
 }
