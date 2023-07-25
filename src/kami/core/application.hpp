@@ -2,7 +2,6 @@
 
 #include "kami/graphics/window.hpp"
 #include "kami/core/device.hpp"
-#include "kami/utils/trait.hpp"
 #include "kami/core/game_object.hpp"
 #include "kami/graphics/renderer/renderer.hpp"
 #include "kami/input/input.hpp"
@@ -20,7 +19,10 @@
 
 
 namespace kami {
-  class Application : public NoCopy {
+  class Application {
+    public:
+      Application(const Application &) = delete;
+      Application &operator=(const Application &) = delete;
     public:
       static constexpr int WIDTH = 600;
       static constexpr int HEIGHT = 600;

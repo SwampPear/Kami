@@ -1,14 +1,16 @@
 #pragma once
 
 #include "kami/core/device.hpp"
-#include "kami/utils/trait.hpp"
 
 #include <string>
 #include <vector>
 
 
 namespace kami {
-  struct PipelineConfigInfo : public NoCopy {
+  struct PipelineConfigInfo {
+    PipelineConfigInfo(const PipelineConfigInfo &) = delete; // prohibit copying
+    PipelineConfigInfo &operator=(const PipelineConfigInfo &) = delete; // delete copy constructor
+
     VkPipelineViewportStateCreateInfo viewportInfo;
     VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
     VkPipelineRasterizationStateCreateInfo rasterizationInfo;
@@ -23,7 +25,10 @@ namespace kami {
     uint32_t subpass = 0;
   };
 
-  class Pipeline : public NoCopy {
+  class Pipeline {
+    public:
+      Pipeline(const Pipeline &) = delete; // prohibit copying
+      Pipeline &operator=(const Pipeline &) = delete; // delete copy constructor
     public:
       Pipeline(
         Device &device, 

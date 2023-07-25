@@ -39,8 +39,6 @@ namespace kami {
       Model(const Model &) = delete; // prohibit copying
       Model &operator=(const Model &) = delete; // delete copy constructor
 
-      static std::unique_ptr<Model> createModelFromFile(Device &device, const std::string &fileName);
-
       void bind(VkCommandBuffer commandBuffer);
       void draw(VkCommandBuffer commandBuffer);
       bool getd();

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "kami/core/device.hpp"
-#include "kami/utils/trait.hpp"
 
 #include <vulkan/vulkan.h>
 

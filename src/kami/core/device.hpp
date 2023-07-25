@@ -1,7 +1,6 @@
 #pragma once
 
 #include "kami/graphics/window.hpp"
-#include "kami/utils/trait.hpp"
 
 #include <string>
 #include <vector>
