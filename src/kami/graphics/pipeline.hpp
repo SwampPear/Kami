@@ -7,9 +7,13 @@
 
 
 namespace kami {
+  /**
+   * @struct PipelineConfigInfo
+   * @brief Config info for pipeline. 
+   */
   struct PipelineConfigInfo {
-    PipelineConfigInfo(const PipelineConfigInfo &) = delete; // prohibit copying
-    PipelineConfigInfo &operator=(const PipelineConfigInfo &) = delete; // delete copy constructor
+    PipelineConfigInfo(const PipelineConfigInfo &) = delete;
+    PipelineConfigInfo &operator=(const PipelineConfigInfo &) = delete;
 
     VkPipelineViewportStateCreateInfo viewportInfo;
     VkPipelineInputAssemblyStateCreateInfo inputAssemblyInfo;
@@ -27,8 +31,8 @@ namespace kami {
 
   class Pipeline {
     public:
-      Pipeline(const Pipeline &) = delete; // prohibit copying
-      Pipeline &operator=(const Pipeline &) = delete; // delete copy constructor
+      Pipeline(const Pipeline &) = delete;
+      Pipeline &operator=(const Pipeline &) = delete;
     public:
       Pipeline(
         Device &device, 
