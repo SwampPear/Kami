@@ -6,6 +6,7 @@
 #include "kami/scene/entity.hpp"
 #include "kami/scene/scene.hpp"
 #include "kami/resourceManager/resourceManager.hpp"
+#include "kami/core/deltaTime.hpp"
 
 #include <koios/koios.hpp>
 
@@ -100,7 +101,7 @@ namespace kami {
 
       // update time
       auto newTime = std::chrono::high_resolution_clock::now();
-      float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+      DeltaTime frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
       currentTime = newTime;
 
       // update camera
