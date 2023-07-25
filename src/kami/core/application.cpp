@@ -99,10 +99,10 @@ namespace kami {
     while(!window.shouldClose()) {
       glfwPollEvents(); // checks for GLFW events
 
-      DeltaTime frameTime = timer.deltaTime(); //std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+      DeltaTime dt = timer.deltaTime();
 
       // update camera
-      cameraController.moveInPlaneXZ(window.getGLFWwindow(), frameTime, scene, cameraEntity);
+      cameraController.moveInPlaneXZ(window.getGLFWwindow(), dt, scene, cameraEntity);
       camera.camera->setPerspectiveProjection(glm::radians(50.0f), renderer.getAspectRatio(), 0.1f, 10.0f);
       
       // update on frame begin
@@ -111,7 +111,7 @@ namespace kami {
         int frameIndex = renderer.getFrameIndex();
         FrameInfo frameInfo{
           frameIndex,
-          frameTime,
+          dt,
           commandBuffer,
           globalDescriptorSets[frameIndex]
         };

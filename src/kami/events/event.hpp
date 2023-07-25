@@ -2,6 +2,14 @@
 
 #include <functional>
 
+namespace kami {
+	enum class EventType
+	{
+		None = 0,
+		KeyPressed, KeyReleased
+	};
+}
+
 
 /*
 The following code is useful as a reference but will probably need to be implemented
