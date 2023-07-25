@@ -7,6 +7,9 @@
 #include "kami/renderer/descriptors.hpp"
 #include "kami/resourceManager/resourceManager.hpp"
 
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
+
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
@@ -31,7 +34,7 @@ namespace kami {
 
       void run();
       static Application& get() { return *instance; }
-      Window& getWindow() { return window; }
+      GLFWwindow *getWindow() { return window.getGLFWwindow(); }
       
     private:
       static Application *instance;
