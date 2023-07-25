@@ -1,6 +1,8 @@
 #include "kami/graphics/model.hpp"
 #include "kami/utils/utils.hpp"
 
+#include <koios/koios.hpp>
+
 #define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_object_loader/tinyObjectLoader.h>
 #define GLM_ENABLE_EXPERIMENTAL
@@ -45,7 +47,11 @@ namespace kami{
 
   Model::Model(Device &device, const std::string &fileName) : device{device} {
     loadModel(fileName);
-    std::cout << "Vertex count: " << vertices.size() << std::endl;
+
+    Koios::Log(
+      Koios::Form("Vertex Count: ", Koios::CYAN, Koios::BOLD),
+      Koios::Form(vertices.size())
+    );
 
     createVertexBuffers(vertices);
     createIndexBuffers(indices);
@@ -137,7 +143,10 @@ namespace kami{
     std::vector<tinyobj::material_t> materials;
     std::string warn, err;
 
-    std::cout << filePath << std::endl;
+    Koios::Log(
+      Koios::Form("Model Loaded: ", Koios::CYAN, Koios::BOLD),
+      Koios::Form(filePath)
+    );
 
     if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, filePath.c_str())) {
       throw std::runtime_error(warn + err);

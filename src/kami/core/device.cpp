@@ -1,5 +1,7 @@
 #include "kami/core/device.hpp"
 
+#include <koios/koios.hpp>
+
 #include <cstring>
 #include <iostream>
 #include <set>
@@ -122,7 +124,12 @@ void Device::pickPhysicalDevice() {
   if (deviceCount == 0) {
     throw std::runtime_error("failed to find GPUs with Vulkan support!");
   }
-  std::cout << "Device count: " << deviceCount << std::endl;
+
+  Koios::Log(
+    Koios::Form("Device Count: ", Koios::BOLD, Koios::CYAN), 
+    Koios::Form(deviceCount)
+  );
+
   std::vector<VkPhysicalDevice> devices(deviceCount);
   vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
 
@@ -138,7 +145,11 @@ void Device::pickPhysicalDevice() {
   }
 
   vkGetPhysicalDeviceProperties(physicalDevice, &properties);
-  std::cout << "physical device: " << properties.deviceName << std::endl;
+
+  Koios::Log(
+    Koios::Form("Physical Device: ", Koios::BOLD, Koios::CYAN), 
+    Koios::Form(properties.deviceName)
+  );
 }
 
 void Device::createLogicalDevice() {
@@ -292,14 +303,15 @@ void Device::hasGflwRequiredInstanceExtensions() {
   std::vector<VkExtensionProperties> extensions(extensionCount);
   vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
 
-  std::cout << "available extensions:" << std::endl;
+
+  Koios::Log(Koios::Form("Available Vulkan Extensions:", Koios::CYAN, Koios::BOLD));
   std::unordered_set<std::string> available;
   for (const auto &extension : extensions) {
     std::cout << "\t" << extension.extensionName << std::endl;
     available.insert(extension.extensionName);
   }
 
-  std::cout << "required extensions:" << std::endl;
+  Koios::Log(Koios::Form("Required Vulkan Extensions:", Koios::CYAN, Koios::BOLD));
   auto requiredExtensions = getRequiredExtensions();
   for (const auto &required : requiredExtensions) {
     std::cout << "\t" << required << std::endl;

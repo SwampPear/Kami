@@ -1,5 +1,7 @@
 #include "kami/graphics/renderer/swapChain.hpp"
 
+#include <koios/koios.hpp>
+
 #include <array>
 #include <cstdlib>
 #include <cstring>
@@ -433,7 +435,12 @@ namespace kami {
   VkPresentModeKHR SwapChain::chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes) {
     for (const auto &availablePresentMode : availablePresentModes) {
       if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
-        std::cout << "Present mode: Mailbox" << std::endl;
+        
+        Koios::Log(
+          Koios::Form("Present Mode: ", Koios::CYAN, Koios::BOLD),
+          Koios::Form("Mailbox")
+        );
+
         return availablePresentMode;
       }
     }
@@ -445,7 +452,11 @@ namespace kami {
     //   }
     // }
 
-    std::cout << "Present mode: V-Sync" << std::endl;
+    Koios::Log(
+      Koios::Form("Present Mode: ", Koios::CYAN, Koios::BOLD),
+      Koios::Form("V-Sync")
+    );
+
     return VK_PRESENT_MODE_FIFO_KHR;
   }
 
