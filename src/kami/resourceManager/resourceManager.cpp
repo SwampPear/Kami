@@ -14,6 +14,7 @@ namespace kami {
 
   void ResourceManager::unloadModel(UUID id) {
     delete modelMap[id];
+    modelMap.erase(id);
   }
 
   Model* ResourceManager::getModel(UUID id) {
