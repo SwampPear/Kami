@@ -3,11 +3,14 @@
 #include <glm/glm.hpp>
 #include "kami/renderer/window.hpp"
 #include "kami/scene/entity.hpp"
+#include "kami/renderer/camera.hpp"
 
 
 namespace kami {
   class CameraController {
     public:
+      CameraController(Camera *camera);
+
       struct KeyMappings {
         int moveLeft = GLFW_KEY_A;
         int moveRight = GLFW_KEY_D;
@@ -26,5 +29,7 @@ namespace kami {
       KeyMappings keys{};
       float moveSpeed{3.0f};
       float lookSpeed{1.5f};
+    private:
+      Camera *camera;
   };
 }

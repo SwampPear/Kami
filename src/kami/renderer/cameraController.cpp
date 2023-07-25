@@ -5,13 +5,13 @@
 
 
 namespace kami {
+  CameraController::CameraController(Camera *camera) : camera{camera} { }
+
   void CameraController::moveInPlaneXZ(GLFWwindow* window, float dt, Scene &scene, Entity entity) {
     auto view = scene.getAllEntitiesWith<TransformComponent, CameraComponent>();
 
     auto &transform = view.get<TransformComponent>(entity);
-
-    auto &camera = view.get<CameraComponent>(entity);
-
+    
     glm::vec3 rotate{0.0f};
 
     if (glfwGetKey(window, keys.lookRight) == GLFW_PRESS) rotate.y += 1.0f;
@@ -43,7 +43,7 @@ namespace kami {
       transform.translation += moveSpeed * dt * glm::normalize(moveDir);
     }
 
-    camera.camera->setViewYXZ(transform.translation, transform.rotation);
+    camera->setViewYXZ(transform.translation, transform.rotation);
 
     //camera.camera->setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
   }
