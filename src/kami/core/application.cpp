@@ -58,8 +58,17 @@ namespace kami {
     }
 
     // resource management
-    UUID sphereID = resourceManager.loadModel("models/untitled.obj");
+    UUID sphereID = resourceManager.loadModel("models/sphere.obj");
     UUID crystalID = resourceManager.loadModel("models/pear.obj");
+
+    // rendering
+    renderer.createPipeline(globalSetLayout->getDescriptorSetLayout());
+    Camera camera{};
+
+    camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
+
+    auto viewObject = GameObject::createGameObject(); // game objects should be removed entirely in favor of using ECS
+    KeyboardMovementController cameraController{};
 
     // scene setup
     Scene scene{};
@@ -72,30 +81,21 @@ namespace kami {
     entity2.addComponent<ColorComponent>();
     entity2.addComponent<ModelComponent>();
 
-    auto entities = scene.getAllEntitiesWith<TransformComponent, ModelComponent>();
+    auto entitiesView = scene.getAllEntitiesWith<TransformComponent, ModelComponent>();
 
-    auto &transform = entities.get<TransformComponent>(entity);
+    auto &transform = entitiesView.get<TransformComponent>(entity);
     transform.translation = {0.0f, 0.0f, 2.5f};
     transform.scale = {0.5f, 0.5f, 0.5f};
 
-    auto &transform2 = entities.get<TransformComponent>(entity2);
+    auto &transform2 = entitiesView.get<TransformComponent>(entity2);
     transform2.translation = {0.0f, -1.5f, 2.5f};
     transform2.scale = {0.5f, 0.5f, 0.5f};
 
-    auto &model = entities.get<ModelComponent>(entity);
+    auto &model = entitiesView.get<ModelComponent>(entity);
     model.ID = sphereID;
 
-    auto &model2 = entities.get<ModelComponent>(entity2);
+    auto &model2 = entitiesView.get<ModelComponent>(entity2);
     model2.ID = crystalID;
-
-    // rendering
-    renderer.createPipeline(globalSetLayout->getDescriptorSetLayout());
-    Camera camera{};
-
-    camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
-
-    auto viewObject = GameObject::createGameObject(); // game objects should be removed entirely in favor of using ECS
-    KeyboardMovementController cameraController{};
 
     // main loop
     auto currentTime = std::chrono::high_resolution_clock::now();
