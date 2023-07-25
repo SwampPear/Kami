@@ -79,7 +79,6 @@ namespace kami {
     //Camera camera{};
     //camera.setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
-    auto viewObject = GameObject::createGameObject(); // game objects should be removed entirely in favor of using ECS
     KeyboardMovementController cameraController{};
 
     // entity setup

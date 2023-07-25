@@ -2,7 +2,6 @@
 
 #include "kami/graphics/window.hpp"
 #include "kami/core/device.hpp"
-#include "kami/core/game_object.hpp"
 #include "kami/graphics/renderer/renderer.hpp"
 #include "kami/input/input.hpp"
 #include "kami/graphics/descriptors.hpp"

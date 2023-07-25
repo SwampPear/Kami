@@ -4,7 +4,6 @@
 #include "kami/core/device.hpp"
 #include "kami/graphics/renderer/swapChain.hpp"
 #include "kami/graphics/pipeline.hpp"
-#include "kami/core/game_object.hpp"
 #include "kami/graphics/camera.hpp"
 #include "kami/graphics/frame_info.hpp"
 #include "kami/scene/scene.hpp"
