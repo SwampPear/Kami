@@ -5,6 +5,8 @@
 
 #include "glm/gtc/matrix_transform.hpp"
 
+#include <iostream>
+
 namespace kami {
 	struct IDComponent {
 		UUID ID;
@@ -34,6 +36,7 @@ namespace kami {
 		UUID ID;
 
 		ModelComponent() = default;
+		~ModelComponent() { std::cout << "asdasd" << std::endl; };
 		ModelComponent(const ModelComponent&) = default;
 	};
 

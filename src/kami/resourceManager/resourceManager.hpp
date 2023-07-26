@@ -1,8 +1,8 @@
 #pragma once
 
+#include "kami/core/device.hpp"
 #include "kami/core/uuid.hpp"
 #include "kami/renderer/model.hpp"
-#include "kami/core/device.hpp"
 
 #include <memory>
 
@@ -38,10 +38,10 @@ namespace kami {
        * @param id the id of the model pointer to retrieve
        * @return pointer to the model object at id
        */
-      Model* getModel(UUID id);
+      std::shared_ptr<Model> getModel(UUID id);
 
     private:
       Device& device;
-      std::unordered_map<UUID, Model*, HashUUID> modelMap;
+      std::unordered_map<UUID, std::shared_ptr<Model>, HashUUID> modelMap;
   };
 }

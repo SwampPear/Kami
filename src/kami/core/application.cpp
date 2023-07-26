@@ -101,11 +101,7 @@ namespace kami {
     Timer timer{};
     
     while(!window.shouldClose()) {
-      glfwPollEvents(); // checks for GLFW events
-
-      if (Input::isKeyPressed(Key::A)) {
-        std::cout << "A" << std::endl;
-      }
+      glfwPollEvents();
 
       DeltaTime dt = timer.deltaTime();
 
@@ -140,6 +136,6 @@ namespace kami {
     vkDeviceWaitIdle(device.device());
 
     // deallocate resource memory, possibly a better solution for this
-    resourceManager.unloadModel(pearID);
+    //resourceManager.unloadModel(pearID);
   }
 }
