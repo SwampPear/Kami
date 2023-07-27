@@ -27,6 +27,10 @@ namespace kami {
     public:
       Application(const Application &) = delete;
       Application &operator=(const Application &) = delete;
+
+      ResourceManager resourceManager{device};
+      Renderer renderer{window, device, resourceManager};
+
     public:
       static constexpr int WIDTH = 600;
       static constexpr int HEIGHT = 600;
@@ -44,8 +48,6 @@ namespace kami {
       static Application *instance;
       Window window{WIDTH, HEIGHT, "window name"};
       Device device{window};
-      ResourceManager resourceManager{device};
-      Renderer renderer{window, device, resourceManager};
       std::unique_ptr<DescriptorPool> globalPool{};
   };
 }

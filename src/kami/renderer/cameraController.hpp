@@ -9,13 +9,17 @@
 namespace kami {
   class CameraController {
     public:
-      CameraController(Camera *camera);
+      CameraController();
 
-      void moveInPlaneXZ(float dt, Scene &scene, Entity entity);
+      void moveInPlaneXZ(float dt, Scene &scene);
 
       float moveSpeed{3.0f};
       float lookSpeed{1.5f};
+
+      void setCameraEntity(Entity entity) {
+        cameraEntity = entity;
+      }
     private:
-      Camera *camera;
+      Entity cameraEntity;
   };
 }

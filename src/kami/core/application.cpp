@@ -80,7 +80,7 @@ namespace kami {
     camera.camera = new Camera();
     camera.camera->setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
-    CameraController cameraController{camera.camera}; // camera controller and camera need to be integrated better
+    CameraController cameraController{}; // camera controller and camera need to be integrated better
 
     // entity setup
     UUID pearID = resourceManager.loadModel("models/pear.obj");
@@ -108,7 +108,7 @@ namespace kami {
       onUpdate(dt); // most likely keep, may need to be moved to events system
 
       // update camera
-      cameraController.moveInPlaneXZ(dt, scene, cameraEntity); // can move to onUpdate
+      cameraController.moveInPlaneXZ(dt, scene); // can move to onUpdate
       camera.camera->setPerspectiveProjection(glm::radians(50.0f), renderer.getAspectRatio(), 0.1f, 10.0f); // can move to onWindowResize
       
       // update on frame begin
