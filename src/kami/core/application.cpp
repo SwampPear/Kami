@@ -14,6 +14,7 @@
 #include "glm/gtc/constants.hpp"
 
 #include <iostream>
+#include <stdexcept>
 
 
 namespace kami {
@@ -67,7 +68,7 @@ namespace kami {
     // create pipeline
     renderer.createPipeline(globalSetLayout->getDescriptorSetLayout());
 
-    // scene setup
+    // scene - setup entities and scene can be moved to setup method of application
     Scene scene{};
 
     // camera setup
@@ -79,12 +80,12 @@ namespace kami {
     camera.camera = new Camera();
     camera.camera->setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
-    CameraController cameraController{camera.camera};
+    CameraController cameraController{camera.camera}; // camera controller and camera need to be integrated better
 
     // entity setup
     UUID pearID = resourceManager.loadModel("models/pear.obj");
     Entity entity = scene.createEntity();
-    
+
     entity.addComponent<ColorComponent>();
     entity.addComponent<ModelComponent>();
 
@@ -98,16 +99,17 @@ namespace kami {
     model.ID = pearID;
 
     // main loop
-    Timer timer{};
+    Timer timer{}; // keep timer
     
     while(!window.shouldClose()) {
-      glfwPollEvents();
+      glfwPollEvents(); // keep
 
-      DeltaTime dt = timer.deltaTime();
+      DeltaTime dt = timer.deltaTime(); // keep
+      onUpdate(dt); // most likely keep, may need to be moved to events system
 
       // update camera
-      cameraController.moveInPlaneXZ(dt, scene, cameraEntity);
-      camera.camera->setPerspectiveProjection(glm::radians(50.0f), renderer.getAspectRatio(), 0.1f, 10.0f);
+      cameraController.moveInPlaneXZ(dt, scene, cameraEntity); // can move to onUpdate
+      camera.camera->setPerspectiveProjection(glm::radians(50.0f), renderer.getAspectRatio(), 0.1f, 10.0f); // can move to onWindowResize
       
       // update on frame begin
       if (auto commandBuffer = renderer.beginFrame()) {
@@ -132,10 +134,6 @@ namespace kami {
       }
     }
 
-    // wait if device commands it
     vkDeviceWaitIdle(device.device());
-
-    // deallocate resource memory, possibly a better solution for this
-    //resourceManager.unloadModel(pearID);
   }
 }

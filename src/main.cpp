@@ -9,10 +9,9 @@ int main() {
 
     try {
         app.run();
-        //std::cout << "test" << std::endl;
     } catch (const std::exception &e) {
         return EXIT_FAILURE;
     }
 
     return EXIT_SUCCESS;
-} //20-7:48
+}
