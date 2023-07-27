@@ -26,6 +26,7 @@ namespace kami {
   Application* Application::instance = nullptr;
 
   Application::Application() {
+    std::cout << "a" << std::endl;
     instance = this;
 
     // create descriptor pool
@@ -39,6 +40,7 @@ namespace kami {
   Application::~Application() { }
 
   void Application::run() {
+    std::cout << "a" << std::endl;
     // create uniform buffer objects
     std::vector<std::unique_ptr<Buffer>> uboBuffers(SwapChain::MAX_FRAMES_IN_FLIGHT);
     for (int i = 0; i < uboBuffers.size(); i++) {
@@ -65,6 +67,7 @@ namespace kami {
         .build(globalDescriptorSets[i]);
     }
 
+    std::cout << "a" << std::endl;
     // create pipeline
     renderer.createPipeline(globalSetLayout->getDescriptorSetLayout());
 
@@ -81,6 +84,8 @@ namespace kami {
     camera.camera->setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
     CameraController cameraController{}; // camera controller and camera need to be integrated better
+
+    cameraController.setCameraEntity(cameraEntity);
 
     // entity setup
     UUID pearID = resourceManager.loadModel("models/pear.obj");
@@ -101,6 +106,7 @@ namespace kami {
     // main loop
     Timer timer{}; // keep timer
     
+    std::cout << "a" << std::endl;
     while(!window.shouldClose()) {
       glfwPollEvents(); // keep
 

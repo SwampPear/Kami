@@ -5,8 +5,8 @@
 class ExampleApplication : public kami::Application {
   public:
     ExampleApplication() { 
-      // setup camera entity
       /*
+      // setup camera entity
       kami::Entity cameraEntity = scene.createEntity();
 
       cameraEntity.addComponent<kami::CameraComponent>();
@@ -31,15 +31,16 @@ class ExampleApplication : public kami::Application {
 
       auto &model = entitiesView.get<kami::ModelComponent>(entity);
       model.ID = pearID;
+
+      cameraController.setCameraEntity(cameraEntity);
       */
-      //cameraController = new kami::CameraController{camera.camera};
     };
 
     ~ExampleApplication() { };
 
-    kami::Scene scene{};
+    //kami::Scene scene{};
 
-    //kami::CameraController cameraController;
+    //kami::CameraController cameraController{};
 
     virtual void onUpdate(kami::DeltaTime dt) override {
       std::cout << "called from example" << std::endl;
