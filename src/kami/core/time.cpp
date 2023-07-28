@@ -4,7 +4,7 @@
 namespace kami {
   DeltaTime::DeltaTime(float time) : time(time) { }
 
-	//operator DeltaTime::float() const { return time; }
+	DeltaTime::operator float() const { return time; }
 
 	float DeltaTime::seconds() const { return time; }		
   float DeltaTime::milliseconds() const { return time * 1000.0f; }
