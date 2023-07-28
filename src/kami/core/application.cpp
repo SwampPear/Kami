@@ -6,8 +6,6 @@
 #include "kami/scene/entity.hpp"
 #include "kami/scene/scene.hpp"
 #include "kami/resourceManager/resourceManager.hpp"
-#include "kami/core/deltaTime.hpp"
-#include "kami/core/timer.hpp"
 
 #include <koios/koios.hpp>
 

@@ -38,7 +38,6 @@ namespace kami {
 		UUID ID;
 
 		ModelComponent() = default;
-		~ModelComponent() { std::cout << "asdasd" << std::endl; };
 		ModelComponent(const ModelComponent&) = default;
 	};
 

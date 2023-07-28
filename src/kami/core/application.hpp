@@ -6,7 +6,7 @@
 #include "kami/input/input.hpp"
 #include "kami/renderer/descriptors.hpp"
 #include "kami/resourceManager/resourceManager.hpp"
-#include "kami/core/deltaTime.hpp"
+#include "kami/core/time.hpp"
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
@@ -42,7 +42,7 @@ namespace kami {
       Renderer &getRenderer() { return renderer; }
       Device &getDevice() { return device; }
 
-      virtual void onUpdate(DeltaTime dt) { std::cout << "called from app" << std::endl;};
+      virtual void onUpdate(DeltaTime dt) { };
       
     private:
       static Application *instance;
