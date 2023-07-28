@@ -9,3 +9,5 @@ shaders/*.spv
 
 # development
 .vscode/
+
+scripts/example

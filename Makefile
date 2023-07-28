@@ -1,6 +1,6 @@
 CC = g++
 
-TARGET = app
+TARGET = app.dylib
 INCLUDE = include
 INCLUDE_PATH = src
 SUB_DIR = src src/kami/core src/kami/renderer src/kami/utils src/kami/input src/kami/scene src/kami/resourceManager src/kami/events src/exampleApplication
