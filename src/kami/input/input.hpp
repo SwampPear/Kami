@@ -11,7 +11,7 @@
 #include <GLFW/glfw3.h>
 
 
-namespace kami {
+namespace Kami {
   class Input {
     public:
       /**

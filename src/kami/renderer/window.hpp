@@ -5,7 +5,7 @@
 #include <string>
 
 
-namespace kami {
+namespace Kami {
   /**
    * @class Window
    * @brief Represents a manipulatable window object on which graphics can be 

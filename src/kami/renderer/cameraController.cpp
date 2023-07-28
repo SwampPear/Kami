@@ -6,7 +6,7 @@
 #include <iostream>
 
 
-namespace kami {
+namespace Kami {
   void CameraController::moveInPlaneXZ(float dt, Scene &scene) {
     auto view = scene.getAllEntitiesWith<TransformComponent, CameraComponent>();
 

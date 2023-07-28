@@ -9,7 +9,7 @@
 #include <vector>
 
 
-namespace kami {
+namespace Kami {
   /**
    * @class SwapChain
    * @brief Represents a swap chain for use in integrating the GPU with the

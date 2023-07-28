@@ -1,7 +1,7 @@
 #include "kami/scene/components.hpp"
 
 
-namespace kami {
+namespace Kami {
   glm::mat4 TransformComponent::mat4() {
     const float c3 = glm::cos(rotation.z);
     const float s3 = glm::sin(rotation.z);

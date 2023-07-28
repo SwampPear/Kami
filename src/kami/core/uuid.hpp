@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <cstddef>
 
-namespace kami {
+namespace Kami {
 	/**
    * @class UUID
    * @brief Represents a universally unique id used to provide a uniform id for 

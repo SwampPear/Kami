@@ -8,7 +8,7 @@
 #include <limits>
 
 
-namespace kami {
+namespace Kami {
   /**
    * @enum ProjectionType
    * @brief Type of projection the camera is currently using.

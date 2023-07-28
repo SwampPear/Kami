@@ -6,7 +6,7 @@
 #include <vector>
 
 
-namespace kami {
+namespace Kami {
   struct SwapChainSupportDetails {
     VkSurfaceCapabilitiesKHR capabilities;
     std::vector<VkSurfaceFormatKHR> formats;

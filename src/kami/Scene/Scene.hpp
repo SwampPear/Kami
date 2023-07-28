@@ -3,7 +3,7 @@
 #include "kami/core/uuid.hpp"
 #include "entt/entt.hpp"
 
-namespace kami {
+namespace Kami {
   class Entity;
 
 	class Scene {

@@ -14,7 +14,7 @@
 #include <cassert>
 
 
-namespace kami {
+namespace Kami {
   /**
    * @class Renderer
    * @brief Represents a renderer object for rendering graphics and handling all

@@ -1,7 +1,7 @@
 #include "kami/resourceManager/resourceManager.hpp"
 
 
-namespace kami {
+namespace Kami {
   ResourceManager::ResourceManager(Device &device) : device{device} { }
 
   UUID ResourceManager::loadModel(const std::string &fileName) {

@@ -15,16 +15,16 @@
 
 namespace std {
   template <>
-  struct hash<kami::Model::Vertex> {
-    size_t operator()(kami::Model::Vertex const &vertex) const {
+  struct hash<Kami::Model::Vertex> {
+    size_t operator()(Kami::Model::Vertex const &vertex) const {
       size_t seed = 0;
-      kami::hashCombine(seed, vertex.position, vertex.color, vertex.normal, vertex.uv);
+      Kami::hashCombine(seed, vertex.position, vertex.color, vertex.normal, vertex.uv);
       return seed;
     }
   };
 }
 
-namespace kami{
+namespace Kami{
   std::vector<VkVertexInputBindingDescription> Model::Vertex::getBindingDescriptions() {
     std::vector<VkVertexInputBindingDescription> bindingDescriptions(1);
     bindingDescriptions[0].binding = 0;

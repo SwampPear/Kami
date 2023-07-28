@@ -3,7 +3,7 @@
 #include <vulkan/vulkan.h>
 
 
-namespace kami {
+namespace Kami {
   struct FrameInfo {
     int frameIndex;
     float frameTime;

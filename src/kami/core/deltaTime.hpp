@@ -3,7 +3,7 @@
 #include <chrono>
 
 
-namespace kami {
+namespace Kami {
 	/*
 	using Time = std::chrono::high_resolution_clock::time_point;
 

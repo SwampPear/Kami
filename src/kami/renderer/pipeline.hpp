@@ -6,7 +6,7 @@
 #include <vector>
 
 
-namespace kami {
+namespace Kami {
   /**
    * @struct PipelineConfigInfo
    * @brief Config info for pipeline. 

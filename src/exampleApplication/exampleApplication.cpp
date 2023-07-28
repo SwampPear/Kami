@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-class ExampleApplication : public kami::Application {
+class ExampleApplication : public Kami::Application {
   struct GlobalUBO {
     glm::mat4 projectionView{1.0f};
     glm::vec3 lightDirection = glm::normalize(glm::vec3{1.0f, -3.0f, -1.0f});
@@ -11,16 +11,16 @@ class ExampleApplication : public kami::Application {
   public:
     ExampleApplication() {
       // create descriptor pool
-      globalPool = kami::DescriptorPool::Builder(getDevice())
-      .setMaxSets(kami::SwapChain::MAX_FRAMES_IN_FLIGHT)
-      .addPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, kami::SwapChain::MAX_FRAMES_IN_FLIGHT)
-      .addPoolSize(VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, kami::SwapChain::MAX_FRAMES_IN_FLIGHT)
+      globalPool = Kami::DescriptorPool::Builder(getDevice())
+      .setMaxSets(Kami::SwapChain::MAX_FRAMES_IN_FLIGHT)
+      .addPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, Kami::SwapChain::MAX_FRAMES_IN_FLIGHT)
+      .addPoolSize(VK_DESCRIPTOR_TYPE_STORAGE_BUFFER, Kami::SwapChain::MAX_FRAMES_IN_FLIGHT)
       .build();
 
       // create uniform buffer objects
-      uboBuffers = std::vector<std::unique_ptr<kami::Buffer>>(kami::SwapChain::MAX_FRAMES_IN_FLIGHT);
+      uboBuffers = std::vector<std::unique_ptr<Kami::Buffer>>(Kami::SwapChain::MAX_FRAMES_IN_FLIGHT);
       for (int i = 0; i < uboBuffers.size(); i++) {
-        uboBuffers[i] = std::make_unique<kami::Buffer>(getDevice(),
+        uboBuffers[i] = std::make_unique<Kami::Buffer>(getDevice(),
           sizeof(GlobalUBO),
           1,
           VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
@@ -31,14 +31,14 @@ class ExampleApplication : public kami::Application {
       }
 
       // create decsriptor set layouts
-      auto globalSetLayout = kami::DescriptorSetLayout::Builder(getDevice())
+      auto globalSetLayout = Kami::DescriptorSetLayout::Builder(getDevice())
         .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)
         .build();
 
-      globalDescriptorSets = std::vector<VkDescriptorSet>(kami::SwapChain::MAX_FRAMES_IN_FLIGHT);
+      globalDescriptorSets = std::vector<VkDescriptorSet>(Kami::SwapChain::MAX_FRAMES_IN_FLIGHT);
       for (int i = 0; i < globalDescriptorSets.size(); i++) {
         auto bufferInfo = uboBuffers[i]->descriptorInfo();
-        kami::DescriptorWriter(*globalSetLayout, *globalPool)
+        Kami::DescriptorWriter(*globalSetLayout, *globalPool)
           .writeBuffer(0, &bufferInfo)
           .build(globalDescriptorSets[i]);
       }
@@ -47,48 +47,48 @@ class ExampleApplication : public kami::Application {
       getRenderer().createPipeline(globalSetLayout->getDescriptorSetLayout());
         
       // setup camera entity
-      kami::Entity cameraEntity = scene.createEntity();
+      Kami::Entity cameraEntity = scene.createEntity();
 
-      cameraEntity.addComponent<kami::CameraComponent>();
+      cameraEntity.addComponent<Kami::CameraComponent>();
 
-      auto &camera = scene.getAllEntitiesWith<kami::CameraComponent>().get<kami::CameraComponent>(cameraEntity);
+      auto &camera = scene.getAllEntitiesWith<Kami::CameraComponent>().get<Kami::CameraComponent>(cameraEntity);
 
-      camera.camera = new kami::Camera();
+      camera.camera = new Kami::Camera();
       camera.camera->setViewTarget(glm::vec3{-1.0f, -2.0f, 2.0f}, glm::vec3{0.0f, 0.0f, 2.5f});
 
-      camera.cameraController = new kami::CameraController();
+      camera.cameraController = new Kami::CameraController();
 
       // setup object entities
-      kami::UUID pearID = getResourceManager().loadModel("models/pear.obj");
-      kami::Entity entity = scene.createEntity();
+      Kami::UUID pearID = getResourceManager().loadModel("models/pear.obj");
+      Kami::Entity entity = scene.createEntity();
 
-      entity.addComponent<kami::ColorComponent>();
-      entity.addComponent<kami::ModelComponent>();
+      entity.addComponent<Kami::ColorComponent>();
+      entity.addComponent<Kami::ModelComponent>();
 
-      auto entitiesView = scene.getAllEntitiesWith<kami::TransformComponent, kami::ModelComponent>();
+      auto entitiesView = scene.getAllEntitiesWith<Kami::TransformComponent, Kami::ModelComponent>();
 
-      auto &transform = entitiesView.get<kami::TransformComponent>(entity);
+      auto &transform = entitiesView.get<Kami::TransformComponent>(entity);
       transform.translation = {0.0f, 0.0f, 2.5f};
       transform.scale = {0.5f, 0.5f, 0.5f};
 
-      auto &model = entitiesView.get<kami::ModelComponent>(entity);
+      auto &model = entitiesView.get<Kami::ModelComponent>(entity);
       model.ID = pearID;
     };
 
     ~ExampleApplication() { };
 
-    kami::Scene scene{};
-    std::unique_ptr<kami::DescriptorPool> globalPool{};
+    Kami::Scene scene{};
+    std::unique_ptr<Kami::DescriptorPool> globalPool{};
 
     std::vector<VkDescriptorSet> globalDescriptorSets;
-    std::vector<std::unique_ptr<kami::Buffer>> uboBuffers;
+    std::vector<std::unique_ptr<Kami::Buffer>> uboBuffers;
 
-    virtual void onUpdate(kami::DeltaTime dt) override {
+    virtual void onUpdate(Kami::DeltaTime dt) override {
       // update camera
-      auto view = scene.getAllEntitiesWith<kami::CameraComponent>();
+      auto view = scene.getAllEntitiesWith<Kami::CameraComponent>();
 
       for (auto entity : view) {
-        auto &camera = view.get<kami::CameraComponent>(entity);
+        auto &camera = view.get<Kami::CameraComponent>(entity);
 
         camera.cameraController->moveInPlaneXZ(dt, scene); // can move to onUpdate
         camera.camera->setPerspectiveProjection(glm::radians(50.0f), getRenderer().getAspectRatio(), 0.1f, 10.0f); // can move to onWindowResize
@@ -97,7 +97,7 @@ class ExampleApplication : public kami::Application {
         if (auto commandBuffer = getRenderer().beginFrame()) {
           // update uniform buffer objects
           int frameIndex = getRenderer().getFrameIndex();
-          kami::FrameInfo frameInfo{
+          Kami::FrameInfo frameInfo{
             frameIndex,
             dt,
             commandBuffer,

@@ -1,7 +1,7 @@
 #include "kami/renderer/camera.hpp"
 
 
-namespace kami {
+namespace Kami {
   Camera::Camera() { }
   Camera::~Camera() { }
 

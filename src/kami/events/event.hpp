@@ -2,7 +2,7 @@
 
 #include <functional>
 
-namespace kami {
+namespace Kami {
 	enum class EventType
 	{
 		None = 0,
@@ -16,7 +16,7 @@ The following code is useful as a reference but will probably need to be impleme
 using some event bus system.
 
 
-namespace kami {
+namespace Kami {
 	enum class EventType
 	{
 		None = 0,

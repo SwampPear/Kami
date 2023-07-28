@@ -3,7 +3,7 @@
 #include "kami/core/device.hpp"
 
 
-namespace kami {
+namespace Kami {
   class DescriptorSetLayout {
     public:
       class Builder {

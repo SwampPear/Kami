@@ -4,7 +4,7 @@
 #include <cassert>
 #include <stdexcept>
  
-namespace kami {
+namespace Kami {
  
 // *************** Descriptor Set Layout Builder *********************
  

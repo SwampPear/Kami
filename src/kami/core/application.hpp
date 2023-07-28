@@ -22,7 +22,7 @@
 #include <iostream>
 
 
-namespace kami {
+namespace Kami {
   class Application {
     public:
       Application(const Application &) = delete;

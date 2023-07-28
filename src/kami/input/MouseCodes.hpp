@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 
-namespace kami {
+namespace Kami {
 	using MouseCode = uint16_t;
 
 	namespace Mouse {

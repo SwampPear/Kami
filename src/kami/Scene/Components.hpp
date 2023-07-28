@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-namespace kami {
+namespace Kami {
 	struct IDComponent {
 		UUID ID;
 

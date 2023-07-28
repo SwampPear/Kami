@@ -15,7 +15,7 @@
 #include <stdexcept>
 
 
-namespace kami {
+namespace Kami {
   Application* Application::instance = nullptr;
 
   Application::Application() {

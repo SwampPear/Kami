@@ -4,7 +4,7 @@
 #include <cstring>
  
 
-namespace kami {
+namespace Kami {
  
 /**
  * Returns the minimum instance size required to be compatible with devices minOffsetAlignment

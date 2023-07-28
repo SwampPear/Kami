@@ -11,7 +11,7 @@
 #include <stdexcept>
 
 
-namespace kami {
+namespace Kami {
   SwapChain::SwapChain(Device &deviceRef, VkExtent2D extent) 
     : device{deviceRef}, windowExtent{extent} {
     init();

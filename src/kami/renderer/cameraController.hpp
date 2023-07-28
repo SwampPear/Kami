@@ -8,7 +8,7 @@
 #include <glm/glm.hpp>
 
 
-namespace kami {
+namespace Kami {
   class CameraController {
     public:
       CameraController() {};

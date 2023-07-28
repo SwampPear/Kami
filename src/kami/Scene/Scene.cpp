@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 
 
-namespace kami {
+namespace Kami {
 	Scene::Scene() { }
 	Scene::~Scene() { }
 

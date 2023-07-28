@@ -11,7 +11,7 @@
 #include <vector>
 
 
-namespace kami {
+namespace Kami {
   // should use dedicated memory allocator
   class Model {
     public:

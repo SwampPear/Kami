@@ -7,7 +7,7 @@
 #include <memory>
 
 
-namespace kami {
+namespace Kami {
   /**
    * @class ResourceManager
    * @brief Handles resource management and retrieval.

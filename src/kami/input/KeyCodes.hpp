@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 
-namespace kami {
+namespace Kami {
   using KeyCode = uint16_t;
 
   namespace Key {

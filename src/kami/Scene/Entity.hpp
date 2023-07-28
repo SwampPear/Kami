@@ -8,7 +8,7 @@
 
 #include <cassert>
 
-namespace kami {
+namespace Kami {
 	class Entity {
 	public:
 		Entity() = default;

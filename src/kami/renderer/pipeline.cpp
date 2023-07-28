@@ -7,7 +7,7 @@
 #include <cassert>
 
 
-namespace kami {
+namespace Kami {
   Pipeline::Pipeline(
     Device &device, 
     const std::string& vertFilepath, 

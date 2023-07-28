@@ -2,7 +2,7 @@
 #include "kami/core/application.hpp"
 
 
-namespace kami {
+namespace Kami {
   bool Input::isKeyPressed(KeyCode key) {
     GLFWwindow* window = Application::get().getWindow();
     return glfwGetKey(window, static_cast<int32_t>(key)) == GLFW_PRESS; 

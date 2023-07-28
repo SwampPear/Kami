@@ -1,7 +1,7 @@
 #include "kami/core/time.hpp"
 
 
-namespace kami {
+namespace Kami {
   DeltaTime::DeltaTime(float time) : time(time) { }
 
 	DeltaTime::operator float() const { return time; }
