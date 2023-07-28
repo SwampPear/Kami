@@ -2,6 +2,7 @@
 
 #include "kami/core/uuid.hpp"
 #include "kami/renderer/camera.hpp"
+#include "kami/renderer/cameraController.hpp"
 
 #include "glm/gtc/matrix_transform.hpp"
 
@@ -26,6 +27,7 @@ namespace kami {
 
 	struct CameraComponent {
 		Camera *camera;
+		CameraController *cameraController;
 		bool primary{true};
 
 		CameraComponent() = default;

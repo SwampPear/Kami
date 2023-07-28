@@ -21,12 +21,7 @@ Goals:
 - efficient and proven essential systems (ECS: entt, graphics: vulkan)
 - procedural asset generation (terrain, story, and audio)
 
-<<<<<<< HEAD
-Current Features:
-- decoupled systems driven by events (major WIP)
-=======
 Features:
->>>>>>> master
 - 3D rendering (2D is trivially implemented in the future)
 - smart resource manager (WIP)
 - ECS API (WIP, through EnTT)

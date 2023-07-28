@@ -38,6 +38,9 @@ namespace kami {
       void run();
       static Application& get() { return *instance; }
       GLFWwindow *getWindow() { return window.getGLFWwindow(); }
+      ResourceManager &getResourceManager() { return resourceManager; }
+      Renderer &getRenderer() { return renderer; }
+      Device &getDevice() { return device; }
 
       virtual void onUpdate(DeltaTime dt) { std::cout << "called from app" << std::endl;};
       

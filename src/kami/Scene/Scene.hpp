@@ -1,7 +1,6 @@
 #pragma once
 
 #include "kami/core/uuid.hpp"
-#include "kami/renderer/camera.hpp"
 #include "entt/entt.hpp"
 
 namespace kami {
