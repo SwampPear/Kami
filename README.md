@@ -1,12 +1,11 @@
 <p align="center">
-  <img alt="Kami Logo" src="assets/kami_logo_banner_gradient.svg" style="width: 80%">   
+  <img alt="kami logo" src="assets/kami_logo_banner_gradient.svg" style="width: 80%">   
 </p>
 
 <p align="center" style="height: 21px">
   <img align="middle" alt="license" src="https://img.shields.io/github/license/SwampPear/kami.svg">
   <img align="middle" alt="last commit" src="https://img.shields.io/github/last-commit/SwampPear/kami.svg">
   <img align="middle" style="height: 21px" alt="built with love <3" src="http://ForTheBadge.com/images/badges/built-with-love.svg">
-  <img align="middle" alt="c++" src="https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge logo=c%2B%2B&logoColor=white">
 </p>
 
 Kami is a work-in-progress 3D and 2D game engine opting for simplicity in usage and implenentation wherever possible.
