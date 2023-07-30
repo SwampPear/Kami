@@ -9,9 +9,7 @@
 #include <glm/gtx/hash.hpp>
 
 #include <cassert>
-#include <iostream>
 #include <unordered_map>
-
 
 namespace std {
   template <>
@@ -56,8 +54,6 @@ namespace Kami{
     createVertexBuffers(vertices);
     createIndexBuffers(indices);
   }
-
-  Model::~Model() { }
 
   void Model::createVertexBuffers(const std::vector<Vertex> &vertices) {
     vertexCount = static_cast<uint32_t>(vertices.size());
@@ -200,9 +196,5 @@ namespace Kami{
         indices.push_back(uniqueVertices[vertex]);
       }
     }
-  }
-
-  bool Model::getd() {
-    return hasIndexBuffer;
   }
 }

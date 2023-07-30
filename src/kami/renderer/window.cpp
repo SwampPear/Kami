@@ -1,6 +1,5 @@
 #include "kami/renderer/window.hpp"
 
-
 namespace Kami {
   Window::Window(int w, int h, std::string name) : width{w}, height{h}, windowName{name} {
     initWindow();
@@ -11,27 +10,11 @@ namespace Kami {
     glfwTerminate();
   }
 
-  bool Window::shouldClose() { 
-    return glfwWindowShouldClose(window); 
-  }
-
   VkExtent2D Window::getExtent() {
     return {
       static_cast<uint32_t>(width), 
       static_cast<uint32_t>(height)
     };
-  }
-
-  bool Window::wasWindowResized() {
-    return framebufferResized;
-  }
-
-  void Window::resetWindowResizedFlag() {
-    framebufferResized = false;
-  }
-
-  GLFWwindow* Window::getGLFWwindow() {
-    return window;
   }
 
   void Window::createWindowSurface(VkInstance instance, VkSurfaceKHR *surface) {

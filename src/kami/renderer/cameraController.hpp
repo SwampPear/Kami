@@ -1,17 +1,14 @@
 #pragma once
 
-
 #include "kami/renderer/window.hpp"
-//#include "kami/renderer/camera.hpp"
 #include "kami/scene/scene.hpp"
 
 #include <glm/glm.hpp>
 
-
 namespace Kami {
   class CameraController {
     public:
-      CameraController() {};
+      CameraController() { };
 
       void moveInPlaneXZ(float dt, Scene &scene);
 

@@ -1,18 +1,18 @@
 #pragma once
 
-#include "kami/renderer/window.hpp"
+
 #include "kami/core/device.hpp"
-#include "kami/renderer/swapChain.hpp"
-#include "kami/renderer/pipeline.hpp"
 #include "kami/renderer/camera.hpp"
 #include "kami/renderer/frame_info.hpp"
-#include "kami/scene/scene.hpp"
+#include "kami/renderer/pipeline.hpp"
+#include "kami/renderer/swapChain.hpp"
+#include "kami/renderer/window.hpp"
 #include "kami/resourceManager/resourceManager.hpp"
+#include "kami/scene/scene.hpp"
 
+#include <cassert>
 #include <memory>
 #include <vector>
-#include <cassert>
-
 
 namespace Kami {
   /**
@@ -41,19 +41,19 @@ namespace Kami {
        * @brief Retrieves render pass from swap chain.
        * @return render pass of swap chain
        */
-      VkRenderPass getSwapChainRenderPass() const;
+      VkRenderPass getSwapChainRenderPass() const { return swapChain->getRenderPass(); };
 
       /**
        * @brief Retrieves aspect ratio of the swap chain extent.
        * @return swap chain extent
        */
-      float getAspectRatio() const;
+      float getAspectRatio() const { return swapChain->extentAspectRatio(); };
 
       /**
        * @brief Determines if frame is started.
        * @return true if frame is started, false otherwise
        */
-      bool isFrameInProgress() const;
+      bool isFrameInProgress() const { return isFrameStarted; };
 
       /**
        * @brief Retrieves the current command buffer.

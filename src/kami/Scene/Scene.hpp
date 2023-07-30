@@ -8,10 +8,10 @@ namespace Kami {
 
 	class Scene {
     public:
-      Scene();
-      ~Scene();
+      Scene() { };
+      ~Scene() { };
 
-      Entity createEntity();
+      Entity createEntity() { return createEntityWithUUID(UUID()); };
       Entity createEntityWithUUID(UUID uuid);
       void destroyEntity(Entity entity);
 

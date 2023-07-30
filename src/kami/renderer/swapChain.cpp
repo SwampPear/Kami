@@ -10,7 +10,6 @@
 #include <set>
 #include <stdexcept>
 
-
 namespace Kami {
   SwapChain::SwapChain(Device &deviceRef, VkExtent2D extent) 
     : device{deviceRef}, windowExtent{extent} {
@@ -53,38 +52,6 @@ namespace Kami {
       vkDestroySemaphore(device.device(), imageAvailableSemaphores[i], nullptr);
       vkDestroyFence(device.device(), inFlightFences[i], nullptr);
     }
-  }
-  
-  VkFramebuffer SwapChain::getFrameBuffer(int index) { 
-    return swapChainFramebuffers[index]; 
-  }
-
-  VkRenderPass SwapChain::getRenderPass() { 
-    return renderPass; 
-  }
-
-  VkImageView SwapChain::getImageView(int index) { 
-    return swapChainImageViews[index]; 
-  }
-
-  size_t SwapChain::imageCount() { 
-    return swapChainImages.size(); 
-  }
-
-  VkFormat SwapChain::getSwapChainImageFormat() { 
-    return swapChainImageFormat; 
-  }
-
-  VkExtent2D SwapChain::getSwapChainExtent() { 
-    return swapChainExtent; 
-  }
-
-  uint32_t SwapChain::width() { 
-    return swapChainExtent.width; 
-  }
-
-  uint32_t SwapChain::height() { 
-    return swapChainExtent.height; 
   }
 
   float SwapChain::extentAspectRatio() {

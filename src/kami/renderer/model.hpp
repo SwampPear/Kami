@@ -10,7 +10,6 @@
 #include <memory>
 #include <vector>
 
-
 namespace Kami {
   // should use dedicated memory allocator
   class Model {
@@ -32,13 +31,12 @@ namespace Kami {
       void loadModel(const std::string &fileName);
 
       Model(Device &device, const std::string &fileName);
-      ~Model();
+      ~Model() { };
       Model(const Model &) = delete; // prohibit copying
       Model &operator=(const Model &) = delete; // delete copy constructor
 
       void bind(VkCommandBuffer commandBuffer);
       void draw(VkCommandBuffer commandBuffer);
-      bool getd();
       std::vector<Vertex> vertices{};
 
     private:

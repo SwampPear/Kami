@@ -2,6 +2,7 @@
 #include "kami/scene/components.hpp"
 
 #include "glm/gtc/constants.hpp"
+
 #include <iostream>
 
 
@@ -12,7 +13,7 @@ namespace Kami {
   };
   
   Renderer::Renderer(Window &window, Device &device, ResourceManager &resourceManager) 
-  : window{window}, device{device}, resourceManager{resourceManager} {
+    : window{window}, device{device}, resourceManager{resourceManager} {
     recreateSwapChain();
     createCommandBuffers();
   }
@@ -20,18 +21,6 @@ namespace Kami {
   Renderer::~Renderer() {
     freeCommandBuffers();
     vkDestroyPipelineLayout(device.device(), pipelineLayout, nullptr);
-  }
-
-  VkRenderPass Renderer::getSwapChainRenderPass() const { 
-    return swapChain->getRenderPass(); 
-  }
-
-  float Renderer::getAspectRatio() const { 
-    return swapChain->extentAspectRatio(); 
-  }
-
-  bool Renderer::isFrameInProgress() const { 
-    return isFrameStarted; 
   }
 
   VkCommandBuffer Renderer::getCurrentCommandBuffer() const {

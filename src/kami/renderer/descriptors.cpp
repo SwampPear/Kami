@@ -1,6 +1,5 @@
 #include "kami/renderer/descriptors.hpp"
- 
-// std
+
 #include <cassert>
 #include <stdexcept>
  

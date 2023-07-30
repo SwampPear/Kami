@@ -1,10 +1,7 @@
-#include "kami/renderer/cameraController.hpp"
-#include "kami/renderer/camera.hpp"
 #include "kami/input/input.hpp"
+#include "kami/renderer/camera.hpp"
+#include "kami/renderer/cameraController.hpp"
 #include "kami/scene/components.hpp"
-
-#include <iostream>
-
 
 namespace Kami {
   void CameraController::moveInPlaneXZ(float dt, Scene &scene) {
@@ -48,8 +45,5 @@ namespace Kami {
 
       camera.camera->setViewYXZ(transform.translation, transform.rotation);
     }
-    
-
-    //camera.camera->setPerspectiveProjection(glm::radians(50.0f), aspect, 0.1f, 10.0f);
   }
 }

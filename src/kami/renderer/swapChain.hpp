@@ -8,7 +8,6 @@
 #include <string>
 #include <vector>
 
-
 namespace Kami {
   /**
    * @class SwapChain
@@ -50,50 +49,50 @@ namespace Kami {
        * @param index index of frame buffer to return
        * @return frame buffer at index
        */
-      VkFramebuffer getFrameBuffer(int index);
+      VkFramebuffer getFrameBuffer(int index) { return swapChainFramebuffers[index]; };
 
       /**
        * @brief Getter for render pass.
        * @return render pass
        */
-      VkRenderPass getRenderPass();
+      VkRenderPass getRenderPass() { return renderPass; };
 
       /**
        * @brief Getter for image view at index.
        * @param index index of image view to return.
        * @return image view at index
        */
-      VkImageView getImageView(int index);
+      VkImageView getImageView(int index) { return swapChainImageViews[index]; };
 
       /**
        * @brief Returns number of swap chain images.
        * @return number of swap chain images
        */
-      size_t imageCount();
+      size_t imageCount() { return swapChainImages.size(); };
 
       /**
        * @brief Getter for swap chain image format.
        * @return image format
        */
-      VkFormat getSwapChainImageFormat();
+      VkFormat getSwapChainImageFormat() { return swapChainImageFormat; };
 
       /**
        * @brief Getter for swap chain extent.
        * @return swap chain extent
        */
-      VkExtent2D getSwapChainExtent();
+      VkExtent2D getSwapChainExtent() { return swapChainExtent; };
 
       /**
        * @brief Getter for swap chain extent width.
        * @return swap chain extent width
        */
-      uint32_t width();
+      uint32_t width() { return swapChainExtent.width; };
 
       /**
        * @brief Getter for swap chain extent width.
        * @return swap chain extent width
        */
-      uint32_t height();
+      uint32_t height() { return swapChainExtent.height; };
 
       /**
        * @brief Computes aspect ratio for extent.

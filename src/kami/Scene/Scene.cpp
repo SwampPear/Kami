@@ -6,14 +6,6 @@
 
 
 namespace Kami {
-	Scene::Scene() { }
-	Scene::~Scene() { }
-
-
-	Entity Scene::createEntity() {
-		return createEntityWithUUID(UUID());
-	}
-
 	Entity Scene::createEntityWithUUID(UUID uuid) {
 		Entity entity{registry.create(), this};
 		entity.addComponent<IDComponent>(uuid);

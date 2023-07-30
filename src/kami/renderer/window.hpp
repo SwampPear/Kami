@@ -2,8 +2,8 @@
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
-#include <string>
 
+#include <string>
 
 namespace Kami {
   /**
@@ -34,7 +34,7 @@ namespace Kami {
        * @brief Determines if the glfw window should close.
        * @return glfwWindowShouldClose
        */
-      bool shouldClose();
+      bool shouldClose() { return glfwWindowShouldClose(window); };
 
       /**
        * @brief Gets the current extent of the window.
@@ -46,17 +46,17 @@ namespace Kami {
        * @brief Determines if the window was resized.
        * @return framebufferResized
        */
-      bool wasWindowResized();
+      bool wasWindowResized() { return framebufferResized; };
 
       /**
        * @brief Resets the frameBufferResized flag to false;
        */
-      void resetWindowResizedFlag();
+      void resetWindowResizedFlag() { framebufferResized = false; };
 
       /**
        * @brief returns the window member variable
        */
-      GLFWwindow* getGLFWwindow();
+      GLFWwindow* getGLFWwindow() { return window; };
 
       /**
        * @brief Creates the surface which graphics are rendered on.
